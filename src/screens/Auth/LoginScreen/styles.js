@@ -1,67 +1,6 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import EntypoIcons from 'react-native-vector-icons/Entypo';
+import {StyleSheet, Dimensions} from 'react-native';
 
-export default function LoginScreen1() {
-  return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.bigCircle}></View>
-        <View style={styles.smallCircle}></View>
-        <View style={styles.centerizedView}>
-          <View style={styles.authBox}>
-            {/* <View style={styles.logoBox}>
-              <EntypoIcons name="suitcase" color="#fff" size={24} />
-            </View> */}
-            <Text style={styles.loginTitleText}>Login</Text>
-            <View style={styles.hr}></View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <TextInput
-                style={styles.input}
-                autoCapitalize={false}
-                keyboardType="email-address"
-                textContentType="emailAddress"
-              />
-            </View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput
-                style={styles.input}
-                autoCapitalize={false}
-                secureTextEntry={true}
-                textContentType="password"
-              />
-            </View>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.registerText}>
-                Don't have an account? Register Now
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-}
-
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
@@ -128,6 +67,8 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     marginTop: 10,
+    alignSelf: 'center',
+    marginVertical: 18,
   },
   hr: {
     width: '100%',

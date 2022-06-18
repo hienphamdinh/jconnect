@@ -2,37 +2,23 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import EntypoIcons from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const BottomTab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="HomeScreen">
+    <BottomTab.Navigator
+      initialRouteName="HomeScreen"
+      screenOptions={{headerShown: false}}>
       <BottomTab.Screen
-        name="HomeScreen"
-        component={require('screens/BottomTab/Home').default}
+        name="Bookmarks"
+        component={require('screens/BottomTab/Bookmarks').default}
         options={{
           tabBarIcon: ({focused, tintColor}) => (
             <Foundation
               name="home"
               color={focused ? '#49AC5A' : '#ccc'}
               size={24}
-            />
-          ),
-          tabBarLabel: () => {
-            return null;
-          },
-        }}
-        Ï
-      />
-      <BottomTab.Screen
-        name="Bookmarks"
-        component={require('screens/BottomTab/Bookmarks').default}
-        options={{
-          tabBarIcon: ({focused, tintColor}) => (
-            <Ionicons
-              name="ios-bookmarks"
-              color={focused ? '#49AC5A' : '#ccc'}
-              size={20}
             />
           ),
           tabBarLabel: () => {
@@ -71,6 +57,23 @@ export default function BottomTabNavigator() {
             return null;
           },
         }}
+      />
+      <BottomTab.Screen
+        name="JobScreen"
+        component={require('screens/BottomTab/JobScreen').default}
+        options={{
+          tabBarIcon: ({focused, tintColor}) => (
+            <EntypoIcons
+              name="suitcase"
+              color={focused ? '#49AC5A' : '#ccc'}
+              size={24}
+            />
+          ),
+          tabBarLabel: () => {
+            return null;
+          },
+        }}
+        Ï
       />
       <BottomTab.Screen
         name="Settings"

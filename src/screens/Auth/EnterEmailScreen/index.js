@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
-export default function LoginScreen() {
+export default function EnterEmailScreen() {
   const navigation = useNavigation();
-  const onPressCreateAccount = () => {
-    navigation.navigate('EnterEmailScreen');
+  const onPressNext = () => {
+    navigation.navigate('EnterPasswordScreen');
   };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -21,7 +21,7 @@ export default function LoginScreen() {
         <View style={styles.smallCircle}></View>
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
-            <Text style={styles.loginTitleText}>Login</Text>
+            <Text style={styles.loginTitleText}>Enter your email</Text>
             <View style={styles.hr}></View>
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Email</Text>
@@ -32,7 +32,7 @@ export default function LoginScreen() {
                 textContentType="emailAddress"
               />
             </View>
-            <View style={styles.inputBox}>
+            {/* <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Password</Text>
               <TextInput
                 style={styles.input}
@@ -40,18 +40,18 @@ export default function LoginScreen() {
                 secureTextEntry={true}
                 textContentType="password"
               />
-            </View>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginButtonText}>Login</Text>
+            </View> */}
+            <TouchableOpacity style={styles.loginButton} onPress={onPressNext}>
+              <Text style={styles.loginButtonText}>Next</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-              <Text style={styles.registerText} onPress={onPressCreateAccount}>
-                Create an account
+              <Text style={styles.registerText} onPress={() => {}}>
+                Login now !
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>

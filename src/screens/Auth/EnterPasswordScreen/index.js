@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
-export default function LoginScreen() {
+export default function EnterPasswordScreen() {
   const navigation = useNavigation();
   const onPressCreateAccount = () => {
-    navigation.navigate('EnterEmailScreen');
+    navigation.navigate('RegisterInfoScreen');
   };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -21,17 +21,8 @@ export default function LoginScreen() {
         <View style={styles.smallCircle}></View>
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
-            <Text style={styles.loginTitleText}>Login</Text>
+            <Text style={styles.loginTitleText}>Create password</Text>
             <View style={styles.hr}></View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <TextInput
-                style={styles.input}
-                autoCapitalize={false}
-                keyboardType="email-address"
-                textContentType="emailAddress"
-              />
-            </View>
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Password</Text>
               <TextInput
@@ -41,17 +32,28 @@ export default function LoginScreen() {
                 textContentType="password"
               />
             </View>
-            <TouchableOpacity style={styles.loginButton}>
-              <Text style={styles.loginButtonText}>Login</Text>
+            <View style={styles.inputBox}>
+              <Text style={styles.inputLabel}>Re-enter password</Text>
+              <TextInput
+                style={styles.input}
+                autoCapitalize={false}
+                secureTextEntry={true}
+                textContentType="password"
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.loginButton}
+              onPress={onPressCreateAccount}>
+              <Text style={styles.loginButtonText}>Create</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <Text style={styles.registerText} onPress={onPressCreateAccount}>
-                Create an account
+                Login now !
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity>
               <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>
