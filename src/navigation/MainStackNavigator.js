@@ -1,6 +1,6 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
 
 const MainStack = createNativeStackNavigator();
 export default function MainStackNavigator() {
@@ -9,19 +9,22 @@ export default function MainStackNavigator() {
   return (
     <MainStack.Navigator
       initialRouteName="SplashScreen"
-      screenOptions={{ headerShown: false }}
-    >
+      screenOptions={{headerShown: false}}>
       <MainStack.Screen
         name="SplashScreen"
-        component={require("screens/SplashScreen").default}
+        component={require('screens/SplashScreen').default}
+      />
+      <MainStack.Screen
+        name="AppStack"
+        component={require('./AppStack').default}
       />
       <MainStack.Screen
         name="AuthenticationStack"
-        component={require("./AuthenticationStack").default}
+        component={require('./AuthenticationStack').default}
       />
       <MainStack.Screen
         name="BottomTabNavigator"
-        component={require("./BottomTabNavigator").default}
+        component={require('./BottomTabNavigator').default}
       />
     </MainStack.Navigator>
   );

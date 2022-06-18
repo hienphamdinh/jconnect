@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -7,27 +7,26 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  FlatList
-} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import shortid from "shortid";
-import styles from "./homeStyle.js";
-import { AuthContext } from "../../context";
-import { Category, Job } from "../../components";
+  FlatList,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import styles from './styles';
+import Category from 'components/Category';
+import Job from 'components/Job';
+import {jobs, categories} from 'constants/JobData';
 
-export function Home({ navigation }) {
-  const { state, dispatch } = useContext(AuthContext);
+const Home = ({navigation}) => {
   const [data, setData] = useState({
-    username: "Shola",
+    username: 'Shola',
     photo:
-      "https://images.pexels.com/photos/1987301/pexels-photo-1987301.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+      'https://images.pexels.com/photos/1987301/pexels-photo-1987301.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   });
 
-  const renderCategory = ({ item }) => {
+  const renderCategory = ({item}) => {
     return <Category category={item} />;
   };
 
-  const renderJob = ({ item }) => {
+  const renderJob = ({item}) => {
     return <Job job={item} navigation={navigation} />;
   };
 
@@ -40,7 +39,7 @@ export function Home({ navigation }) {
             <Text style={styles.findJobText}>Find your perfect job</Text>
           </View>
           <View style={styles.profilePicWrapper}>
-            <Image source={{ uri: data?.photo }} style={styles.profilePic} />
+            <Image source={{uri: data?.photo}} style={styles.profilePic} />
           </View>
         </View>
         <View style={styles.searchContainer}>
@@ -56,8 +55,8 @@ export function Home({ navigation }) {
           <View style={styles.section}>
             <Text style={styles.heading}>Interesting categories</Text>
             <FlatList
-              data={state?.categories}
-              keyExtractor={(item, index) => shortid.generate()}
+              data={categories}
+              keyExtractor={(item, index) => index.toString()}
               renderItem={renderCategory}
               horizontal={true}
               contentContainerStyle={styles.sectionScrollContainer}
@@ -68,8 +67,8 @@ export function Home({ navigation }) {
           <View style={styles.section}>
             <Text style={styles.heading}>Jobs for you</Text>
             <FlatList
-              data={state?.jobs}
-              keyExtractor={(item, index) => shortid.generate()}
+              data={jobs}
+              keyExtractor={(item, index) => index.toString()}
               renderItem={renderJob}
               horizontal={false}
               contentContainerStyle={styles.sectionScrollContainer}
@@ -81,4 +80,6 @@ export function Home({ navigation }) {
       </View>
     </KeyboardAvoidingView>
   );
-}
+};
+
+export default Home;

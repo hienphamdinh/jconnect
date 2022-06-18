@@ -1,6 +1,6 @@
-import SplashScreen from "src/assets/Images/spash_screen.svg";
+import SplashScreen from 'src/assets/Images/spash_screen.svg';
 
 const Images = {
-  SplashScreen
+  SplashScreen,
 };
 export default Images;
