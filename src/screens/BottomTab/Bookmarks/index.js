@@ -29,7 +29,6 @@ export default function LoginScreen1() {
               <Text style={styles.inputLabel}>Email</Text>
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
                 keyboardType="email-address"
                 textContentType="emailAddress"
               />
@@ -38,7 +37,6 @@ export default function LoginScreen1() {
               <Text style={styles.inputLabel}>Password</Text>
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
                 secureTextEntry={true}
                 textContentType="password"
               />

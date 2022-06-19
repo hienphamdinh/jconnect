@@ -23,7 +23,6 @@ export default function EnterPasswordScreen() {
               <Text style={styles.inputLabel}>Password</Text>
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
                 secureTextEntry={true}
                 textContentType="password"
               />
@@ -32,7 +31,6 @@ export default function EnterPasswordScreen() {
               <Text style={styles.inputLabel}>Re-enter password</Text>
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
                 secureTextEntry={true}
                 textContentType="password"
               />

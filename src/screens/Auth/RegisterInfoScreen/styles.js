@@ -10,8 +10,11 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: 24,
     backgroundColor: 'white',
+  },
+  contentContainerStyle: {
+    backgroundColor: 'white',
     paddingHorizontal: 16,
-    paddingBottom: 100,
+    paddingBottom: 80,
   },
   header: {
     backgroundColor: '#49AC5A',

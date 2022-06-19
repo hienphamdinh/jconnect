@@ -10,8 +10,19 @@ import SwitchComponent from 'components/SwitchComponent';
 import useRegisterHook from './hook';
 import PrimaryButton from 'components/PrimaryButton';
 import BackComponent from 'components/BackComponent';
+import CheckButton from 'components/CheckButton';
+import {MALE, FEMALE} from 'constants/Gender';
+
 export default function RegisterInfoScreen() {
-  const {insets, activeToggle, onPressToggle, onPressJoin} = useRegisterHook();
+  const {
+    insets,
+    activeToggle,
+    gender,
+    onPressToggle,
+    onPressJoin,
+    onPressGenderMale,
+    onPressGenderFeMale,
+  } = useRegisterHook();
   return (
     <Container style={styles.container} notSafeArea>
       <BackComponent />
@@ -37,18 +48,17 @@ export default function RegisterInfoScreen() {
       </View>
       <ScrollView
         style={styles.scrollView}
+        contentContainerStyle={styles.contentContainerStyle}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}>
         <InputBox
           title="Full name"
           placeholder="Pham Dinh Hien"
-          autoCapitalize={false}
           keyboardType="email-address"
           textContentType="emailAddress"
         />
         <InputBox
-          title="Birthday"
-          autoCapitalize={false}
+          title="Year of Birth"
           editable={false}
           placeholder="Email"
           keyboardType="email-address"
@@ -56,18 +66,28 @@ export default function RegisterInfoScreen() {
         />
         <InputBox
           title="Phone"
-          autoCapitalize={false}
           placeholder="Email"
           keyboardType="phone-pad"
           textContentType="emailAddress"
         />
         <InputBox
           title="Location"
-          autoCapitalize={false}
           placeholder="Email"
           keyboardType="email-address"
           textContentType="emailAddress"
         />
+        <View style={styles.switchContainer}>
+          <CheckButton
+            title="Male"
+            onPress={onPressGenderMale}
+            active={gender === MALE}
+          />
+          <CheckButton
+            title="Female"
+            onPress={onPressGenderFeMale}
+            active={gender === FEMALE}
+          />
+        </View>
         <View style={styles.switchContainer}>
           <Text style={styles.textSwitch}>I'm a student</Text>
           <SwitchComponent
@@ -79,7 +99,6 @@ export default function RegisterInfoScreen() {
           <>
             <InputBox
               title="University/School"
-              autoCapitalize={false}
               placeholder="Email"
               keyboardType="email-address"
               textContentType="emailAddress"
@@ -88,7 +107,6 @@ export default function RegisterInfoScreen() {
               <InputBox
                 style={styles.inputItem}
                 title="Start year"
-                autoCapitalize={false}
                 placeholder="Email"
                 keyboardType="phone-pad"
                 textContentType="emailAddress"
@@ -97,7 +115,6 @@ export default function RegisterInfoScreen() {
               <InputBox
                 style={styles.inputItem}
                 title="End year"
-                autoCapitalize={false}
                 placeholder="Email"
                 keyboardType="email-address"
                 textContentType="emailAddress"
@@ -108,14 +125,12 @@ export default function RegisterInfoScreen() {
           <>
             <InputBox
               title="Most recently job"
-              autoCapitalize={false}
               placeholder="Email"
               keyboardType="phone-pad"
               textContentType="emailAddress"
             />
             <InputBox
               title="Most recently company"
-              autoCapitalize={false}
               placeholder="Email"
               keyboardType="email-address"
               textContentType="emailAddress"

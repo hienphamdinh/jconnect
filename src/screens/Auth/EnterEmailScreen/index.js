@@ -23,7 +23,6 @@ export default function EnterEmailScreen() {
               <Text style={styles.inputLabel}>Email</Text>
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
                 keyboardType="email-address"
                 textContentType="emailAddress"
               />
