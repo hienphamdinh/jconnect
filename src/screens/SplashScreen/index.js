@@ -13,7 +13,7 @@ const NavBarExtra =
 export default function SplashScreen() {
   const navigation = useNavigation();
   setTimeout(function () {
-    navigation.navigate('AuthenticationStack');
+    navigation.navigate('BottomTabNavigator');
   }, 5000);
   return (
     <View style={styles.container}>

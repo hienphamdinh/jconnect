@@ -12,7 +12,7 @@ export default function BottomTabNavigator() {
       screenOptions={{headerShown: false}}>
       <BottomTab.Screen
         name="Bookmarks"
-        component={require('screens/BottomTab/Bookmarks').default}
+        component={require('screens/BottomTab/HomeScreen').default}
         options={{
           tabBarIcon: ({focused, tintColor}) => (
             <Foundation

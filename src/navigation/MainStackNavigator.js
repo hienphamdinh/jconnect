@@ -15,10 +15,6 @@ export default function MainStackNavigator() {
         component={require('screens/SplashScreen').default}
       />
       <MainStack.Screen
-        name="AppStack"
-        component={require('./AppStack').default}
-      />
-      <MainStack.Screen
         name="AuthenticationStack"
         component={require('./AuthenticationStack').default}
       />
