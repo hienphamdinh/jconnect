@@ -19,7 +19,6 @@ target 'jconnect' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
   target 'jconnectTests' do
     inherit! :complete
