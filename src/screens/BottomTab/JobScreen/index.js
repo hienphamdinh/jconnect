@@ -6,7 +6,6 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   FlatList,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,6 +13,7 @@ import styles from './styles';
 import Category from 'components/Category';
 import Job from 'components/Job';
 import {jobs, categories} from 'constants/JobData';
+import Container from 'components/Container';
 
 const Home = ({navigation}) => {
   const [data, setData] = useState({
@@ -32,7 +32,7 @@ const Home = ({navigation}) => {
 
   return (
     <KeyboardAvoidingView style={styles.homeContainer}>
-      <View style={styles.homeContent}>
+      <Container style={styles.homeContent}>
         <View style={styles.homeHeader}>
           <View>
             <Text style={styles.usernameText}>What's up {data?.username}</Text>
@@ -77,7 +77,7 @@ const Home = ({navigation}) => {
           </View>
         </View>
         {/* </FlatList> */}
-      </View>
+      </Container>
     </KeyboardAvoidingView>
   );
 };

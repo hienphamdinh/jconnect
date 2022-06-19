@@ -6,6 +6,13 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  scrollView: {
+    flex: 1,
+    paddingTop: 24,
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingBottom: 100,
+  },
   header: {
     backgroundColor: '#49AC5A',
     justifyContent: 'flex-end',
@@ -97,5 +104,24 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: 12,
     fontSize: 16,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  textSwitch: {
+    fontSize: 16,
+  },
+  educationYear: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  divider: {
+    width: 20 * WIDTH_RATIO,
+  },
+  inputItem: {
+    flex: 1,
   },
 });

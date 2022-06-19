@@ -4,6 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
+    overflow: 'hidden',
   },
   bigCircle: {
     width: Dimensions.get('window').height * 0.7,

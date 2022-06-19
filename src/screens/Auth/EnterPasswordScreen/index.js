@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import BackComponent from 'components/BackComponent';
+import Container from 'components/Container';
 import styles from './styles';
 export default function EnterPasswordScreen() {
   const navigation = useNavigation();
@@ -15,7 +10,8 @@ export default function EnterPasswordScreen() {
     navigation.navigate('RegisterInfoScreen');
   };
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <Container notSafeArea>
+      <BackComponent />
       <View style={styles.container}>
         <View style={styles.bigCircle}></View>
         <View style={styles.smallCircle}></View>
@@ -57,6 +53,6 @@ export default function EnterPasswordScreen() {
           </View>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </Container>
   );
 }

@@ -28,7 +28,7 @@ const Colors = {
   dotBanner: '#DCE5EB',
   text: '#E0D7E5',
   black: '#000000',
-  primary: '#6E2775',
+  primary: '#49AC5A',
   darkPrimary: '#632066',
   white: '#ffffff',
   blueGrey: 'rgba(150, 158, 178, 1)',

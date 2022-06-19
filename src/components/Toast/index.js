@@ -1,13 +1,13 @@
-import React, {useRef} from "react";
-import {View, Text, StyleSheet, Animated, Dimensions} from "react-native";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
-import OpacityButton from "components/OpacityButton";
-import {HEIGHT_DEVICE} from "themes/Dimens";
+import React, {useRef} from 'react';
+import {View, Text, StyleSheet, Animated, Dimensions} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import OpacityButton from 'components/OpacityButton';
+import {HEIGHT_DEVICE} from 'themes/Dimens';
 export default function Toast() {
   const toastRef = useRef(new Animated.Value(HEIGHT_DEVICE * -1)).current;
   const insets = useSafeAreaInsets();
   const popIn = () => {
-    console.log("Innnnnnn", HEIGHT_DEVICE);
+    console.log('Innnnnnn', HEIGHT_DEVICE);
     Animated.timing(toastRef, {
       toValue: -HEIGHT_DEVICE + insets.top + 60,
       duration: 300,
@@ -16,7 +16,7 @@ export default function Toast() {
   };
 
   const popOut = () => {
-    console.log("Outtt", HEIGHT_DEVICE * -1);
+    console.log('Outtt', HEIGHT_DEVICE * -1);
     setTimeout(() => {
       Animated.timing(toastRef, {
         toValue: HEIGHT_DEVICE * -1,
@@ -27,7 +27,7 @@ export default function Toast() {
   };
 
   const onPressClose = () => {
-    console.log("Outtttt");
+    console.log('Outtttt');
     Animated.timing(toastRef, {
       toValue: HEIGHT_DEVICE * -1,
       duration: 300,
@@ -35,22 +35,22 @@ export default function Toast() {
     }).start();
   };
   return (
-      <Animated.View
-        style={[
-          styles.toastContainer,
-          {
-            transform: [{translateY: toastRef}],
-          },
-        ]}>
-        <Text>Tao là Phạm Đình Hiển</Text>
-      </Animated.View>
+    <Animated.View
+      style={[
+        styles.toastContainer,
+        {
+          transform: [{translateY: toastRef}],
+        },
+      ]}>
+      <Text>Tao là Phạm Đình Hiển</Text>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   toastContainer: {
     position: 'relative',
-    shadowColor: "gray",
+    shadowColor: 'gray',
     shadowOffset: {
       width: 0,
       height: 3,
@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     height: 60,
     width: 350,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     paddingHorizontal: 8,
-    justifyContent: "center",
+    justifyContent: 'center',
     elevation: 5,
   },
 });

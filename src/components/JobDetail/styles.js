@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {NORMAL_STATUS_BAR_HEIGHT} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
   jobDetailContainer: {
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: NORMAL_STATUS_BAR_HEIGHT,
   },
   jobDetailCircleContainer: {
     backgroundColor: '#fafafa',
