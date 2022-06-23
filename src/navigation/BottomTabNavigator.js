@@ -42,7 +42,7 @@ export default function BottomTabNavigator() {
           },
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Notifications"
         component={require('screens/BottomTab/Notifications').default}
         options={{
@@ -57,7 +57,7 @@ export default function BottomTabNavigator() {
             return null;
           },
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="JobScreen"
         component={require('screens/BottomTab/JobScreen').default}

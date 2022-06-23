@@ -17,8 +17,11 @@ const Job = ({job, navigation}) => {
     return value;
   };
 
+  console.log({bookmarks});
+
   const handleNavigation = (route, params) => {
-    handleNestedNavigation(navigation, getScreenParent(route), route, params);
+    navigation.navigate('JobDetailScreen', params);
+    // handleNestedNavigation(navigation, getScreenParent(route), route, params);
   };
 
   return (

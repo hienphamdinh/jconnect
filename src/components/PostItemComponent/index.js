@@ -31,8 +31,8 @@ export default function index() {
       </View>
       <Image source={{uri: img}} style={styles.imageContent} />
       <View style={styles.actionWrapper}>
-        {listAction.map(item => (
-          <OpacityButton style={styles.iconWrapper}>
+        {listAction.map((item, index) => (
+          <OpacityButton key={index.toString()} style={styles.iconWrapper}>
             <AntDesign name={item.icon} size={18 * WIDTH_RATIO} />
             <Text style={styles.textNumberAction}>1000</Text>
           </OpacityButton>

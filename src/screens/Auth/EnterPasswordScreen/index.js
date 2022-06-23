@@ -3,6 +3,7 @@ import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import BackComponent from 'components/BackComponent';
 import Container from 'components/Container';
+import usePasswordHook from './hook';
 import styles from './styles';
 export default function EnterPasswordScreen() {
   const navigation = useNavigation();
@@ -40,14 +41,6 @@ export default function EnterPasswordScreen() {
               onPress={onPressCreateAccount}>
               <Text style={styles.loginButtonText}>Create</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity>
-              <Text style={styles.registerText} onPress={onPressCreateAccount}>
-                Login now !
-              </Text>
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity>
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity> */}
           </View>
         </View>
       </View>

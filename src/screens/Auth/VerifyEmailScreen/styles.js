@@ -118,4 +118,14 @@ export default StyleSheet.create({
     fontSize: 14,
     color: Colors.red,
   },
+  reSendButton: {
+    marginTop: 8,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  resendText: {
+    color: Colors.red,
+    fontSize: 14,
+    fontWeight: '500',
+  },
 });

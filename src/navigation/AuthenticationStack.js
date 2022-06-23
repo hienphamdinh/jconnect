@@ -13,6 +13,10 @@ export default function AuthenticationStack() {
         component={require('screens/Auth/EnterEmailScreen').default}
       />
       <AuthStack.Screen
+        name="VerifyEmailScreen"
+        component={require('screens/Auth/VerifyEmailScreen').default}
+      />
+      <AuthStack.Screen
         name="EnterPasswordScreen"
         component={require('screens/Auth/EnterPasswordScreen').default}
       />

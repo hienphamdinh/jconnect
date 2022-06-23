@@ -20,6 +20,8 @@ target 'jconnect' do
   )
 
 
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
+
   target 'jconnectTests' do
     inherit! :complete
     # Pods for testing

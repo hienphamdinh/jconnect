@@ -28,4 +28,11 @@ export default StyleSheet.create({
     borderRadius: 4,
     paddingHorizontal: 10,
   },
+  star: {
+    color: Colors.red,
+    fontSize: 16,
+  },
+  error: {
+    borderColor: Colors.red,
+  },
 });

@@ -54,27 +54,31 @@ export default function RegisterInfoScreen() {
         <InputBox
           title="Full name"
           placeholder="Pham Dinh Hien"
-          keyboardType="email-address"
-          textContentType="emailAddress"
+          keyboardType="default"
+          textContentType="none"
+          requireValue
         />
         <InputBox
           title="Year of Birth"
           editable={false}
-          placeholder="Email"
-          keyboardType="email-address"
-          textContentType="emailAddress"
+          placeholder="Year of Birth"
+          keyboardType="numeric"
+          textContentType="none"
+          requireValue
         />
         <InputBox
           title="Phone"
-          placeholder="Email"
+          placeholder="Phone number"
           keyboardType="phone-pad"
           textContentType="emailAddress"
+          requireValue
         />
         <InputBox
           title="Location"
-          placeholder="Email"
-          keyboardType="email-address"
-          textContentType="emailAddress"
+          placeholder="Current location"
+          keyboardType="default"
+          textContentType="none"
+          requireValue
         />
         <View style={styles.switchContainer}>
           <CheckButton
@@ -99,25 +103,25 @@ export default function RegisterInfoScreen() {
           <>
             <InputBox
               title="University/School"
-              placeholder="Email"
-              keyboardType="email-address"
-              textContentType="emailAddress"
+              placeholder="Current university/school"
+              keyboardType="default"
+              textContentType="none"
             />
             <View style={styles.educationYear}>
               <InputBox
                 style={styles.inputItem}
                 title="Start year"
-                placeholder="Email"
-                keyboardType="phone-pad"
-                textContentType="emailAddress"
+                placeholder="Start year"
+                keyboardType="numeric"
+                textContentType="none"
               />
               <View style={styles.divider} />
               <InputBox
                 style={styles.inputItem}
                 title="End year"
-                placeholder="Email"
-                keyboardType="email-address"
-                textContentType="emailAddress"
+                placeholder="End year"
+                keyboardType="numeric"
+                textContentType="none"
               />
             </View>
           </>

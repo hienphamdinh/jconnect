@@ -22,6 +22,10 @@ export default function MainStackNavigator() {
         name="BottomTabNavigator"
         component={require('./BottomTabNavigator').default}
       />
+      <MainStack.Screen
+        name="JobDetailScreen"
+        component={require('screens/JobDetail').default}
+      />
     </MainStack.Navigator>
   );
 }
