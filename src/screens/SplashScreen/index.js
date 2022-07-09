@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, StatusBar, Platform} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  StatusBar,
+  Platform,
+  Text,
+} from 'react-native';
 import Images from 'themes/Images';
 import {useNavigation} from '@react-navigation/native';
 import ExtraDimensions from 'react-native-extra-dimensions-android';
@@ -17,7 +24,8 @@ export default function SplashScreen() {
   }, 5000);
   return (
     <View style={styles.container}>
-      <Images.SplashScreen />
+      <Text>HeaderBar</Text>
+      {/* <Images.SplashScreen /> */}
     </View>
   );
 }
