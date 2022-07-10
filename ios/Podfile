@@ -21,7 +21,6 @@ target 'jconnect' do
 
 
 
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   target 'jconnectTests' do
     inherit! :complete

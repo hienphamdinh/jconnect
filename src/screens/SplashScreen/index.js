@@ -1,27 +1,14 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-  Platform,
-  Text,
-} from 'react-native';
-import Images from 'themes/Images';
+import {View, StyleSheet, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import ExtraDimensions from 'react-native-extra-dimensions-android';
-const NavbarHeight =
-  Dimensions.get('screen').height - Dimensions.get('window').height;
+import SplashScreen from 'react-native-splash-screen';
 
-const NavBarExtra =
-  ExtraDimensions.get('REAL_WINDOW_HEIGHT') -
-  (ExtraDimensions.get('STATUS_BAR_HEIGHT') -
-    ExtraDimensions.get('SOFT_MENU_BAR_HEIGHT'));
-export default function SplashScreen() {
+export default function SplashScreens() {
   const navigation = useNavigation();
   setTimeout(function () {
+    SplashScreen.hide();
     navigation.navigate('AuthenticationStack');
-  }, 5000);
+  }, 2000);
   return (
     <View style={styles.container}>
       <Text>HeaderBar</Text>
