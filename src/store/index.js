@@ -1,29 +1,34 @@
-import { persistReducer, persistStore } from "redux-persist";
-import logger from "redux-logger";
-import { applyMiddleware ,combineReducers,  createStore} from "redux";
-import rootSagas from "./rootSagas";
-import {reducer as auth} from "store/auth/reducer";
-import createSagaMiddleware from "redux-saga";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {persistReducer, persistStore} from 'redux-persist';
+import logger from 'redux-logger';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import rootSagas from './rootSagas';
+import {reducer as auth} from 'store/auth/reducer';
+import createSagaMiddleware from 'redux-saga';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 let middleware = [];
 const persistConfig = {
-    key:'root',
-    storage: AsyncStorage,
-    blacklist: [],
-    whitelist:["auth"],
-    stateReconciler: false,
+  key: 'root',
+  storage: AsyncStorage,
+  blacklist: [],
+  whitelist: ['auth'],
+  stateReconciler: false,
+};
+const sagaMiddleware = createSagaMiddleware();
+middleware.push(sagaMiddleware);
+if (__DEV__) {
+  middleware.push(logger);
 }
-const sagaMiddleware =createSagaMiddleware();
-middleware.push(sagaMiddleware)
-if(__DEV__) middleware.push(logger);
 
 const rootReducer = combineReducers({
-    auth
-})
+  auth,
+});
 
-const store = createStore(persistReducer(persistConfig,rootReducer), applyMiddleware(...middleware));
+const store = createStore(
+  persistReducer(persistConfig, rootReducer),
+  applyMiddleware(...middleware),
+);
 
-sagaMiddleware.run(rootSagas)
+sagaMiddleware.run(rootSagas);
 
 export const persistedStore = persistStore(store);
 

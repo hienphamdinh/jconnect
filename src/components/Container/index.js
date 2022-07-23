@@ -15,7 +15,7 @@ class Container extends PureComponent {
         behavior={behavior}
         style={[styles.container, style]}>
         {notSafeArea ? (
-          <View style={{flex: 1}}>{children}</View>
+          <View style={styles.container}>{children}</View>
         ) : (
           <SafeAreaView style={[styles.container, padding]}>
             {children}

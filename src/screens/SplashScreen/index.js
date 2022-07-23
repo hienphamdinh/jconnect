@@ -1,32 +1,48 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
+import LottieView from 'lottie-react-native';
+import Animations from 'themes/Animations';
+import {WIDTH_RATIO} from 'themes/Dimens';
 
 export default function SplashScreens() {
   const navigation = useNavigation();
   setTimeout(function () {
-    SplashScreen.hide();
     navigation.navigate('AuthenticationStack');
-  }, 2000);
+  }, 4000);
+  useEffect(() => {
+    setTimeout(function () {
+      SplashScreen.hide();
+    }, 2000);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>HeaderBar</Text>
-      {/* <Images.SplashScreen /> */}
+      <LottieView
+        source={Animations.launchAnimation}
+        style={styles.animation}
+        resizeMode="contain"
+        autoSize
+        autoPlay
+        loop
+      />
+      <Text style={styles.txtLoading}>Loading...</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  image: {
-    height: '100%',
-    width: '100%',
+  animation: {
+    height: 150 * WIDTH_RATIO,
+    width: 150 * WIDTH_RATIO,
+  },
+  txtLoading: {
+    fontSize: 15 * WIDTH_RATIO,
   },
 });
