@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {LogBox, Text, TextInput} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/lib/integration/react';
@@ -6,6 +6,8 @@ import {Provider} from 'react-redux';
 import store, {persistedStore} from 'store';
 import Toast from 'components/Toast';
 import MainStackNavigator from 'navigation/MainStackNavigator';
+import messaging from '@react-native-firebase/messaging';
+import firebase from '@react-native-firebase/app';
 
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
@@ -55,6 +57,27 @@ TextInput.render = function (...args) {
 
 const RootComponent = () => {
   const navigationRef = useRef();
+  const [token, setToken] = useState('');
+  const getFirebaseToken = async () => {
+    await messaging().registerDeviceForRemoteMessages();
+
+    const generatedToken = messaging().getToken();
+    return generatedToken;
+  };
+  useEffect(() => {
+    async function fetchData() {
+      const generatedToken = await getFirebaseToken();
+      console.log('gentoKen', generatedToken);
+      setToken(generatedToken);
+    }
+    fetchData();
+  });
+  const onMessageReceived = async message => {
+    console.log('message', message);
+  };
+  useEffect(() => {
+    messaging().setBackgroundMessageHandler(onMessageReceived);
+  }, []);
   return (
     <NavigationContainer ref={navigationRef}>
       <MainStackNavigator />
@@ -63,6 +86,7 @@ const RootComponent = () => {
 };
 
 const App = () => {
+  // firebase.initializeApp();
   return (
     <Provider store={store}>
       <PersistGate persistor={persistedStore}>
