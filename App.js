@@ -8,6 +8,7 @@ import Toast from 'components/Toast';
 import MainStackNavigator from 'navigation/MainStackNavigator';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
+import codePush from 'react-native-code-push';
 
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
@@ -96,4 +97,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default codePush(App);

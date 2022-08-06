@@ -24,7 +24,7 @@ export default function LoginScreen() {
         <View style={styles.smallCircle} />
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
-            <Text style={styles.loginTitleText}>Login</Text>
+            <Text style={styles.loginTitleText}>////</Text>
             <View style={styles.hr} />
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Email</Text>

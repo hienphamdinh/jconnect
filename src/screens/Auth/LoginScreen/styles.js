@@ -8,7 +8,7 @@ export default StyleSheet.create({
   bigCircle: {
     width: Dimensions.get('window').height * 0.7,
     height: Dimensions.get('window').height * 0.7,
-    backgroundColor: '#49AC5A',
+    backgroundColor: 'red',
     borderRadius: 1000,
     position: 'absolute',
     right: Dimensions.get('window').width * 0.25,
