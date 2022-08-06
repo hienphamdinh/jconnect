@@ -1,10 +1,10 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import AuthActions, {AuthTypes} from './action';
+import * as API from './service';
 
 export function* login(action) {
-  console.log('Đã vô tới reducer', action);
-  const {phone, password} = action;
-  yield put(AuthActions.loginSuccess(phone));
+  const data = yield call(API.login, '0971109618');
+  console.log('data', data);
 }
 
 const mapAuthSagas = [takeLatest(AuthTypes.LOGIN, login)];

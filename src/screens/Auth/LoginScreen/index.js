@@ -8,8 +8,11 @@ import {
   Keyboard,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import useLoginHook from './hook';
 import styles from './styles';
 export default function LoginScreen() {
+  const {onPressLogin} = useLoginHook();
+
   const navigation = useNavigation();
   const onPressCreateAccount = () => {
     navigation.navigate('EnterEmailScreen');
@@ -35,7 +38,7 @@ export default function LoginScreen() {
                 textContentType="password"
               />
             </View>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={onPressLogin}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity>
