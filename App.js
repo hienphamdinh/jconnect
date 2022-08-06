@@ -10,6 +10,11 @@ import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
 import codePush from 'react-native-code-push';
 
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  installMode: codePush.InstallMode.ON_NEXT_RESTART,
+};
+
 LogBox.ignoreLogs([
   'VirtualizedLists should never be nested',
   'Require cycle',
@@ -97,4 +102,4 @@ const App = () => {
   );
 };
 
-export default codePush(App);
+export default codePush(codePushOptions)(App);
