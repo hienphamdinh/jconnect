@@ -36,6 +36,7 @@ Text.render = function (...args) {
       style: [
         {
           fontFamily: 'Roboto-Regular',
+          color: 'black',
         },
         origin.props.style,
       ],

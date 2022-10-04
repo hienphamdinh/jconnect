@@ -14,18 +14,19 @@ export default function EnterPasswordScreen() {
     <Container notSafeArea>
       <BackComponent />
       <View style={styles.container}>
-        <View style={styles.bigCircle}></View>
-        <View style={styles.smallCircle}></View>
+        <View style={styles.bigCircle} />
+        <View style={styles.smallCircle} />
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
             <Text style={styles.loginTitleText}>Create password</Text>
-            <View style={styles.hr}></View>
+            <View style={styles.hr} />
             <View style={styles.inputBox}>
               <Text style={styles.inputLabel}>Password</Text>
               <TextInput
                 style={styles.input}
                 secureTextEntry={true}
                 textContentType="password"
+                placeholder="Create a new password"
               />
             </View>
             <View style={styles.inputBox}>
@@ -34,6 +35,7 @@ export default function EnterPasswordScreen() {
                 style={styles.input}
                 secureTextEntry={true}
                 textContentType="password"
+                placeholder="Re-enter a new password"
               />
             </View>
             <TouchableOpacity

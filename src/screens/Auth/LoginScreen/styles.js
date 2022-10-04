@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   container: {
@@ -68,7 +69,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     alignSelf: 'center',
-    marginVertical: 18,
+    color: Colors.black,
   },
   hr: {
     width: '100%',

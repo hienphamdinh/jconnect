@@ -1,22 +1,18 @@
-import axios from 'axios';
-import {GET} from 'store/api';
-import get from 'lodash/get';
+import {GET, POST} from 'store/api';
 
-const BASE_URL = 'http://localhost:3000/api/';
-
-export const checkEmail = async email => {
-  const path = 'users/check-email';
-  const res = await axios
-    .post(path, email, {baseURL: BASE_URL})
-    .then(response => {
-      get(response, 'data');
-      return get(response, 'data');
-    });
-
-  return res;
+export const checkEmail = email => {
+  const path = 'auth/check-email';
+  return POST(path, {
+    email,
+  });
 };
 
 export const login = phone => {
-  const path = '/users/login/hien';
-  return GET(path, {hien: 'yen'});
+  const path = '/auth/login/hien';
+  return POST(path, {hien: 'yen'});
+};
+
+export const verifyEmail = email => {
+  const path = '/auth/verify-email';
+  return POST(path, {email});
 };

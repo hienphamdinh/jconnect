@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "start-r": "yarn start --reset-cache",
+    "start:r": "yarn start --reset-cache",
     "test": "jest",
     "lint": "eslint .",
     "setup:m1": "yarn && cd ios && arch -x86_64 pod install && cd ..",

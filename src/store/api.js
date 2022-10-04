@@ -13,7 +13,21 @@ import {
 import {get} from 'lodash';
 
 const instance = axios.create({
-  baseURL: Configs.API_BASE_URL,
+  /* chỗ này đôi khi react native gặp một số vấn đề như network error khi làm việc dưới localhost thì có một số cách sau đây để khắc phục
+  Ví dụ:
+ Ta có baseURL như sau http://localhost:3000/api 
+ Đối với url này đôi khi sẽ gặp lỗi trên (tùy wifi, tùy router)
+ Cách khắc phục: 
+ Cách 1: Dùng 10.0.2.2 thay cho localhost http://localhost:3000/api sẽ thành http://10.0.2.2:3000/api
+  Cách 2: Lấy địa chỉ ipv4/ipv6 của wifi(Ví dụ wifi có địa chỉ ip sau 192.168.1.245) thay cho localhost:  http://localhost:3000/api sẽ thành http://192.168.1.245:3000/api
+  */
+
+  // Hiện tại chỗ này đang code bị lỗi như trên --- Ngày 3/10 lúc 23h27 trên wifi Virus 5G
+  // Nên phải dùng 1 trong 2 cách trên để chữa cháy
+  // Sau này báo cáo phải nhớ đổi lại
+
+  // baseURL: Configs.API_BASE_URL,
+  baseURL: 'http://192.168.1.245:3000/jobconnect/api',
   timeout: 60000,
 });
 

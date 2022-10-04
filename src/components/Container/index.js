@@ -13,6 +13,7 @@ class Container extends PureComponent {
     return (
       <KeyboardAvoidingView
         behavior={behavior}
+        enabled={Platform.OS === 'ios'}
         style={[styles.container, style]}>
         {notSafeArea ? (
           <View style={styles.container}>{children}</View>
