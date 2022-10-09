@@ -4,7 +4,7 @@ import {NORMAL_STATUS_BAR_HEIGHT} from 'themes/Dimens';
 export default StyleSheet.create({
   jobDetailCircleContainer: {
     position: 'absolute',
-    top: NORMAL_STATUS_BAR_HEIGHT + 16,
+    top: NORMAL_STATUS_BAR_HEIGHT,
     left: 16,
     backgroundColor: '#fafafa',
     height: 50,

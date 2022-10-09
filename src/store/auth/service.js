@@ -7,7 +7,7 @@ export const checkEmail = email => {
   });
 };
 
-export const login = phone => {
+export const login = user => {
   const path = '/auth/login/hien';
   return POST(path, {hien: 'yen'});
 };

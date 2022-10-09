@@ -74,7 +74,6 @@ const RootComponent = () => {
   useEffect(() => {
     async function fetchData() {
       const generatedToken = await getFirebaseToken();
-      console.log('gentoKen', generatedToken);
       setToken(generatedToken);
     }
     fetchData();

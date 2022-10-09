@@ -1,17 +1,24 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import {TouchableOpacity, Text, ActivityIndicator} from 'react-native';
 import styles from './styles';
 export default function PrimaryButton({
   customStyle,
   textStyle,
+  loading,
   title,
+  disable,
   onPress,
 }) {
   return (
     <TouchableOpacity
-      style={[styles.loginButton, customStyle]}
+      disabled={disable}
+      style={[styles.loginButton, disable && styles.disable, customStyle]}
       onPress={onPress}>
-      <Text style={[styles.loginButtonText, textStyle]}>{title}</Text>
+      {loading && !disable ? (
+        <ActivityIndicator color={'white'} size={27} />
+      ) : (
+        <Text style={[styles.loginButtonText, textStyle]}>{title}</Text>
+      )}
     </TouchableOpacity>
   );
 }

@@ -27,7 +27,7 @@ const instance = axios.create({
   // Sau này báo cáo phải nhớ đổi lại
 
   // baseURL: Configs.API_BASE_URL,
-  baseURL: 'http://192.168.1.245:3000/jobconnect/api',
+  baseURL: 'http://192.168.1.245:3000/job-connect/api',
   timeout: 60000,
 });
 

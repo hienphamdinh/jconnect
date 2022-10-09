@@ -3,26 +3,30 @@ import {useNavigation} from '@react-navigation/native';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import {useDispatch} from 'react-redux';
-import AuthActions, {AuthTypes} from 'store/auth/action';
+import AuthActions from 'store/auth/action';
+import I18n from 'locales';
 const useEnterEmailHook = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState('');
   const onCheckEmail = async () => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     if (isEmpty(email)) {
-      setError('Email is empty');
+      setError(I18n.t('EnterEmailScreen.EmailEmpty'));
     } else if (!regex.test(email)) {
-      setError('Email is invalid');
+      setError(I18n.t('EnterEmailScreen.EmailInvalid'));
     } else {
+      setLoading(true);
       dispatch(
         AuthActions.checkEmail(email, res => {
-          if (get(res, 'data.status')) {
-            setError(get(res, 'data.message'));
-          } else {
-            setError();
+          setLoading(false);
+          if (get(res, 'status')) {
             navigation.navigate('VerifyEmailScreen', {email});
+            setError();
+          } else {
+            setError(get(res, 'message'));
           }
         }),
       );
@@ -41,6 +45,7 @@ const useEnterEmailHook = () => {
     onCheckEmail,
     onChangeText,
     onClearInput,
+    loading,
     error,
     email,
   };

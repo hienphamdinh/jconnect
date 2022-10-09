@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   loginButton: {
@@ -12,5 +13,8 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  disable: {
+    backgroundColor: Colors.mediumGrey,
   },
 });

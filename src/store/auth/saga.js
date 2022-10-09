@@ -1,11 +1,10 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
-import AuthActions, {AuthTypes} from './action';
+import {call, takeLatest} from 'redux-saga/effects';
+import {AuthTypes} from './action';
 import * as API from './service';
 
 export function* login(action) {
   try {
     const data = yield call(API.login, '0971109618');
-    console.log('data', data);
   } catch (error) {}
 }
 

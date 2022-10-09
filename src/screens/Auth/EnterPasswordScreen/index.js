@@ -1,48 +1,62 @@
 import React from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import BackComponent from 'components/BackComponent';
 import Container from 'components/Container';
 import usePasswordHook from './hook';
+import I18n from 'locales';
 import styles from './styles';
-export default function EnterPasswordScreen() {
-  const navigation = useNavigation();
-  const onPressCreateAccount = () => {
-    navigation.navigate('RegisterInfoScreen');
-  };
+import PrimaryButton from 'components/PrimaryButton';
+export default function EnterPasswordScreen(props) {
+  const {
+    password,
+    rePassword,
+    error,
+    onPressCreateAccount,
+    onPasswordChange,
+    onRePasswordChange,
+  } = usePasswordHook(props);
+
   return (
-    <Container notSafeArea>
-      <BackComponent />
+    <Container notSafeArea showBack>
       <View style={styles.container}>
         <View style={styles.bigCircle} />
         <View style={styles.smallCircle} />
         <View style={styles.centerizedView}>
           <View style={styles.authBox}>
-            <Text style={styles.loginTitleText}>Create password</Text>
+            <Text style={styles.loginTitleText}>
+              {I18n.t('CreatePasswordScreen.CreatePassword')}
+            </Text>
             <View style={styles.hr} />
             <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Password</Text>
+              <Text style={styles.inputLabel}> {I18n.t('Password')}</Text>
               <TextInput
                 style={styles.input}
                 secureTextEntry={true}
                 textContentType="password"
-                placeholder="Create a new password"
+                placeholder={I18n.t('CreatePasswordScreen.NewPassword')}
+                value={password}
+                onChangeText={onPasswordChange}
               />
             </View>
             <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Re-enter password</Text>
+              <Text style={styles.inputLabel}>
+                {I18n.t('CreatePasswordScreen.ReEnterPassword')}
+              </Text>
               <TextInput
                 style={styles.input}
                 secureTextEntry={true}
                 textContentType="password"
-                placeholder="Re-enter a new password"
+                placeholder={I18n.t('CreatePasswordScreen.ReEntered')}
+                value={rePassword}
+                onChangeText={onRePasswordChange}
               />
             </View>
-            <TouchableOpacity
+            {error && <Text style={styles.error}>{error}</Text>}
+            <PrimaryButton
+              disable={!password || !rePassword}
               style={styles.loginButton}
-              onPress={onPressCreateAccount}>
-              <Text style={styles.loginButtonText}>Create</Text>
-            </TouchableOpacity>
+              onPress={onPressCreateAccount}
+              title={I18n.t('Create')}
+            />
           </View>
         </View>
       </View>

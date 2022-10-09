@@ -16,6 +16,7 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   const onPressCreateAccount = () => {
     navigation.navigate('EnterEmailScreen');
+    // navigation.navigate('RegisterInfoScreen');
   };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

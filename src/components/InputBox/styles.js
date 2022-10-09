@@ -8,7 +8,6 @@ export default StyleSheet.create({
     borderRadius: 8,
     borderColor: Colors.gray,
     justifyContent: 'center',
-    marginBottom: 20,
   },
 
   inputLabel: {
@@ -27,6 +26,7 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 4,
     paddingHorizontal: 10,
+    justifyContent: 'center',
   },
   star: {
     color: Colors.red,
@@ -34,5 +34,29 @@ export default StyleSheet.create({
   },
   error: {
     borderColor: Colors.red,
+  },
+  dateInput: {
+    color: Colors.black,
+  },
+  errorText: {
+    color: Colors.red,
+  },
+  boxWrapper: {
+    marginBottom: 20,
+  },
+  item: {
+    marginVertical: 8,
+    borderRadius: 4,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: Colors.mediumGrey,
+  },
+  list: {
+    flex: 1,
+  },
+  contentContainerStyle: {
+    paddingTop: 24,
+    paddingHorizontal: 16,
+    paddingBottom: 100,
   },
 });

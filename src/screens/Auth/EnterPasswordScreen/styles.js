@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   container: {
@@ -112,5 +113,8 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginTop: 12,
     fontSize: 16,
+  },
+  error: {
+    color: Colors.red,
   },
 });

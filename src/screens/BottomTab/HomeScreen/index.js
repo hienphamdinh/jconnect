@@ -4,12 +4,11 @@ import Container from 'components/Container';
 import HeaderBar from 'components/HeaderBar';
 import FloatingActionButton from 'components/FloatingActionButton';
 import PostItemComponent from 'components/PostItemComponent';
+import {useSelector} from 'react-redux';
 import styles from './styles';
-import Config from 'react-native-config';
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function HomeScreen() {
-  console.log('BASE_URL', Config.BASE_URL);
   const renderItem = ({item, index}) => <PostItemComponent item={item} />;
   return (
     <Container notSafeArea>

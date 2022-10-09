@@ -40,6 +40,8 @@ const useEnterEmailHook = props => {
 
   const onVerifyEmail = () => {
     Keyboard.dismiss();
+
+    // nhớ xóa
     if (isEmpty(pin)) {
       setError('Please enter code');
     } else if (pin === verifyCode) {

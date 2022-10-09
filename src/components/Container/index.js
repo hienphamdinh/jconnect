@@ -2,23 +2,41 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {SafeAreaView, KeyboardAvoidingView, Platform} from 'react-native';
 import {View} from 'react-native-animatable';
+import BackComponent from 'components/BackComponent';
 import styles from './styles';
 
 class Container extends PureComponent {
   render() {
-    const {behavior, style, notSafeArea, isPadding, paddingStyle, children} =
-      this.props;
+    const {
+      behavior,
+      style,
+      notSafeArea,
+      isPadding,
+      paddingStyle,
+      children,
+      showBack,
+    } = this.props;
 
     const padding = isPadding ? paddingStyle : {};
     return (
       <KeyboardAvoidingView
-        behavior={behavior}
+        // behavior={
+        //   behavior || Platform.select({android: undefined, ios: 'padding'})
+        // }
+        // // enabled={Platform.OS === 'ios'}
+
+        // enabled
+        behavior={'padding'}
         enabled={Platform.OS === 'ios'}
         style={[styles.container, style]}>
         {notSafeArea ? (
-          <View style={styles.container}>{children}</View>
+          <View style={styles.container}>
+            {showBack && <BackComponent />}
+            {children}
+          </View>
         ) : (
           <SafeAreaView style={[styles.container, padding]}>
+            {showBack && <BackComponent />}
             {children}
           </SafeAreaView>
         )}
