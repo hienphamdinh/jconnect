@@ -10,6 +10,7 @@ import SwitchComponent from 'components/SwitchComponent';
 import useRegisterHook from './hook';
 import PrimaryButton from 'components/PrimaryButton';
 import CheckButton from 'components/CheckButton';
+import ImagePickerComponent from 'components/ImagePickerComponent';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {MALE, FEMALE} from 'constants/Gender';
@@ -22,10 +23,15 @@ export default function RegisterInfoScreen(props) {
     gender,
     formRef,
     valid,
+    openImagePicker,
+    avatar,
+    onCloseImagePicker,
+    onOpenImagePicker,
     setIsValid,
     onPressToggle,
     onPressJoin,
     onPressGender,
+    onSelectedAvatar,
   } = useRegisterHook(props);
   const initForm = get(props, 'route.params.initForm');
   return (
@@ -76,9 +82,7 @@ export default function RegisterInfoScreen(props) {
               ]}>
               <OpacityButton
                 style={styles.iconWrapper}
-                onPress={() => {
-                  console.log('KKKK');
-                }}>
+                onPress={onOpenImagePicker}>
                 <EntypoIcons name="camera" size={30} />
                 <EntypoIcons
                   name="circle-with-plus"
@@ -232,6 +236,12 @@ export default function RegisterInfoScreen(props) {
                 disable={!valid}
               />
             </ScrollView>
+            <ImagePickerComponent
+              visible={openImagePicker}
+              onClose={onCloseImagePicker}
+              onSelectItem={onSelectedAvatar}
+              selected={avatar}
+            />
           </Container>
         );
       }}

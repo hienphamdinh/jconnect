@@ -19,6 +19,10 @@
     "NotMatch": "The password not match",
     "PasswordInvalid": "The password have at least one lower letter, upper letter, digit and 8 character"
   },
+  "PopupSelectImage": {
+    "Title": "Select Image"
+  },
+
   "Confirm": "Confirm",
   "Verify": "Verify",
   "Create": "Create",

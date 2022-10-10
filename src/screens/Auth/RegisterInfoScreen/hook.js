@@ -15,10 +15,18 @@ const useRegisterHook = props => {
   const [gender, setGender] = useState();
   const [valid, setIsValid] = useState(false);
   const [openImagePicker, setOpenImagePicker] = useState(false);
+  const [avatar, setAvatar] = useState();
 
   const onPressToggle = useCallback(() => {
     setActiveToggle(!activeToggle);
   }, [activeToggle]);
+
+  const onOpenImagePicker = () => {
+    setOpenImagePicker(true);
+  };
+  const onCloseImagePicker = () => {
+    setOpenImagePicker(false);
+  };
 
   const onSuccess = response => {
     navigation.navigate('BottomTabNavigator');
@@ -61,16 +69,25 @@ const useRegisterHook = props => {
     setGender(value);
   };
 
+  const onSelectedAvatar = item => {
+    setAvatar(item);
+  };
+
   return {
     insets,
     activeToggle,
     gender,
     formRef,
     valid,
+    openImagePicker,
+    avatar,
+    onCloseImagePicker,
+    onOpenImagePicker,
     setIsValid,
     onPressToggle,
     onPressJoin,
     onPressGender,
+    onSelectedAvatar,
   };
 };
 

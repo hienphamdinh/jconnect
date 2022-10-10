@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO, NORMAL_STATUS_BAR_HEIGHT} from 'themes/Dimens';
+import {NORMAL_STATUS_BAR_HEIGHT} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
   modal: {
@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     marginTop: NORMAL_STATUS_BAR_HEIGHT + 20,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
+    borderTopLeftRadius: 14,
+    borderTopRightRadius: 14,
     elevation: 10,
   },
   header: {

@@ -19,7 +19,7 @@ const useEnterEmailHook = props => {
     setError();
   };
 
-  const getOtpCode = () => {
+  const getOtpCode = useCallback(() => {
     dispatch(
       AuthActions.verifyEmail(email, res => {
         if (res.status) {
@@ -27,12 +27,12 @@ const useEnterEmailHook = props => {
         }
       }),
     );
-  };
+  }, [dispatch, email]);
 
   const onResendCode = useCallback(() => {
     setIsTimeOut(false);
     getOtpCode();
-  }, [email]);
+  }, [getOtpCode]);
 
   const onFinish = () => {
     setIsTimeOut(true);
@@ -58,7 +58,7 @@ const useEnterEmailHook = props => {
 
   useEffect(() => {
     getOtpCode();
-  }, [email]);
+  }, [getOtpCode]);
 
   return {
     onVerifyEmail,
