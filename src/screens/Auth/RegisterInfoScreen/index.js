@@ -14,6 +14,8 @@ import ImagePickerComponent from 'components/ImagePickerComponent';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {MALE, FEMALE} from 'constants/Gender';
+import FastImage from 'react-native-fast-image';
+import Loading from 'components/Loading';
 import get from 'lodash/get';
 
 export default function RegisterInfoScreen(props) {
@@ -25,6 +27,7 @@ export default function RegisterInfoScreen(props) {
     valid,
     openImagePicker,
     avatar,
+    loading,
     onCloseImagePicker,
     onOpenImagePicker,
     setIsValid,
@@ -34,6 +37,9 @@ export default function RegisterInfoScreen(props) {
     onSelectedAvatar,
   } = useRegisterHook(props);
   const initForm = get(props, 'route.params.initForm');
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <Formik
       innerRef={formRef}
@@ -80,16 +86,22 @@ export default function RegisterInfoScreen(props) {
                   height: (insets.top + 100) * WIDTH_RATIO,
                 },
               ]}>
-              <OpacityButton
-                style={styles.iconWrapper}
-                onPress={onOpenImagePicker}>
-                <EntypoIcons name="camera" size={30} />
-                <EntypoIcons
-                  name="circle-with-plus"
-                  size={20}
-                  style={styles.plusIcon}
-                />
-              </OpacityButton>
+              {avatar ? (
+                <OpacityButton onPress={onOpenImagePicker}>
+                  <FastImage
+                    source={{
+                      uri: get(avatar, 'node.image.uri'),
+                    }}
+                    style={styles.avatar}
+                  />
+                </OpacityButton>
+              ) : (
+                <OpacityButton
+                  style={styles.iconWrapper}
+                  onPress={onOpenImagePicker}>
+                  <EntypoIcons name="camera" size={30} />
+                </OpacityButton>
+              )}
             </View>
             <ScrollView
               style={styles.scrollView}
@@ -109,7 +121,7 @@ export default function RegisterInfoScreen(props) {
               />
               <DateInputBox
                 title="Birthday"
-                placeholder="23/06/2000"
+                placeholder="Choose your birthday"
                 requireValue
                 value={values.birthDay}
                 onChangeDate={handleChange('birthDay')}

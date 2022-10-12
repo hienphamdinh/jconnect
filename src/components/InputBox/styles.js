@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
+import {screenHeight, screenWidth} from 'themes/Dimens';
 export default StyleSheet.create({
   inputBox: {
     marginTop: 10,
@@ -58,5 +59,13 @@ export default StyleSheet.create({
     paddingTop: 24,
     paddingHorizontal: 16,
     paddingBottom: 100,
+  },
+  popupDate: {
+    marginTop: screenHeight / 1.8,
+  },
+  datePicker: {
+    marginTop: 12,
+    width: screenWidth,
+    alignSelf: 'center',
   },
 });

@@ -26,6 +26,7 @@ const useImagesPicker = props => {
       CameraRoll.getPhotos({
         first: 20,
         assetType: 'Photos',
+        include: ['filename'],
         after,
       })
         .then(res => {

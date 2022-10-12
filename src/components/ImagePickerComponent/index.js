@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Image, FlatList, View, TouchableOpacity, Text} from 'react-native';
+import {Image, FlatList, View, TouchableOpacity} from 'react-native';
 import Popup from 'components/Popup';
 import useImagePicker from './hook';
 import Loading from 'components/Loading';

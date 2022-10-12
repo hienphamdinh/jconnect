@@ -78,23 +78,25 @@ export const DateInputBox = ({
             <Text>{placeholder}</Text>
           )}
         </View>
-        <DatePicker
-          modal
-          open={show}
-          maximumDate={new Date()}
-          mode="date"
-          date={valueToDate()}
-          onConfirm={date => {
-            onChangeDate(dayjs(date).format('DD/MM/YYYY'));
-            setShow(false);
-          }}
-          onCancel={() => {
-            setShow(false);
-          }}
-          title="Chọn ngày"
-          confirmText="Xác nhận"
-          cancelText="Huỷ"
-        />
+        <Popup
+          style={styles.popupDate}
+          visible={show}
+          showHeader
+          title="Select date"
+          onClose={() => setShow(false)}>
+          <DatePicker
+            style={styles.datePicker}
+            open={show}
+            maximumDate={new Date()}
+            mode="date"
+            date={valueToDate()}
+            onDateChange={date => {
+              onChangeDate(dayjs(date).format('DD/MM/YYYY'));
+            }}
+            onCancel={() => {}}
+            androidVariant={'iosClone'}
+          />
+        </Popup>
       </TouchableOpacity>
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
@@ -119,18 +121,21 @@ export const LocationInputBox = ({
     setShow(false);
   }, []);
 
-  const renderItem = useCallback(({item, index}) => {
-    return (
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() => {
-          onSelect(item);
-          onClose && onClose();
-        }}>
-        <Text>{item}</Text>
-      </TouchableOpacity>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({item, index}) => {
+      return (
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => {
+            onSelect(item);
+            onClose && onClose();
+          }}>
+          <Text>{item}</Text>
+        </TouchableOpacity>
+      );
+    },
+    [onClose, onSelect],
+  );
 
   return (
     <View style={[styles.boxWrapper, style]}>

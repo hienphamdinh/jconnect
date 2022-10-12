@@ -9,6 +9,7 @@ import MainStackNavigator from 'navigation/MainStackNavigator';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
 import codePush from 'react-native-code-push';
+import auth from '@react-native-firebase/auth';
 
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
@@ -71,6 +72,21 @@ const RootComponent = () => {
     const generatedToken = messaging().getToken();
     return generatedToken;
   };
+  useEffect(() => {
+    auth()
+      .signInAnonymously()
+      .then(() => {
+        console.log('User signed in anonymously');
+      })
+      .catch(error => {
+        if (error.code === 'auth/operation-not-allowed') {
+          console.log('Enable anonymous in your firebase console.');
+        }
+
+        console.error(error);
+      });
+  }, []);
+
   useEffect(() => {
     async function fetchData() {
       const generatedToken = await getFirebaseToken();

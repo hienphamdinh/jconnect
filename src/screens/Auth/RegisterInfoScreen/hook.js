@@ -2,8 +2,11 @@ import {useState, useCallback, useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import UserActions from 'store/users/action';
+import UserActions from 'store/user/action';
+import {FireBaseStorage} from 'utils/FirebaseHelper';
 import get from 'lodash/get';
+
+const storage = FireBaseStorage();
 
 const useRegisterHook = props => {
   const dispatch = useDispatch();
@@ -16,6 +19,7 @@ const useRegisterHook = props => {
   const [valid, setIsValid] = useState(false);
   const [openImagePicker, setOpenImagePicker] = useState(false);
   const [avatar, setAvatar] = useState();
+  const [loading, setLoading] = useState(false);
 
   const onPressToggle = useCallback(() => {
     setActiveToggle(!activeToggle);
@@ -28,17 +32,37 @@ const useRegisterHook = props => {
     setOpenImagePicker(false);
   };
 
-  const onSuccess = response => {
+  const onSuccess = useCallback(() => {
     navigation.navigate('BottomTabNavigator');
-  };
+    setLoading(false);
+  }, [navigation]);
 
   const onFailed = response => {
+    setLoading(false);
     console.log('ERROR', response?.message);
   };
 
-  const onPressJoin = useCallback(() => {
+  const onPressJoin = useCallback(async () => {
+    setLoading(true);
     const data = get(formRef, 'current.values');
+
+    let uploadImage;
+    if (avatar) {
+      uploadImage = await storage.upLoadImage({
+        fileName: get(avatar, 'node.image.filename'),
+        uri: get(avatar, 'node.image.uri'),
+      });
+    }
+
+    let avatarUrl = '';
+    if (uploadImage) {
+      avatarUrl = await storage.getImageURL({
+        fileName: get(avatar, 'node.image.filename'),
+      });
+    }
+
     const user = {
+      avatar: avatarUrl,
       fullName: get(data, 'fullName'),
       birthDay: get(data, 'birthDay'),
       contact: {
@@ -62,16 +86,23 @@ const useRegisterHook = props => {
     };
 
     dispatch(UserActions.createUser(user, onSuccess, onFailed));
-  }, [account, activeToggle, dispatch, onSuccess]);
+  }, [account, activeToggle, avatar, dispatch, onSuccess]);
 
   const onPressGender = value => {
     formRef.current.setFieldValue('gender', value);
     setGender(value);
   };
 
-  const onSelectedAvatar = item => {
-    setAvatar(item);
-  };
+  const onSelectedAvatar = useCallback(
+    async item => {
+      if (get(item, 'node.image.uri') === get(avatar, 'node.image.uri')) {
+        setAvatar();
+      } else {
+        setAvatar(item);
+      }
+    },
+    [avatar],
+  );
 
   return {
     insets,
@@ -81,6 +112,7 @@ const useRegisterHook = props => {
     valid,
     openImagePicker,
     avatar,
+    loading,
     onCloseImagePicker,
     onOpenImagePicker,
     setIsValid,

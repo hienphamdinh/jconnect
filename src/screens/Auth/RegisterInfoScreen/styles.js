@@ -21,18 +21,13 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  plusIcon: {
-    position: 'absolute',
-    top: -9 * WIDTH_RATIO,
-    right: 0,
-  },
   iconWrapper: {
     borderWidth: 1,
     borderColor: '#49AC5A',
     backgroundColor: 'white',
-    height: 60 * WIDTH_RATIO,
-    width: 60 * WIDTH_RATIO,
-    borderRadius: 30 * WIDTH_RATIO,
+    height: 70 * WIDTH_RATIO,
+    width: 70 * WIDTH_RATIO,
+    borderRadius: 35 * WIDTH_RATIO,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
@@ -126,5 +121,11 @@ export default StyleSheet.create({
   },
   inputItem: {
     flex: 1,
+  },
+  avatar: {
+    height: 70 * WIDTH_RATIO,
+    width: 70 * WIDTH_RATIO,
+    borderRadius: 35 * WIDTH_RATIO,
+    marginBottom: 15,
   },
 });

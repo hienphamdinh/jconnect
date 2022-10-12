@@ -15,6 +15,8 @@ export default function Popup({
   title = 'Chọn thành phố',
   showHeader = false,
   onClose,
+  renderLeft,
+  onLeftPress = () => {},
   children,
 }) {
   return (
@@ -26,7 +28,11 @@ export default function Popup({
       <View style={[styles.container, style]}>
         {showHeader && (
           <View style={styles.header}>
-            <View style={styles.closeIcon} />
+            <TouchableOpacity
+              onPress={onLeftPress}
+              style={[styles.closeIcon, {alignItems: 'flex-start'}]}>
+              {renderLeft && renderLeft()}
+            </TouchableOpacity>
             <Text style={styles.headerText}>{title}</Text>
             <TouchableOpacity style={styles.closeIcon} onPress={onClose}>
               <AntDesignIcon name="close" size={20} color="black" />
