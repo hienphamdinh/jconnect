@@ -1,24 +1,19 @@
 import {StyleSheet} from 'react-native';
-import {
-  NORMAL_STATUS_BAR_HEIGHT,
-  WIDTH_RATIO,
-  HEIGHT_RATIO,
-} from 'themes/Dimens';
+import {WIDTH_RATIO, HEIGHT_RATIO, screenWidth} from 'themes/Dimens';
 
 import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   container: {
-    paddingTop: (30 + NORMAL_STATUS_BAR_HEIGHT) * HEIGHT_RATIO,
+    paddingTop: 20,
     backgroundColor: Colors.primary,
     paddingHorizontal: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
     paddingBottom: 16 * HEIGHT_RATIO,
   },
   search: {
-    flex: 1,
+    marginTop: 10,
     flexDirection: 'row',
+    width: screenWidth - 32,
     height: 40 * WIDTH_RATIO,
     backgroundColor: Colors.white,
     borderRadius: 8,
@@ -37,5 +32,35 @@ export default StyleSheet.create({
     height: 40 * WIDTH_RATIO,
     width: 40 * WIDTH_RATIO,
     borderRadius: (40 * WIDTH_RATIO) / 2,
+  },
+  avatarWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  nameWrapper: {
+    marginLeft: 8,
+  },
+  welcomeText: {
+    fontSize: 16 * WIDTH_RATIO,
+    color: Colors.white,
+    fontWeight: 'bold',
+  },
+  nameText: {
+    fontSize: 20 * WIDTH_RATIO,
+    color: Colors.white,
+    fontWeight: 'bold',
+  },
+  notificationWrapper: {},
+  divider: {
+    flex: 1,
+  },
+  dotStyle: {
+    position: 'absolute',
+    backgroundColor: Colors.red,
+    height: 10 * WIDTH_RATIO,
+    width: 10 * WIDTH_RATIO,
+    borderRadius: 5 * WIDTH_RATIO,
+    bottom: 0,
+    right: 0,
   },
 });
