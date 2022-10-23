@@ -9,6 +9,8 @@ export default function PrimaryInputLabel({
   value,
   error,
   onClearInput,
+  onChangeText,
+  secureTextEntry = false,
   ...otherPropsInput
 }) {
   return (
@@ -18,15 +20,17 @@ export default function PrimaryInputLabel({
         <View style={styles.rowInput}>
           <TextInput
             style={styles.input}
-            keyboardType="email-address"
-            textContentType="emailAddress"
             autoCapitalize="none"
             value={value}
+            onChangeText={onChangeText}
+            secureTextEntry={secureTextEntry}
             {...otherPropsInput}
           />
-          <TouchableOpacity style={styles.closeIcon} onPress={onClearInput}>
-            <AntDesign name="close" />
-          </TouchableOpacity>
+          {value ? (
+            <TouchableOpacity style={styles.closeIcon} onPress={onClearInput}>
+              <AntDesign name="close" />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
       {size(error) > 0 && <Text style={styles.error}>{error}</Text>}

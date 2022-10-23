@@ -113,4 +113,7 @@ export default StyleSheet.create({
     marginTop: 12,
     fontSize: 16,
   },
+  forgotStyle: {
+    marginTop: 8,
+  },
 });

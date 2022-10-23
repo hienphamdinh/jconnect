@@ -2,12 +2,6 @@ import {call, takeLatest} from 'redux-saga/effects';
 import {AuthTypes} from './action';
 import * as API from './service';
 
-export function* login(action) {
-  try {
-    const data = yield call(API.login, '0971109618');
-  } catch (error) {}
-}
-
 export function* checkEmail(action) {
   try {
     const {email, callback} = action;
@@ -25,7 +19,6 @@ export function* verifyEmail(action) {
 }
 
 const mapAuthSagas = [
-  takeLatest(AuthTypes.LOGIN, login),
   takeLatest(AuthTypes.CHECK_EMAIL, checkEmail),
   takeLatest(AuthTypes.VERIFY_EMAIL, verifyEmail),
 ];

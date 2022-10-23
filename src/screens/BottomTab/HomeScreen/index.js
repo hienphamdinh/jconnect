@@ -11,8 +11,8 @@ const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function HomeScreen() {
   const renderItem = ({item, index}) => <PostItemComponent item={item} />;
-  const userInfo = useSelector(state => state.user.info);
-
+  const userInfo = useSelector(state => state.user);
+  console.log('user', userInfo);
   return (
     <Container notSafeArea>
       <HeaderBar />

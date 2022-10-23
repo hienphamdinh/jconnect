@@ -1,23 +1,26 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {Text, View, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import useLoginHook from './hook';
+import PrimaryInputLabel from 'components/PrimaryInputLabel';
 import styles from './styles';
-export default function LoginScreen() {
-  const {onPressLogin} = useLoginHook();
+import PrimaryButton from 'components/PrimaryButton';
+import PrimaryTinyButton from 'components/PrimaryTinyButton';
 
-  const navigation = useNavigation();
-  const onPressCreateAccount = () => {
-    navigation.navigate('EnterEmailScreen');
-    // navigation.navigate('RegisterInfoScreen');
-  };
+export default function LoginScreen() {
+  const {
+    loading,
+    email,
+    emailError,
+    password,
+    passwordError,
+    onChangeEmail,
+    onChangePassword,
+    onClearEmail,
+    onClearPassword,
+    onPressLogin,
+    onPressCreateAccount,
+  } = useLoginHook();
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -27,29 +30,35 @@ export default function LoginScreen() {
           <View style={styles.authBox}>
             <Text style={styles.loginTitleText}>Login</Text>
             <View style={styles.hr} />
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Email</Text>
-              <TextInput style={styles.input} autoCapitalize="none" />
-            </View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Password</Text>
-              <TextInput
-                style={styles.input}
-                secureTextEntry={true}
-                textContentType="password"
-              />
-            </View>
-            <TouchableOpacity style={styles.loginButton} onPress={onPressLogin}>
-              <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.registerText} onPress={onPressCreateAccount}>
-                Create an account
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
+            <PrimaryInputLabel
+              label={'Email'}
+              value={email}
+              onChangeText={onChangeEmail}
+              onClearInput={onClearEmail}
+              error={emailError}
+            />
+            <PrimaryInputLabel
+              label={'Password'}
+              value={password}
+              keyboardType="default"
+              onChangeText={onChangePassword}
+              onClearInput={onClearPassword}
+              error={passwordError}
+              secureTextEntry
+            />
+            <PrimaryButton
+              title={'Login'}
+              onPress={onPressLogin}
+              loading={loading}
+            />
+            <PrimaryTinyButton
+              title={'Create account'}
+              onPress={onPressCreateAccount}
+            />
+            <PrimaryTinyButton
+              title={'Forgot password'}
+              customStyle={styles.forgotStyle}
+            />
           </View>
         </View>
       </View>

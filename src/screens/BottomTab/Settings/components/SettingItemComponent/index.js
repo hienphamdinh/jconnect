@@ -7,7 +7,7 @@ import Colors from 'themes/Colors';
 export default function SettingItemComponent(props) {
   const {item} = props;
   return (
-    <OpacityButton style={styles.container}>
+    <OpacityButton style={styles.container} onPress={item.onPress}>
       <AntDesign name={item.icon} size={20} color={item.colorIcon} />
       <View style={styles.iconContainer}>
         <Text style={styles.title}>{item.title}</Text>

@@ -1,10 +1,13 @@
 import {StyleSheet} from 'react-native';
+import {WIDTH_RATIO} from 'themes/Dimens';
 
 export default StyleSheet.create({
   registerText: {
-    textAlign: 'center',
     marginTop: 20,
-    fontSize: 16,
     alignSelf: 'center',
+  },
+  loginButtonText: {
+    fontSize: 15 * WIDTH_RATIO,
+    textAlign: 'center',
   },
 });

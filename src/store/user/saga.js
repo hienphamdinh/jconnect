@@ -1,5 +1,5 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
-import AuthActions, {AuthTypes} from './action';
+import UserActions, {UserTypes} from './action';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Storage from 'constants/Storage';
 import get from 'lodash/get';
@@ -11,7 +11,7 @@ export function* createUser(action) {
     const response = yield call(API.createUser, user);
     if (response.status) {
       AsyncStorage.setItem(Storage.ACCESS_TOKEN, get(response, 'token'));
-      yield put(AuthActions.createUserSuccess(get(response, 'user')));
+      yield put(UserActions.createUserSuccess(response));
       onSuccess() && onSuccess(response);
     } else {
       onFailed && onFailed(response);
@@ -21,5 +21,37 @@ export function* createUser(action) {
   }
 }
 
-const mapAuthSagas = [takeLatest(AuthTypes.CREATE_USER, createUser)];
+export function* login(action) {
+  const {email, password, onSuccess, onFailed} = action;
+  try {
+    const response = yield call(API.login, email, password);
+
+    if (response.status) {
+      AsyncStorage.setItem(Storage.ACCESS_TOKEN, get(response, 'token'));
+      yield put(UserActions.loginSuccess(response));
+      onSuccess && onSuccess(response);
+    } else {
+      onFailed && onFailed(response);
+    }
+  } catch (error) {
+    onFailed && onFailed(error);
+  }
+}
+
+export function* logout(action) {
+  const {onSuccess} = action;
+  try {
+    AsyncStorage.removeItem(Storage.ACCESS_TOKEN);
+    yield put(UserActions.logoutSuccess());
+    onSuccess && onSuccess();
+  } catch (error) {
+    console.log('ERROR', error);
+  }
+}
+
+const mapAuthSagas = [
+  takeLatest(UserTypes.CREATE_USER, createUser),
+  takeLatest(UserTypes.LOGIN, login),
+  takeLatest(UserTypes.LOGOUT, logout),
+];
 export default mapAuthSagas;

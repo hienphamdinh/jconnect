@@ -3,11 +3,9 @@ import {LogBox, Text, TextInput} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux';
-import store, {persistedStore} from 'store';
-import Toast from 'components/Toast';
+import store, {persistedStore} from 'store/reduxStore';
 import MainStackNavigator from 'navigation/MainStackNavigator';
 import messaging from '@react-native-firebase/messaging';
-import firebase from '@react-native-firebase/app';
 import codePush from 'react-native-code-push';
 import auth from '@react-native-firebase/auth';
 

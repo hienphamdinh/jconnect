@@ -39,7 +39,6 @@ const useRegisterHook = props => {
 
   const onFailed = response => {
     setLoading(false);
-    console.log('ERROR', response?.message);
   };
 
   const onPressJoin = useCallback(async () => {

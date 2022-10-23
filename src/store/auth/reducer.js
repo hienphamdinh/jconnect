@@ -6,13 +6,4 @@ export const INITIAL_STATE = Immutable({
   phone: '',
 });
 
-const loginSuccess = (state, action) => {
-  const {phone} = action;
-  return state.merge({
-    phone: phone,
-  });
-};
-
-export const reducer = createReducer(INITIAL_STATE, {
-  [AuthTypes.LOGIN]: loginSuccess,
-});
+export const reducer = createReducer(INITIAL_STATE, {});
