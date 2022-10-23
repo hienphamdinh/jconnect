@@ -44,7 +44,11 @@ const Home = ({navigation}) => {
         </View>
         <View style={styles.searchContainer}>
           <TextInput placeholder="Search" style={styles.searchInput} />
-          <TouchableOpacity style={styles.searchButton}>
+          <TouchableOpacity
+            style={styles.searchButton}
+            onPress={() => {
+              navigation.navigate('PostJobScreen');
+            }}>
             <Ionicons name="shuffle" size={25} color="#fff" />
           </TouchableOpacity>
         </View>

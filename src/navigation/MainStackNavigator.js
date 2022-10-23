@@ -26,6 +26,10 @@ export default function MainStackNavigator() {
         name="JobDetailScreen"
         component={require('screens/JobDetail').default}
       />
+      <MainStack.Screen
+        name="PostJobScreen"
+        component={require('screens/PostJobScreen').default}
+      />
     </MainStack.Navigator>
   );
 }

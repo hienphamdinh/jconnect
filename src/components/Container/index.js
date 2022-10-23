@@ -7,25 +7,12 @@ import styles from './styles';
 
 class Container extends PureComponent {
   render() {
-    const {
-      behavior,
-      style,
-      notSafeArea,
-      isPadding,
-      paddingStyle,
-      children,
-      showBack,
-    } = this.props;
+    const {style, notSafeArea, isPadding, paddingStyle, children, showBack} =
+      this.props;
 
     const padding = isPadding ? paddingStyle : {};
     return (
       <KeyboardAvoidingView
-        // behavior={
-        //   behavior || Platform.select({android: undefined, ios: 'padding'})
-        // }
-        // // enabled={Platform.OS === 'ios'}
-
-        // enabled
         behavior={'padding'}
         enabled={Platform.OS === 'ios'}
         style={[styles.container, style]}>
