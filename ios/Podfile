@@ -22,6 +22,8 @@ target 'jconnect' do
 
 
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'jconnectTests' do
     inherit! :complete
     # Pods for testing

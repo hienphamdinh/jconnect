@@ -4,8 +4,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const MainStack = createNativeStackNavigator();
 export default function MainStackNavigator() {
-  const navigation = useNavigation();
-  //setTimeout(() => navigation.navigate("AuthenticationStack"), 2000);
   return (
     <MainStack.Navigator
       initialRouteName="SplashScreen"
@@ -29,6 +27,14 @@ export default function MainStackNavigator() {
       <MainStack.Screen
         name="PostJobScreen"
         component={require('screens/PostJobScreen').default}
+      />
+      <MainStack.Screen
+        name="SuccessScreen"
+        component={require('screens/SuccessScreen').default}
+      />
+      <MainStack.Screen
+        name="FailedScreen"
+        component={require('screens/FailedScreen').default}
       />
     </MainStack.Navigator>
   );

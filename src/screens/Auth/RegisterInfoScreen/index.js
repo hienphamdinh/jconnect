@@ -125,6 +125,7 @@ export default function RegisterInfoScreen(props) {
                 requireValue
                 value={values.birthDay}
                 onChangeDate={handleChange('birthDay')}
+                maximumDate={new Date()}
                 error={!!values.birthDay && errors.birthDay}
                 onFocus={() => setFieldTouched('birthDay')}
               />

@@ -1,22 +1,20 @@
 import {useState, useCallback, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
-import UserActions from 'store/user/action';
+import {createJob} from 'store/user/service';
 import {FireBaseStorage} from 'utils/FirebaseHelper';
 import get from 'lodash/get';
 
 const storage = FireBaseStorage();
 
 const usePostJob = props => {
-  const dispatch = useDispatch();
-  const account = get(props, 'route.params.account');
+  const userInfo = get(props, 'route.params.info');
   const formRef = useRef();
   const navigation = useNavigation();
   const [activeToggle, setActiveToggle] = useState(false);
   const [gender, setGender] = useState();
   const [valid, setIsValid] = useState(false);
   const [openImagePicker, setOpenImagePicker] = useState(false);
-  const [avatar, setAvatar] = useState();
+  const [thumbnail, setThumbnail] = useState();
   const [loading, setLoading] = useState(false);
 
   const onPressToggle = useCallback(() => {
@@ -30,60 +28,54 @@ const usePostJob = props => {
     setOpenImagePicker(false);
   };
 
-  const onSuccess = useCallback(() => {
-    navigation.navigate('BottomTabNavigator');
-    setLoading(false);
-  }, [navigation]);
-
-  const onFailed = response => {
-    setLoading(false);
-  };
-
   const onPressJoin = useCallback(async () => {
     setLoading(true);
     const data = get(formRef, 'current.values');
 
     let uploadImage;
-    if (avatar) {
+    if (thumbnail) {
       uploadImage = await storage.upLoadImage({
-        fileName: get(avatar, 'node.image.filename'),
-        uri: get(avatar, 'node.image.uri'),
+        fileName: get(thumbnail, 'node.image.filename'),
+        uri: get(thumbnail, 'node.image.uri'),
       });
     }
 
-    let avatarUrl = '';
+    let thumbnailUrl = '';
     if (uploadImage) {
-      avatarUrl = await storage.getImageURL({
-        fileName: get(avatar, 'node.image.filename'),
+      thumbnailUrl = await storage.getImageURL({
+        fileName: get(thumbnail, 'node.image.filename'),
       });
     }
 
-    const user = {
-      avatar: avatarUrl,
-      fullName: get(data, 'fullName'),
-      birthDay: get(data, 'birthDay'),
-      contact: {
-        phone: get(data, 'phone'),
-      },
+    const job = {
+      thumbnail: thumbnailUrl,
+      jobName: get(data, 'jobName'),
+      categories: get(data, 'categories'),
+      jobType: get(data, 'jobType'),
       city: get(data, 'city'),
-      address: get(data, 'address'),
-      gender: get(data, 'gender'),
-
-      account: {
-        type: activeToggle ? 'student' : 'normal',
-        ...account,
-      },
-      mostRecentlyJob: get(data, 'mostRecentlyJob'),
-      mostRecentlyCompany: get(data, 'mostRecentlyCompany'),
-      education: {
-        name: get(data, 'schoolName'),
-        startYear: get(data, 'startYear'),
-        endYear: get(data, 'endYear'),
-      },
+      salary: get(data, 'salary'),
+      expiredApply: get(data, 'expiredApply'),
+      street: get(data, 'street'),
+      description: get(data, 'description'),
+      requirement: get(data, 'requirement'),
+      postedBy: get(userInfo, 'id'),
     };
 
-    dispatch(UserActions.createUser(user, onSuccess, onFailed));
-  }, [account, activeToggle, avatar, dispatch, onSuccess]);
+    createJob(job)
+      .then(response => {
+        if (response.status) {
+          navigation.navigate('SuccessScreen');
+        } else {
+          console.log('ERROR', response?.message);
+        }
+      })
+      .catch(error => {
+        console.log('ERROR', error?.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [navigation, thumbnail, userInfo]);
 
   const onPressGender = value => {
     formRef.current.setFieldValue('gender', value);
@@ -92,13 +84,13 @@ const usePostJob = props => {
 
   const onSelectedAvatar = useCallback(
     async item => {
-      if (get(item, 'node.image.uri') === get(avatar, 'node.image.uri')) {
-        setAvatar();
+      if (get(item, 'node.image.uri') === get(thumbnail, 'node.image.uri')) {
+        setThumbnail();
       } else {
-        setAvatar(item);
+        setThumbnail(item);
       }
     },
-    [avatar],
+    [thumbnail],
   );
 
   return {
@@ -107,7 +99,7 @@ const usePostJob = props => {
     formRef,
     valid,
     openImagePicker,
-    avatar,
+    thumbnail,
     loading,
     onCloseImagePicker,
     onOpenImagePicker,

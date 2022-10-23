@@ -1,11 +1,14 @@
-import React, {memo, useState, useCallback} from 'react';
+import React, {memo, useState, useCallback, useRef} from 'react';
 import {View, TextInput, Text, TouchableOpacity, FlatList} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import Popup, {AnimationType} from 'components/Popup';
+import Popup from 'components/Popup';
 import {listProvinceVietNam} from 'constants/Location';
 import {KeyExtractor} from 'utils/ListHepler';
+import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
+import HTMLView from 'react-native-htmlview';
 import dayjs from 'dayjs';
 import styles from './styles';
+import get from 'lodash/get';
 
 const InputBox = ({
   title,
@@ -71,7 +74,7 @@ export const DateInputBox = ({
             {requireValue && <Text style={styles.star}>*</Text>}
           </Text>
         )}
-        <View style={[styles.input, inputStyle]} {...otherProps}>
+        <View style={[styles.input, inputStyle]}>
           {value ? (
             <Text style={styles.dateInput}>{value}</Text>
           ) : (
@@ -87,7 +90,6 @@ export const DateInputBox = ({
           <DatePicker
             style={styles.datePicker}
             open={show}
-            maximumDate={new Date()}
             mode="date"
             date={valueToDate()}
             onDateChange={date => {
@@ -95,6 +97,7 @@ export const DateInputBox = ({
             }}
             onCancel={() => {}}
             androidVariant={'iosClone'}
+            {...otherProps}
           />
         </Popup>
       </TouchableOpacity>
@@ -162,6 +165,156 @@ export const LocationInputBox = ({
           <FlatList
             keyExtractor={KeyExtractor.extractor}
             data={listProvinceVietNam}
+            contentContainerStyle={styles.contentContainerStyle}
+            style={styles.list}
+            renderItem={renderItem}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
+        </Popup>
+      </TouchableOpacity>
+      {error && <Text style={styles.errorText}>{error}</Text>}
+    </View>
+  );
+};
+
+export const EditorInputBox = ({
+  title,
+  requireValue = false,
+  style,
+  labelStyle,
+  inputStyle,
+  error = false,
+  onFocus,
+  value,
+  onChange,
+  placeholder,
+  ...otherProps
+}) => {
+  const refEditor = useRef();
+  const [show, setShow] = useState(false);
+
+  return (
+    <View style={[styles.boxWrapper, style]}>
+      <TouchableOpacity
+        onPress={() => {
+          setShow(true);
+          onFocus && onFocus();
+        }}
+        style={[styles.inputBox, error && styles.error]}>
+        {title && (
+          <Text style={[styles.inputLabel, labelStyle]}>
+            {title}
+            {requireValue && <Text style={styles.star}>*</Text>}
+          </Text>
+        )}
+        <View style={[styles.htmlView, inputStyle]} {...otherProps}>
+          <HTMLView value={value || placeholder} />
+        </View>
+        <Popup
+          title={title}
+          style={styles.popupEditor}
+          visible={show}
+          showHeader
+          renderLeft={() => {
+            return value ? (
+              <TouchableOpacity
+                onPress={() => {
+                  refEditor.current.setContentHTML('');
+                  onChange('');
+                }}>
+                <Text style={styles.clearText}>Clear all</Text>
+              </TouchableOpacity>
+            ) : null;
+          }}
+          onClose={() => setShow(false)}>
+          <RichEditor
+            ref={refEditor}
+            placeholder="Start writing here..."
+            initialContentHTML={value}
+            style={styles.editor}
+            onChange={content => onChange(content)}
+          />
+          <RichToolbar
+            editor={refEditor}
+            actions={[
+              actions.setBold,
+              actions.setItalic,
+              actions.insertBulletsList,
+              actions.insertOrderedList,
+              actions.setUnderline,
+            ]}
+          />
+        </Popup>
+      </TouchableOpacity>
+      {error && <Text style={styles.errorText}>{error}</Text>}
+    </View>
+  );
+};
+
+export const BaseInputBox = ({
+  title,
+  requireValue = false,
+  style,
+  labelStyle,
+  inputStyle,
+  error = false,
+  onFocus,
+  onSelect,
+  placeholder,
+  showKey,
+  selectKey,
+  listData = [],
+  ...otherProps
+}) => {
+  const [show, setShow] = useState(false);
+  const [valueShow, setValueShow] = useState();
+  const onClose = useCallback(() => {
+    setShow(false);
+  }, []);
+
+  const renderItem = useCallback(
+    ({item, index}) => {
+      return (
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => {
+            onSelect(selectKey ? get(item, selectKey) : item);
+            setValueShow(showKey ? get(item, showKey) : item);
+            onClose && onClose();
+          }}>
+          <Text>{showKey ? get(item, showKey) : item}</Text>
+        </TouchableOpacity>
+      );
+    },
+    [onClose, onSelect, selectKey, showKey],
+  );
+
+  return (
+    <View style={[styles.boxWrapper, style]}>
+      <TouchableOpacity
+        onPress={() => {
+          setShow(true);
+          onFocus && onFocus();
+        }}
+        style={[styles.inputBox, error && styles.error]}>
+        {title && (
+          <Text style={[styles.inputLabel, labelStyle]}>
+            {title}
+            {requireValue && <Text style={styles.star}>*</Text>}
+          </Text>
+        )}
+        <View style={[styles.input, inputStyle]} {...otherProps}>
+          {valueShow ? (
+            <Text style={styles.dateInput}>{valueShow}</Text>
+          ) : (
+            <Text>{placeholder}</Text>
+          )}
+        </View>
+        <Popup visible={show} onClose={onClose} showHeader>
+          <FlatList
+            keyExtractor={KeyExtractor.extractor}
+            data={listData}
             contentContainerStyle={styles.contentContainerStyle}
             style={styles.list}
             renderItem={renderItem}

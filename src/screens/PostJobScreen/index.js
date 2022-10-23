@@ -4,23 +4,29 @@ import Container from 'components/Container';
 import styles from './styles';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
 import OpacityButton from 'components/OpacityButton';
-import InputBox, {DateInputBox, LocationInputBox} from 'components/InputBox';
+import InputBox, {
+  DateInputBox,
+  LocationInputBox,
+  EditorInputBox,
+  BaseInputBox,
+} from 'components/InputBox';
 import usePostJob from './hook';
 import PrimaryButton from 'components/PrimaryButton';
 import ImagePickerComponent from 'components/ImagePickerComponent';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import FastImage from 'react-native-fast-image';
-import Loading from 'components/Loading';
 import HeaderTitle from 'components/HeaderTitle';
 import get from 'lodash/get';
+import {jobTypeList} from 'constants/Job';
+import {useSelector} from 'react-redux';
 
 export default function PostJobScreen(props) {
   const {
     formRef,
     valid,
     openImagePicker,
-    avatar,
+    thumbnail,
     loading,
     onCloseImagePicker,
     onOpenImagePicker,
@@ -29,9 +35,10 @@ export default function PostJobScreen(props) {
     onSelectedAvatar,
   } = usePostJob(props);
   const initForm = get(props, 'route.params.initForm');
-  if (loading) {
-    return <Loading />;
-  }
+  const categories = useSelector(state =>
+    get(state, 'categories.listCategories'),
+  );
+
   return (
     <Formik
       innerRef={formRef}
@@ -39,24 +46,16 @@ export default function PostJobScreen(props) {
       initialValues={initForm || {}}
       validateOnMount
       validationSchema={yup.object().shape({
-        fullName: yup.string().required('* Vui lòng điền thông tin'),
-        birthDay: yup.string().required('* Vui lòng chọn ngày sinh nhật'),
-        phone: yup
-          .string()
-          .max(11, '* Tối đa 11 ký tự')
-          .matches(
-            /(84|0[0-9])+([0-9]{8,9})\b/g,
-            '* Số điện thoại không đúng định dạng',
-          )
-          .required('* Vui lòng điền thông tin'),
-        city: yup.string().required('* Vui lòng điền thông tin'),
-        address: yup.string(),
-        gender: yup.string().required('* Vui lòng chọn giới tính'),
-        mostRecentlyJob: yup.string(),
-        mostRecentlyCompany: yup.string(),
-        schoolName: yup.string(),
-        startYear: yup.string(),
-        endYear: yup.string(),
+        thumbnail: yup.string(),
+        jobName: yup.string().required('* Vui lòng điền thông tin'),
+        categories: yup.string().required('* Vui lòng chọn danh mục'),
+        jobType: yup.string().required('* Vui lòng chọn loại'),
+        city: yup.string().required('* Vui lòng chọn thành phố'),
+        salary: yup.string().required('* Vui lòng nhập lương'),
+        expiredApply: yup.string().required('* Vui lòng chọn hạn ứng tuyển'),
+        street: yup.string(),
+        description: yup.string().required('* Vui lòng nhập mô tả công việc'),
+        requirement: yup.string().required('* Vui lòng nhập yêu cầu công việc'),
       })}>
       {({
         isValid,
@@ -78,13 +77,13 @@ export default function PostJobScreen(props) {
               showsVerticalScrollIndicator={false}
               showsHorizontalScrollIndicator={false}>
               <View style={styles.avatarContainer}>
-                {avatar ? (
+                {thumbnail ? (
                   <OpacityButton
                     onPress={onOpenImagePicker}
                     style={styles.iconWrapper}>
                     <FastImage
                       source={{
-                        uri: get(avatar, 'node.image.uri'),
+                        uri: get(thumbnail, 'node.image.uri'),
                       }}
                       style={styles.avatar}
                     />
@@ -103,40 +102,83 @@ export default function PostJobScreen(props) {
                 </Text>
               </View>
               <InputBox
-                title="Full name"
-                placeholder="Nguyen Van A"
+                title="Job name"
+                placeholder="Enter job name"
+                keyboardType="default"
+                requireValue
+                autoCapitalize="none"
+                value={values.jobName}
+                onChangeText={handleChange('jobName')}
+                error={!!values.jobName && errors.jobName}
+                onFocus={() => setFieldTouched('jobName')}
+              />
+              <BaseInputBox
+                title="Category"
+                placeholder="Select job category"
                 keyboardType="default"
                 textContentType="none"
                 requireValue
-                value={values.fullName}
-                onChangeText={handleChange('fullName')}
-                error={!!values.fullName && errors.fullName}
-                onFocus={() => setFieldTouched('fullName')}
+                onSelect={handleChange('categories')}
+                error={!!values.categories && errors.categories}
+                onFocus={() => setFieldTouched('categories')}
+                listData={categories}
+                showKey="title"
+                selectKey="_id"
               />
-              <DateInputBox
-                title="Birthday"
-                placeholder="Choose your birthday"
+              <BaseInputBox
+                title="Job type"
+                placeholder="Select job category"
+                keyboardType="default"
+                textContentType="none"
                 requireValue
-                value={values.birthDay}
-                onChangeDate={handleChange('birthDay')}
-                error={!!values.birthDay && errors.birthDay}
-                onFocus={() => setFieldTouched('birthDay')}
+                onSelect={handleChange('jobType')}
+                error={!!values.jobType && errors.jobType}
+                onFocus={() => setFieldTouched('jobType')}
+                listData={jobTypeList}
               />
               <InputBox
-                title="Phone"
-                placeholder="+84"
-                keyboardType="phone-pad"
-                textContentType="emailAddress"
+                title="Salary"
+                placeholder="Enter salary"
+                keyboardType="default"
                 requireValue
-                maxLength={11}
-                value={values.phone}
-                onChangeText={handleChange('phone')}
-                error={!!values.phone && errors.phone}
-                onFocus={() => setFieldTouched('phone')}
+                autoCapitalize="none"
+                value={values.salary}
+                onChangeText={handleChange('salary')}
+                error={!!values.salary && errors.salary}
+                onFocus={() => setFieldTouched('salary')}
               />
+              <DateInputBox
+                title="Expired applied"
+                placeholder="Choose job expired applied"
+                requireValue
+                value={values.expiredApply}
+                onChangeDate={handleChange('expiredApply')}
+                error={!!values.expiredApply && errors.expiredApply}
+                onFocus={() => setFieldTouched('expiredApply')}
+                minimumDate={new Date()}
+              />
+              <EditorInputBox
+                title="Job description"
+                placeholder="Press open editor"
+                requireValue
+                value={values.description}
+                onChange={handleChange('description')}
+                error={!!values.description && errors.description}
+                onFocus={() => setFieldTouched('description')}
+              />
+              <EditorInputBox
+                title="Job requirement"
+                placeholder="Press open editor"
+                requireValue
+                value={values.requirement}
+                onChange={handleChange('requirement')}
+                error={!!values.requirement && errors.requirement}
+                onFocus={() => setFieldTouched('requirement')}
+              />
+
               <LocationInputBox
                 title="City/Province"
-                placeholder="Current city"
+                placeholder="Job city"
                 keyboardType="default"
                 textContentType="none"
                 requireValue
@@ -146,27 +188,37 @@ export default function PostJobScreen(props) {
                 onFocus={() => setFieldTouched('city')}
               />
               <InputBox
-                title="Address"
+                title="Street"
                 placeholder="48 Tran Xuan Soan"
                 keyboardType="default"
                 textContentType="none"
-                value={values.address}
-                onChangeText={handleChange('address')}
-                error={!!values.address && errors.address}
-                onFocus={() => setFieldTouched('address')}
+                value={values.street}
+                onChangeText={handleChange('street')}
+                error={!!values.street && errors.street}
+                onFocus={() => setFieldTouched('street')}
               />
-
+              <InputBox
+                title="Contact"
+                placeholder="+84"
+                keyboardType="phone-pad"
+                maxLength={11}
+                value={values.contact}
+                onChangeText={handleChange('contact')}
+                error={!!values.contact && errors.contact}
+                onFocus={() => setFieldTouched('contact')}
+              />
               <PrimaryButton
-                title={'Join'}
+                title={'Create'}
                 onPress={onPressJoin}
                 disable={!valid}
+                loading={loading}
               />
             </ScrollView>
             <ImagePickerComponent
               visible={openImagePicker}
               onClose={onCloseImagePicker}
               onSelectItem={onSelectedAvatar}
-              selected={avatar}
+              selected={thumbnail}
             />
           </Container>
         );

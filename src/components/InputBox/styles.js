@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {screenHeight, screenWidth} from 'themes/Dimens';
+import {screenHeight, screenWidth, WIDTH_RATIO} from 'themes/Dimens';
 export default StyleSheet.create({
   inputBox: {
     marginTop: 10,
@@ -67,5 +67,19 @@ export default StyleSheet.create({
     marginTop: 12,
     width: screenWidth,
     alignSelf: 'center',
+  },
+  popupEditor: {
+    flex: 1,
+  },
+  editor: {
+    flex: 1,
+  },
+  htmlView: {
+    minHeight: 80 * WIDTH_RATIO,
+    paddingHorizontal: 8,
+  },
+  clearText: {
+    fontWeight: 'bold',
+    color: Colors.deepSkyBlue,
   },
 });
