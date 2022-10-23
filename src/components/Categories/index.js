@@ -24,13 +24,17 @@ const Categories = () => {
 
   const renderItem = ({item, index}) => <Item item={item} index={index} />;
   return (
-    <FlatList
-      style={styles.list}
-      contentContainerStyle={styles.contentContainerStyle}
-      data={categories}
-      horizontal
-      renderItem={renderItem}
-    />
+    <View>
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+        style={styles.list}
+        contentContainerStyle={styles.contentContainerStyle}
+        data={categories}
+        horizontal
+        renderItem={renderItem}
+      />
+    </View>
   );
 };
 

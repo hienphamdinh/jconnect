@@ -3,6 +3,7 @@ import Container from 'components/Container';
 import HeaderBar from 'components/HeaderBar';
 import PostItemComponent from 'components/PostItemComponent';
 import Categories from 'components/Categories';
+import HomeBanner from './components/HomeBanner';
 import {useSelector} from 'react-redux';
 import styles from './styles';
 const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -12,9 +13,10 @@ export default function HomeScreen() {
   const userInfo = useSelector(state => state.user);
 
   return (
-    <Container notSafeArea>
+    <Container notSafeArea style={styles.container}>
       <HeaderBar />
       <Categories />
+      <HomeBanner />
     </Container>
   );
 }

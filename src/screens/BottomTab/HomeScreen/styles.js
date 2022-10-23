@@ -9,7 +9,7 @@ import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.white,
   },
   divider: {
     width: WIDTH_DEVICE,

@@ -22,9 +22,6 @@ const styles = StyleSheet.create({
     color: Colors.black,
     textAlign: 'center',
   },
-  categoryNoOfJobs: {
-    opacity: 0.5,
-  },
   list: {
     backgroundColor: Colors.white,
   },
