@@ -11,7 +11,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import Category from 'components/Categories';
-import Job from 'components/Job';
+import Job from 'components/JobList';
 import {jobs, categories} from 'constants/JobData';
 import Container from 'components/Container';
 

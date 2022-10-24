@@ -27,7 +27,7 @@ export default function HomeBanner() {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Carousel
         ref={ref}
         itemWidth={screenWidth - 32}

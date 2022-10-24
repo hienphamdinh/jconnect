@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
   containerDotStyle: {
     paddingVertical: 8,
   },
+  container: {
+    marginTop: 12,
+  },
 });
 
 export default styles;

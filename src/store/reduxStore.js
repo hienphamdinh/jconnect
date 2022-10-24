@@ -4,6 +4,7 @@ import rootSagas from './rootSagas';
 import {reducer as auth} from 'store/auth/reducer';
 import {reducer as user} from 'store/user/reducer';
 import {reducer as categories} from 'store/categories/reducer';
+import {reducer as job} from 'store/job/reducer';
 import createSagaMiddleware from 'redux-saga';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -11,7 +12,7 @@ let middleware = [];
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['user', 'categories'],
+  whitelist: ['user', 'categories', 'job'],
   blacklist: [],
   stateReconciler: false,
 };
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   auth,
   user,
   categories,
+  job,
 });
 
 const store = createStore(

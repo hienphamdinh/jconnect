@@ -1,10 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {
-  NORMAL_STATUS_BAR_HEIGHT,
-  WIDTH_DEVICE,
-  WIDTH_RATIO,
-  HEIGHT_RATIO,
-} from 'themes/Dimens';
+import {WIDTH_DEVICE, WIDTH_RATIO, HEIGHT_RATIO} from 'themes/Dimens';
 import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
@@ -22,5 +17,9 @@ export default StyleSheet.create({
   flatList: {
     backgroundColor: Colors.white,
     paddingTop: 24,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: Colors.white,
   },
 });
