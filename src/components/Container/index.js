@@ -7,8 +7,15 @@ import styles from './styles';
 
 class Container extends PureComponent {
   render() {
-    const {style, notSafeArea, isPadding, paddingStyle, children, showBack} =
-      this.props;
+    const {
+      style,
+      notSafeArea,
+      isPadding,
+      paddingStyle,
+      children,
+      showBack,
+      handleBackButton,
+    } = this.props;
 
     const padding = isPadding ? paddingStyle : {};
     return (
@@ -23,7 +30,7 @@ class Container extends PureComponent {
           </View>
         ) : (
           <SafeAreaView style={[styles.container, padding]}>
-            {showBack && <BackComponent />}
+            {showBack && <BackComponent handleBackButton={handleBackButton} />}
             {children}
           </SafeAreaView>
         )}

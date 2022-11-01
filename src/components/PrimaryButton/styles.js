@@ -7,6 +7,9 @@ export default StyleSheet.create({
     marginTop: 10,
     paddingVertical: 10,
     borderRadius: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButtonText: {
     color: '#fff',

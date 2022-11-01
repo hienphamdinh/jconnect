@@ -3,16 +3,23 @@ import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import ImageFast from 'components/ImageFast/index.js';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {timeFromNow} from 'utils/JobHelper/index.js';
+import {useNavigation} from '@react-navigation/native';
 import styles from './styles.js';
 import get from 'lodash/get';
 
 const JobItem = ({item, index}) => {
+  const navigation = useNavigation();
+  const onItemPress = () => {
+    navigation.navigate('JobDetailScreen', {
+      jobId: get(item, '_id'),
+    });
+  };
   const isBookmarked = () => {
     return true;
   };
 
   return (
-    <TouchableOpacity style={styles.jobContainer} onPress={() => {}}>
+    <TouchableOpacity style={styles.jobContainer} onPress={onItemPress}>
       <ImageFast
         source={{uri: get(item, 'thumbnail')}}
         style={styles.jobImage}

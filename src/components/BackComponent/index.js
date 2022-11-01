@@ -11,7 +11,7 @@ const BackButton = ({
 }) => {
   const navigation = useNavigation();
   const onBack = handleBackButton
-    ? handleBackButton
+    ? handleBackButton()
     : () => {
         navigation.goBack();
       };

@@ -22,7 +22,7 @@ export default function MainStackNavigator() {
       />
       <MainStack.Screen
         name="JobDetailScreen"
-        component={require('screens/JobDetail').default}
+        component={require('screens/JobDetailScreen').default}
       />
       <MainStack.Screen
         name="PostJobScreen"
@@ -35,6 +35,10 @@ export default function MainStackNavigator() {
       <MainStack.Screen
         name="FailedScreen"
         component={require('screens/FailedScreen').default}
+      />
+      <MainStack.Screen
+        name="ApplicationScreen"
+        component={require('screens/ApplicationScreen').default}
       />
     </MainStack.Navigator>
   );
