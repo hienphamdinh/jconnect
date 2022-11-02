@@ -14,3 +14,8 @@ export const createJob = job => {
   const path = '/job/create';
   return POST(path, {job});
 };
+
+export const updateUser = (userId, data) => {
+  const path = '/user/update';
+  return POST(path, {userId, data});
+};

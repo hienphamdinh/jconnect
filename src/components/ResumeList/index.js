@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
 import OpacityButton from 'components/OpacityButton';
-import {useSelector} from 'react-redux';
-import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 import styles from './styles';
-import DocumentPicker, {types} from 'react-native-document-picker';
-import size from 'lodash/size';
-import Toast from 'react-native-toast-message';
-import {FireBaseStorage} from 'utils/FirebaseHelper';
 
-const storage = FireBaseStorage();
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import PrimaryButton from 'components/PrimaryButton';
+import useResumeHook from './hook';
 
-export default function ResumeList() {
-  const [cv, setCv] = useState();
+export default function ResumeList(props) {
+  const {loading, cv, onUpLoad} = useResumeHook(props);
+
   return (
     <View style={styles.container}>
       <View style={styles.resumeWrapper}>
@@ -20,57 +18,49 @@ export default function ResumeList() {
           <Text style={styles.pdfText}>PDF</Text>
         </View>
         <View style={styles.pdfNameContainer}>
-          <Text style={styles.cvName}>
-            {cv ? get(cv, 'name') : 'You have no resume'}
-          </Text>
+          {!loading ? (
+            <Text style={styles.cvName}>
+              {!isEmpty(cv) ? cv : 'You have no resume'}
+            </Text>
+          ) : (
+            <Text>{''}</Text>
+          )}
         </View>
       </View>
-      <OpacityButton
-        style={styles.uploadBtn}
-        onPress={() => {
-          DocumentPicker.pick({
-            type: types.pdf,
-            presentationStyle: 'formSheet',
-          })
-            .then(res => {
-              if (size(res)) {
-                setCv(res[0]);
-                console.log('link', get(res, '0.uri'));
-                storage
-                  .upLoadPDF({
-                    fileName: get(res, '0.name'),
-                    uri: get(res, '0.uri'),
-                  })
-                  .then(link => {
-                    console.log('link', link);
-                  })
-                  .catch(err => {
-                    Toast.show({
-                      type: 'failed',
-                      text1: 'Error',
-                      text2: err?.message || 'Error upload your resume',
-                    });
-                  });
-              } else {
-                Toast.show({
-                  type: 'failed',
-                  text1: 'Error',
-                  text2: 'Can not upload your resume',
-                });
-              }
-            })
-            .catch(err => {
-              Toast.show({
-                type: 'failed',
-                text1: 'Error',
-                text2: err?.message || 'Can not upload your resume',
-              });
-            });
-        }}>
-        <Text style={styles.textUpload}>
-          {cv ? 'Change resume' : 'Upload resume'}
-        </Text>
-      </OpacityButton>
+      <View style={styles.btnContainer}>
+        <OpacityButton
+          style={styles.uploadBtn}
+          onPress={() => {
+            onUpLoad();
+          }}>
+          <Text style={styles.textUpload}>
+            {loading
+              ? 'Uploading resume'
+              : !isEmpty(cv)
+              ? 'Change resume'
+              : 'Upload resume'}
+          </Text>
+          {loading ? (
+            <ActivityIndicator color={'white'} size={20} style={styles.icon} />
+          ) : null}
+        </OpacityButton>
+        <View style={styles.flex1} />
+        {!loading && !isEmpty(cv) ? (
+          <PrimaryButton
+            customStyle={styles.uploadBtn}
+            textStyle={styles.textUpload}
+            title={'View'}
+            renderRight={() => (
+              <AntDesignIcons
+                style={styles.icon}
+                name="eye"
+                size={20}
+                color="white"
+              />
+            )}
+          />
+        ) : null}
+      </View>
     </View>
   );
 }

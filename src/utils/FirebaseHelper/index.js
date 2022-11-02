@@ -8,9 +8,9 @@ export const FireBaseStorage = () => ({
     return reference.ref(`/jconnect/images/${fileName}`).getDownloadURL();
   },
   upLoadPDF: ({fileName = 'default', uri}) => {
-    return reference.ref(`/jconnect/PDF/${fileName}`).putFile(uri);
+    return reference.ref(`/jconnect/pdf/${fileName}`).putFile(uri);
   },
   getPDFURL: ({fileName = 'default'}) => {
-    return reference.ref(`/jconnect/PDF/${fileName}`).getDownloadURL();
+    return reference.ref(`/jconnect/pdf/${fileName}`).getDownloadURL();
   },
 });

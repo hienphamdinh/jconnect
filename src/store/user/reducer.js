@@ -16,6 +16,14 @@ const createUserSuccess = (state, action) => {
     info: get(response, 'user'),
   });
 };
+
+const updateUserSuccess = (state, action) => {
+  const {user} = action;
+  return state.merge({
+    info: user,
+  });
+};
+
 const loginSuccess = (state, action) => {
   const {response} = action;
   return state.merge({
@@ -41,6 +49,7 @@ const restore = (state, action) => {
 
 export const reducer = createReducer(INITIAL_STATE, {
   [UserTypes.CREATE_USER_SUCCESS]: createUserSuccess,
+  [UserTypes.UPDATE_USER_SUCCESS]: updateUserSuccess,
   [UserTypes.LOGOUT_SUCCESS]: logoutSuccess,
   [UserTypes.LOGIN_SUCCESS]: loginSuccess,
   [REHYDRATE]: restore,

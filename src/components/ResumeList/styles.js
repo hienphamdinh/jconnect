@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  pdfContainerEye: {
+    paddingHorizontal: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   pdfText: {
     color: Colors.white,
   },
@@ -36,6 +41,7 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   textUpload: {
     fontSize: 14 * WIDTH_RATIO,
@@ -44,6 +50,15 @@ const styles = StyleSheet.create({
   },
   cvName: {
     fontWeight: 'bold',
+  },
+  btnContainer: {
+    flexDirection: 'row',
+  },
+  flex1: {
+    flex: 1,
+  },
+  icon: {
+    marginLeft: 4,
   },
 });
 

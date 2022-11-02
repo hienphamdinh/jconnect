@@ -4,6 +4,7 @@ import {PermissionsAndroid} from 'react-native';
 import get from 'lodash/get';
 import concat from 'lodash/concat';
 import size from 'lodash/size';
+import Toast from 'react-native-toast-message';
 
 const useImagesPicker = props => {
   const [listImages, setListImages] = useState([]);
@@ -40,7 +41,11 @@ const useImagesPicker = props => {
           setLoading(false);
         });
     } else {
-      console.log('Can not access to gallery');
+      Toast.show({
+        type: 'failed',
+        text1: 'Error',
+        text2: 'Can not get images from gallery',
+      });
     }
   }, []);
 

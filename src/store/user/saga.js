@@ -21,6 +21,21 @@ export function* createUser(action) {
   }
 }
 
+export function* updateUser(action) {
+  const {userId, data, onSuccess, onFailed} = action;
+  try {
+    const response = yield call(API.updateUser, userId, data);
+    if (response.status) {
+      yield put(UserActions.updateUserSuccess(get(response, 'user')));
+      onSuccess() && onSuccess(response);
+    } else {
+      onFailed && onFailed(response);
+    }
+  } catch (error) {
+    onFailed && onFailed(error);
+  }
+}
+
 export function* login(action) {
   const {email, password, onSuccess, onFailed} = action;
   try {
@@ -51,6 +66,7 @@ export function* logout(action) {
 
 const mapAuthSagas = [
   takeLatest(UserTypes.CREATE_USER, createUser),
+  takeLatest(UserTypes.UPDATE_USER, updateUser),
   takeLatest(UserTypes.LOGIN, login),
   takeLatest(UserTypes.LOGOUT, logout),
 ];

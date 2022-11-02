@@ -13,7 +13,7 @@ import ResumeList from 'components/ResumeList';
 
 export default function ApplicationScreen() {
   const userInfo = useSelector(state => get(state, 'user.info'));
-  const {formRef} = useApplyHook();
+  const {formRef, onResumeChange} = useApplyHook();
   return (
     <Container showBack>
       <HeaderTitle title={'Apply this job'} />
@@ -40,7 +40,10 @@ export default function ApplicationScreen() {
               '* Số điện thoại không đúng định dạng',
             )
             .required('* Vui lòng điền thông tin'),
-          cv: yup.string().required('* Vui lòng điền thông tin'),
+          cv: yup.object({
+            url: yup.string().required('* Vui lòng điền thông tin'),
+            name: yup.string(),
+          }),
         })}>
         {({
           isValid,
@@ -89,7 +92,11 @@ export default function ApplicationScreen() {
                 onFocus={() => setFieldTouched('phone')}
               />
               <Text style={styles.heading}>Resume</Text>
-              <ResumeList />
+              <ResumeList
+                initResume={get(values, 'cv.name')}
+                onResumeChange={onResumeChange}
+                onPressUpload={() => setFieldTouched('cv')}
+              />
             </View>
           );
         }}
