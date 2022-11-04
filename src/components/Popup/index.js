@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Modal, TouchableOpacity} from 'react-native';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import Colors from 'themes/Colors';
 import styles from './styles';
 
 export const AnimationType = {
@@ -18,6 +19,8 @@ export default function Popup({
   renderLeft,
   onLeftPress = () => {},
   children,
+  headerStyle,
+  lightMode,
 }) {
   return (
     <Modal
@@ -27,15 +30,32 @@ export default function Popup({
       transparent={true}>
       <View style={[styles.container, style]}>
         {showHeader && (
-          <View style={styles.header}>
+          <View
+            style={[
+              styles.header,
+              headerStyle,
+              {backgroundColor: lightMode ? Colors.primary : Colors.silver},
+            ]}>
             <TouchableOpacity
               onPress={onLeftPress}
               style={[styles.closeIcon, {alignItems: 'flex-start'}]}>
               {renderLeft && renderLeft()}
             </TouchableOpacity>
-            <Text style={styles.headerText}>{title}</Text>
+            <Text
+              style={[
+                styles.headerText,
+                {
+                  color: lightMode ? Colors.white : Colors.black,
+                },
+              ]}>
+              {title}
+            </Text>
             <TouchableOpacity style={styles.closeIcon} onPress={onClose}>
-              <AntDesignIcon name="close" size={20} color="black" />
+              <AntDesignIcon
+                name="close"
+                size={20}
+                color={lightMode ? 'white' : 'black'}
+              />
             </TouchableOpacity>
           </View>
         )}

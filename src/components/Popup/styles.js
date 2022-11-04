@@ -20,9 +20,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    // borderColor: Colors.mediumGrey,
   },
   closeIcon: {
     flex: 1,

@@ -93,7 +93,7 @@ export default function ApplicationScreen() {
               />
               <Text style={styles.heading}>Resume</Text>
               <ResumeList
-                initResume={get(values, 'cv.name')}
+                initResume={get(userInfo, 'applicationInfo.cv')}
                 onResumeChange={onResumeChange}
                 onPressUpload={() => setFieldTouched('cv')}
               />

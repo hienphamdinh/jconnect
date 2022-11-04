@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, ActivityIndicator} from 'react-native';
 import OpacityButton from 'components/OpacityButton';
 import isEmpty from 'lodash/isEmpty';
-import styles from './styles';
-
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import PrimaryButton from 'components/PrimaryButton';
+import PdfViewComponent from 'components/PdfViewComponent';
 import useResumeHook from './hook';
+import styles from './styles';
 
 export default function ResumeList(props) {
-  const {loading, cv, onUpLoad} = useResumeHook(props);
+  const {loading, cv, onUpLoad, onPressView, showCV, pdfUri, setShowCV} =
+    useResumeHook(props);
 
   return (
     <View style={styles.container}>
@@ -47,6 +48,7 @@ export default function ResumeList(props) {
         <View style={styles.flex1} />
         {!loading && !isEmpty(cv) ? (
           <PrimaryButton
+            onPress={onPressView}
             customStyle={styles.uploadBtn}
             textStyle={styles.textUpload}
             title={'View'}
@@ -61,6 +63,16 @@ export default function ResumeList(props) {
           />
         ) : null}
       </View>
+      {pdfUri ? (
+        <PdfViewComponent
+          visible={showCV}
+          source={{
+            uri: pdfUri,
+            cache: true,
+          }}
+          onClose={() => setShowCV(false)}
+        />
+      ) : null}
     </View>
   );
 }

@@ -15,7 +15,9 @@ const useResumeHook = props => {
   const dispatch = useDispatch();
   const userId = useSelector(state => get(state, 'user.info._id'));
   const [loading, setLoading] = useState(false);
-  const [cv, setCv] = useState(initResume || '');
+  const [cv, setCv] = useState(get(initResume, 'name') || '');
+  const [showCV, setShowCV] = useState(false);
+  const [pdfUri, setPdfUri] = useState(get(initResume, 'url'));
 
   const onUpLoad = async () => {
     onPressUpload && onPressUpload();
@@ -31,7 +33,7 @@ const useResumeHook = props => {
         fileName: get(document, '0.name'),
         uri: get(document, '0.fileCopyUri'),
       });
-
+      setPdfUri(get(document, '0.fileCopyUri'));
       setCv(get(document, '0.name'));
 
       if (get(uploadDocument, 'state') === 'success') {
@@ -83,10 +85,18 @@ const useResumeHook = props => {
     }
   };
 
+  const onPressView = () => {
+    setShowCV(true);
+  };
+
   return {
     loading,
     cv,
     onUpLoad,
+    onPressView,
+    showCV,
+    pdfUri,
+    setShowCV,
   };
 };
 
