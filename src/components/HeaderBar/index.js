@@ -33,10 +33,10 @@ export default function HeaderBar({
           <View style={styles.dotStyle} />
         </View>
       </View>
-      <OpacityButton style={[styles.search, searchStyle]} onPress={onPress}>
+      {/* <OpacityButton style={[styles.search, searchStyle]} onPress={onPress}>
         <Text style={styles.title}>{placeholder || 'Search...'}</Text>
         <AntDesign name={'search1'} size={25 * WIDTH_RATIO} />
-      </OpacityButton>
+      </OpacityButton> */}
     </View>
   );
 }
