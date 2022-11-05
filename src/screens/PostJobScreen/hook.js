@@ -64,7 +64,7 @@ const usePostJob = props => {
     createJob(job)
       .then(response => {
         if (response.status) {
-          navigation.navigate('SuccessScreen');
+          navigation.navigate('ApplyJobSuccess');
         } else {
           console.log('ERROR', response?.message);
         }

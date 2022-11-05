@@ -86,7 +86,9 @@ const useResumeHook = props => {
   };
 
   const onPressView = () => {
-    setShowCV(true);
+    if (pdfUri) {
+      setShowCV(true);
+    }
   };
 
   return {

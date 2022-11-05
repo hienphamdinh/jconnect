@@ -40,6 +40,10 @@ export default function MainStackNavigator() {
         name="ApplicationScreen"
         component={require('screens/ApplicationScreen').default}
       />
+      <MainStack.Screen
+        name="ApplyJobSuccess"
+        component={require('screens/ApplyJobSuccess').default}
+      />
     </MainStack.Navigator>
   );
 }

@@ -17,3 +17,10 @@ export const checkApply = (applicantId, jobId) => {
     jobId,
   });
 };
+export const applyJob = (applicantId, jobId) => {
+  const path = 'job/apply';
+  return POST(path, {
+    applicantId,
+    jobId,
+  });
+};

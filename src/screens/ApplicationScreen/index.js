@@ -10,16 +10,16 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import useApplyHook from './hook';
 import ResumeList from 'components/ResumeList';
+import PrimaryButton from 'components/PrimaryButton';
 
-export default function ApplicationScreen() {
+export default function ApplicationScreen(props) {
   const userInfo = useSelector(state => get(state, 'user.info'));
-  const {formRef, onResumeChange} = useApplyHook();
+  const {formRef, loading, onResumeChange, onPressSubmit} = useApplyHook(props);
   return (
     <Container showBack>
       <HeaderTitle title={'Apply this job'} />
       <Formik
         innerRef={formRef}
-        onSubmit={values => {}}
         initialValues={{
           fullName: get(userInfo, 'fullName'),
           email:
@@ -84,8 +84,9 @@ export default function ApplicationScreen() {
                 value={values.phone}
                 title="Phone"
                 placeholder="Your contact phone"
-                keyboardType="default"
+                keyboardType="number-pad"
                 textContentType="none"
+                maxLength={11}
                 requireValue
                 onChangeText={handleChange('phone')}
                 error={!!values.phone && errors.phone}
@@ -97,6 +98,14 @@ export default function ApplicationScreen() {
                 onResumeChange={onResumeChange}
                 onPressUpload={() => setFieldTouched('cv')}
               />
+              <View style={styles.footer}>
+                <PrimaryButton
+                  title={'Submit'}
+                  onPress={onPressSubmit}
+                  disable={!isValid}
+                  loading={loading}
+                />
+              </View>
             </View>
           );
         }}

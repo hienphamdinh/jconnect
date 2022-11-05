@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontSize: 16 * WIDTH_RATIO,
   },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 16,
+  },
 });
 
 export default styles;
