@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingTop: 20,
     backgroundColor: Colors.primary,
     paddingHorizontal: 16,
-    paddingBottom: 16 * HEIGHT_RATIO,
+    paddingBottom: 25 * HEIGHT_RATIO,
     alignItems: 'center',
   },
   search: {
@@ -20,6 +20,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
+    elevation: 5,
   },
   title: {
     fontSize: 16,
@@ -43,8 +44,10 @@ export default StyleSheet.create({
     width: 40 * WIDTH_RATIO,
   },
   avatarWrapper: {
+    position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
+    bottom: -20,
   },
   filterWrapper: {
     justifyContent: 'center',
@@ -54,6 +57,7 @@ export default StyleSheet.create({
     width: 40 * WIDTH_RATIO,
     borderRadius: 8,
     marginLeft: 8,
+    elevation: 5,
   },
   topHeader: {
     flexDirection: 'row',

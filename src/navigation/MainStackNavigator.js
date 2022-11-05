@@ -44,6 +44,10 @@ export default function MainStackNavigator() {
         name="ApplyJobSuccess"
         component={require('screens/ApplyJobSuccess').default}
       />
+      <MainStack.Screen
+        name="MyJobsScreen"
+        component={require('screens/MyJobsScreen').default}
+      />
     </MainStack.Navigator>
   );
 }

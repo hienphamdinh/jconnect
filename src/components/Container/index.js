@@ -15,6 +15,7 @@ class Container extends PureComponent {
       children,
       showBack,
       handleBackButton,
+      backButtonStyle,
     } = this.props;
 
     const padding = isPadding ? paddingStyle : {};
@@ -30,7 +31,12 @@ class Container extends PureComponent {
           </View>
         ) : (
           <SafeAreaView style={[styles.container, padding]}>
-            {showBack && <BackComponent handleBackButton={handleBackButton} />}
+            {showBack && (
+              <BackComponent
+                handleBackButton={handleBackButton}
+                customStyle={backButtonStyle}
+              />
+            )}
             {children}
           </SafeAreaView>
         )}
