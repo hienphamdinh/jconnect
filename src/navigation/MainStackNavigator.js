@@ -48,6 +48,10 @@ export default function MainStackNavigator() {
         name="MyJobsScreen"
         component={require('screens/MyJobsScreen').default}
       />
+      <MainStack.Screen
+        name="MyProfileScreen"
+        component={require('screens/MyProfileScreen').default}
+      />
     </MainStack.Navigator>
   );
 }

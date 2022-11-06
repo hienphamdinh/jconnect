@@ -11,8 +11,15 @@ import CountDown from 'components/CountDown';
 import get from 'lodash/get';
 import I18n from 'locales';
 export default function VerifyEmailScreen(props) {
-  const {onVerifyEmail, onChangeText, onFinish, onResendCode, error, pin} =
-    useVerifyEmailHook(props);
+  const {
+    onVerifyEmail,
+    onChangeText,
+    onFinish,
+    onClearInput,
+    onResendCode,
+    error,
+    pin,
+  } = useVerifyEmailHook(props);
 
   return (
     <Container notSafeArea showBack>
@@ -36,6 +43,7 @@ export default function VerifyEmailScreen(props) {
               placeholder="Enter code send to your email"
               value={pin}
               onChangeText={onChangeText}
+              onClearInput={onClearInput}
               error={error}
             />
             <PrimaryButton title={I18n.t('Verify')} onPress={onVerifyEmail} />

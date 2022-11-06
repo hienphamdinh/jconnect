@@ -19,7 +19,7 @@ export default function ResumeList(props) {
         <View style={styles.pdfNameContainer}>
           {!loading ? (
             <Text style={styles.cvName}>
-              {!isEmpty(cv) ? cv : 'You have no resume'}
+              {!isEmpty(pdfUri) ? cv : 'You have no resume'}
             </Text>
           ) : (
             <Text>{''}</Text>
@@ -34,7 +34,7 @@ export default function ResumeList(props) {
         <Text style={styles.textUpload}>
           {loading
             ? 'Uploading resume'
-            : !isEmpty(cv)
+            : !isEmpty(pdfUri)
             ? 'Change resume'
             : 'Upload resume'}
         </Text>

@@ -14,6 +14,7 @@ const useDetailHook = props => {
   const canApply = get(props, 'route.params.canApply');
   const [jobDetail, setJobDetail] = useState();
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const isMyJob = userId === get(jobDetail, 'postedBy._id');
 
   const onPressApply = () => {
     checkApply(userId, get(jobDetail, '_id')).then(res => {
@@ -79,6 +80,12 @@ const useDetailHook = props => {
     });
   };
 
+  const onPressPostBy = () => {
+    navigation.navigate('MyProfileScreen', {
+      id: userId,
+    });
+  };
+
   useEffect(() => {
     getJobDetail(jobId)
       .then(response => {
@@ -95,7 +102,15 @@ const useDetailHook = props => {
     checkSavedJobs();
   }, [checkSavedJobs]);
 
-  return {jobDetail, canApply, isBookmarked, onPressApply, onPressSavedJobs};
+  return {
+    jobDetail,
+    canApply,
+    isBookmarked,
+    isMyJob,
+    onPressApply,
+    onPressSavedJobs,
+    onPressPostBy,
+  };
 };
 
 export default useDetailHook;

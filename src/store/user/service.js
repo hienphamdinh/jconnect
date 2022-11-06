@@ -19,3 +19,8 @@ export const updateUser = (userId, data) => {
   const path = '/user/update';
   return POST(path, {userId, data});
 };
+
+export const userDetail = userId => {
+  const path = `/user/${userId}/detail`;
+  return GET(path, {});
+};

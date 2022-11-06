@@ -14,8 +14,15 @@ import useDetailHook from './hook.js';
 import PrimaryButton from 'components/PrimaryButton/index.js';
 
 const JobDetail = props => {
-  const {jobDetail, canApply, isBookmarked, onPressSavedJobs, onPressApply} =
-    useDetailHook(props);
+  const {
+    jobDetail,
+    canApply,
+    isBookmarked,
+    isMyJob,
+    onPressSavedJobs,
+    onPressApply,
+    onPressPostBy,
+  } = useDetailHook(props);
 
   return (
     <Container style={styles.jobDetailContainer} showBack>
@@ -23,7 +30,7 @@ const JobDetail = props => {
         <TouchableOpacity
           style={styles.jobDetailCircleContainer}
           onPress={onPressSavedJobs}>
-          {isBookmarked ? (
+          {isMyJob ? null : isBookmarked ? (
             <FontAwesome name="bookmark" color="#49AC5A" size={20} />
           ) : (
             <FontAwesome name="bookmark-o" color="#ccc" size={20} />
@@ -85,12 +92,12 @@ const JobDetail = props => {
               </Text>
             </View>
             <View style={styles.timeDivider} />
-            <View style={styles.timeItem}>
+            <TouchableOpacity style={styles.timeItem} onPress={onPressPostBy}>
               <Text style={styles.timeTitle}>By</Text>
               <Text style={styles.timeNow}>
                 {get(jobDetail, 'postedBy.fullName')}
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -110,7 +117,7 @@ const JobDetail = props => {
           </View>
         </ScrollView>
         <View style={styles.bottomWrapper}>
-          {canApply ? (
+          {canApply && !isMyJob ? (
             <PrimaryButton
               title={'Apply here'}
               customStyle={styles.applyHereBtn}

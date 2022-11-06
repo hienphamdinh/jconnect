@@ -2,12 +2,13 @@ import {useState, useCallback, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {createJob} from 'store/user/service';
 import {FireBaseStorage} from 'utils/FirebaseHelper';
+import {useSelector} from 'react-redux';
 import get from 'lodash/get';
 
 const storage = FireBaseStorage();
 
 const usePostJob = props => {
-  const userInfo = get(props, 'route.params.info');
+  const userInfo = useSelector(state => get(state, 'user.info'));
   const formRef = useRef();
   const navigation = useNavigation();
   const [activeToggle, setActiveToggle] = useState(false);
@@ -58,7 +59,7 @@ const usePostJob = props => {
       street: get(data, 'street'),
       description: get(data, 'description'),
       requirement: get(data, 'requirement'),
-      postedBy: get(userInfo, 'id'),
+      postedBy: get(userInfo, '_id'),
     };
 
     createJob(job)

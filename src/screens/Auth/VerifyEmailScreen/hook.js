@@ -38,6 +38,10 @@ const useEnterEmailHook = props => {
     setIsTimeOut(true);
   };
 
+  const onClearInput = () => {
+    setPin('');
+  };
+
   const onVerifyEmail = () => {
     Keyboard.dismiss();
 
@@ -65,6 +69,7 @@ const useEnterEmailHook = props => {
     onChangeText,
     onResendCode,
     onFinish,
+    onClearInput,
     verifyCode,
     error,
     pin,
