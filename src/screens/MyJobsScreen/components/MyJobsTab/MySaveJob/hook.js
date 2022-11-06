@@ -3,9 +3,10 @@ import {mySavedJob} from 'store/job/service';
 import {useSelector} from 'react-redux';
 import get from 'lodash/get';
 import size from 'lodash/size';
-import {removeApply} from 'store/job/service';
+import {removeSave} from 'store/job/service';
 
-export default function useApplyHook() {
+export default function useApplyHook(props) {
+  const activeTab = get(props, 'activeTab');
   const [listJob, setListJob] = useState([]);
   const userId = useSelector(state => get(state, 'user.info._id'));
   const [loading, setLoading] = useState(false);
@@ -36,8 +37,8 @@ export default function useApplyHook() {
     }
   };
 
-  const onDeleteApply = ({item, index}) => {
-    removeApply(userId, get(item, '_id')).then(res => {
+  const onRemoveSaved = ({item, index}) => {
+    removeSave(userId, get(item, '_id')).then(res => {
       if (res.status) {
         fetchData(0);
       }
@@ -45,12 +46,14 @@ export default function useApplyHook() {
   };
 
   useEffect(() => {
-    fetchData(0);
-  }, [fetchData]);
+    if (activeTab === 2) {
+      fetchData(0);
+    }
+  }, [fetchData, activeTab]);
 
   return {
     listJob,
     onEndReached,
-    onDeleteApply,
+    onRemoveSaved,
   };
 }

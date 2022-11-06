@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import {ToastAndroid} from 'react-native';
 import {getJobDetail} from 'store/job/service';
-import {checkApply} from 'store/job/service.js';
+import {checkApply, checkSaved, savedJob} from 'store/job/service.js';
 import Toast from 'react-native-toast-message';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
@@ -12,6 +13,7 @@ const useDetailHook = props => {
   const jobId = get(props, 'route.params.jobId');
   const canApply = get(props, 'route.params.canApply');
   const [jobDetail, setJobDetail] = useState();
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const onPressApply = () => {
     checkApply(userId, get(jobDetail, '_id')).then(res => {
@@ -29,16 +31,71 @@ const useDetailHook = props => {
     });
   };
 
+  const checkSavedJobs = useCallback(() => {
+    const id = get(jobDetail, '_id');
+    if (id) {
+      checkSaved(userId, id).then(res => {
+        if (!res.status) {
+          setIsBookmarked(true);
+        }
+      });
+    }
+  }, [jobDetail, userId]);
+
+  const onPressSavedJobs = () => {
+    checkSaved(userId, get(jobDetail, '_id')).then(res => {
+      if (!res.status) {
+        setIsBookmarked(true);
+        Toast.show({
+          type: 'failed',
+          text1: 'Error',
+          text2: get(res, 'message', 'Can not apply'),
+        });
+      } else {
+        savedJob(userId, jobId)
+          .then(response => {
+            if (response.status) {
+              setIsBookmarked(true);
+              ToastAndroid.show('Saved job', ToastAndroid.LONG);
+            } else {
+              setIsBookmarked(false);
+              Toast.show({
+                type: 'failed',
+                text1: 'Error',
+                text2: response?.message,
+              });
+            }
+          })
+          .catch(err => {
+            console.log('err', err);
+            setIsBookmarked(false);
+            Toast.show({
+              type: 'failed',
+              text1: 'Error',
+              text2: err?.message,
+            });
+          });
+      }
+    });
+  };
+
   useEffect(() => {
     getJobDetail(jobId)
       .then(response => {
-        setJobDetail(get(response, 'data'));
+        if (response.status) {
+          setJobDetail(get(response, 'data'));
+        }
       })
       .catch(err => {
         console.log('ERROR', err.message);
       });
   }, [jobId]);
-  return {jobDetail, canApply, onPressApply};
+
+  useEffect(() => {
+    checkSavedJobs();
+  }, [checkSavedJobs]);
+
+  return {jobDetail, canApply, isBookmarked, onPressApply, onPressSavedJobs};
 };
 
 export default useDetailHook;

@@ -16,10 +16,11 @@ import styles from './styles';
 export default function MyJobsTab({initTabIndex = 0}) {
   const layout = useWindowDimensions();
   const [activeTab, setActiveTab] = useState(initTabIndex);
+
   const renderScene = SceneMap({
-    MyApplyJob,
-    MyPostedJob,
-    MySaveJob,
+    MyApplyJob: () => <MyApplyJob activeTab={activeTab} />,
+    MyPostedJob: () => <MyPostedJob activeTab={activeTab} />,
+    MySaveJob: () => <MySaveJob activeTab={activeTab} />,
   });
 
   const renderTabBar = props => {

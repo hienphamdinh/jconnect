@@ -14,16 +14,16 @@ import useDetailHook from './hook.js';
 import PrimaryButton from 'components/PrimaryButton/index.js';
 
 const JobDetail = props => {
-  const {jobDetail, canApply, onPressApply} = useDetailHook(props);
-  const isBookmarked = () => {
-    return true;
-  };
+  const {jobDetail, canApply, isBookmarked, onPressSavedJobs, onPressApply} =
+    useDetailHook(props);
 
   return (
     <Container style={styles.jobDetailContainer} showBack>
       <View style={styles.jobDetailContent}>
-        <TouchableOpacity style={styles.jobDetailCircleContainer}>
-          {isBookmarked() ? (
+        <TouchableOpacity
+          style={styles.jobDetailCircleContainer}
+          onPress={onPressSavedJobs}>
+          {isBookmarked ? (
             <FontAwesome name="bookmark" color="#49AC5A" size={20} />
           ) : (
             <FontAwesome name="bookmark-o" color="#ccc" size={20} />

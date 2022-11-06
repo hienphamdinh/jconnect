@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
+    alignSelf: 'flex-end',
+    marginTop: 10,
   },
   jobDetaiRow1: {
     display: 'flex',

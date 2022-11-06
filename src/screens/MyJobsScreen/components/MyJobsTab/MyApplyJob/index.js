@@ -4,8 +4,8 @@ import useApplyHook from './hook';
 import JobList from 'components/JobList';
 import {TYPE_JOB_ACTION} from 'constants/TypeJobAction';
 import styles from './styles';
-export default function MyApplyJob() {
-  const {listJob, onDeleteApply, onEndReached} = useApplyHook();
+export default function MyApplyJob(props) {
+  const {listJob, onDeleteApply, onEndReached} = useApplyHook(props);
 
   return (
     <View style={styles.container}>

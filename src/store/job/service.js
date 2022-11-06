@@ -18,8 +18,28 @@ export const checkApply = (applicantId, jobId) => {
   });
 };
 
+export const checkSaved = (applicantId, jobId) => {
+  const path = 'job/check-saved';
+  return POST(path, {
+    applicantId,
+    jobId,
+  });
+};
+
 export const applyJob = (applicantId, jobId) => {
   const path = 'job/apply';
+  return POST(path, {
+    applicantId,
+    jobId,
+  });
+};
+
+export const savedJob = (applicantId, jobId) => {
+  console.log({
+    applicantId,
+    jobId,
+  });
+  const path = 'job/saved';
   return POST(path, {
     applicantId,
     jobId,
@@ -52,5 +72,20 @@ export const removeApply = (applicantId, jobId) => {
   return POST(path, {
     applicantId,
     jobId,
+  });
+};
+
+export const removeSave = (applicantId, jobId) => {
+  const path = 'job/remove-saved';
+  return POST(path, {
+    applicantId,
+    jobId,
+  });
+};
+
+export const removePosted = userId => {
+  const path = 'job/remove-posted';
+  return POST(path, {
+    userId,
   });
 };

@@ -22,6 +22,9 @@ const JobItem = ({item, index, typeAction}) => {
   };
 
   const renderLeft = useCallback(() => {
+    if (typeAction.actionType === TYPE_JOB_ACTION.DEFAULT) {
+      return null;
+    }
     const action = typeAction.action
       ? typeAction.action
       : ({item, index}) => {};
