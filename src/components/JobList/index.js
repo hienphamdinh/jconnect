@@ -4,19 +4,45 @@ import ImageFast from 'components/ImageFast/index.js';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {timeFromNow} from 'utils/JobHelper/index.js';
 import {useNavigation} from '@react-navigation/native';
+import {TYPE_JOB_ACTION} from 'constants/TypeJobAction';
+import Images from 'themes/Images.js';
+import FastImage from 'react-native-fast-image';
 import styles from './styles.js';
 import get from 'lodash/get';
 
-const JobItem = ({item, index}) => {
+const JobItem = ({item, index, typeAction}) => {
   const navigation = useNavigation();
   const onItemPress = () => {
     navigation.navigate('JobDetailScreen', {
       jobId: get(item, '_id'),
+      canApply: ![TYPE_JOB_ACTION.APPLY, TYPE_JOB_ACTION.POST].includes(
+        get(typeAction, 'actionType'),
+      ),
     });
   };
-  const isBookmarked = () => {
-    return true;
-  };
+
+  const renderLeft = useCallback(() => {
+    const action = typeAction.action
+      ? typeAction.action
+      : ({item, index}) => {};
+
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          action({item, index});
+        }}>
+        {[
+          TYPE_JOB_ACTION.APPLY,
+          TYPE_JOB_ACTION.POST,
+          TYPE_JOB_ACTION.SAVE,
+        ].includes(get(typeAction, 'actionType')) ? (
+          <FontAwesome name="trash" color="red" size={25} />
+        ) : (
+          <FontAwesome name="bookmark-o" color="#ccc" size={20} />
+        )}
+      </TouchableOpacity>
+    );
+  }, [index, item, typeAction]);
 
   return (
     <TouchableOpacity style={styles.jobContainer} onPress={onItemPress}>
@@ -40,29 +66,44 @@ const JobItem = ({item, index}) => {
           {timeFromNow(get(item, 'createAt'))}
         </Text>
       </View>
-      {isBookmarked() ? (
-        <FontAwesome name="bookmark" color="#ccc" size={20} />
-      ) : (
-        <FontAwesome name="bookmark-o" color="#ccc" size={20} />
-      )}
+      {renderLeft()}
     </TouchableOpacity>
   );
 };
 
-const JobList = ({data, ...otherProps}) => {
-  const renderItem = useCallback(({item, index}) => {
-    return <JobItem item={item} index={index} />;
-  }, []);
+const JobList = ({
+  data,
+  typeAction = {
+    actionType: TYPE_JOB_ACTION.DEFAULT,
+    action: () => {},
+  },
+  ...otherProps
+}) => {
+  const renderItem = useCallback(
+    ({item, index}) => {
+      return <JobItem item={item} index={index} typeAction={typeAction} />;
+    },
+    [typeAction],
+  );
 
+  const listEmptyComponent = useCallback(
+    () => (
+      <View style={styles.nothingComponent}>
+        <FastImage source={Images.Nothing} style={styles.nothingImg} />
+        <Text style={styles.nothingText}>Jobs is empty</Text>
+      </View>
+    ),
+    [],
+  );
   return (
     <View style={styles.container}>
-      <Text style={styles.titleBlock}>Hot jobs</Text>
       <FlatList
         data={data}
         renderItem={renderItem}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainerStyle}
+        ListEmptyComponent={listEmptyComponent}
         {...otherProps}
       />
     </View>

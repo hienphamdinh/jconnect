@@ -14,7 +14,7 @@ import useDetailHook from './hook.js';
 import PrimaryButton from 'components/PrimaryButton/index.js';
 
 const JobDetail = props => {
-  const {jobDetail, onPressApply} = useDetailHook(props);
+  const {jobDetail, canApply, onPressApply} = useDetailHook(props);
   const isBookmarked = () => {
     return true;
   };
@@ -110,19 +110,21 @@ const JobDetail = props => {
           </View>
         </ScrollView>
         <View style={styles.bottomWrapper}>
-          <PrimaryButton
-            title={'Apply here'}
-            customStyle={styles.applyHereBtn}
-            onPress={onPressApply}
-            renderRight={() => (
-              <MaterialIcons
-                name="double-arrow"
-                color="#fff"
-                size={20}
-                style={styles.applyIcon}
-              />
-            )}
-          />
+          {canApply ? (
+            <PrimaryButton
+              title={'Apply here'}
+              customStyle={styles.applyHereBtn}
+              onPress={onPressApply}
+              renderRight={() => (
+                <MaterialIcons
+                  name="double-arrow"
+                  color="#fff"
+                  size={20}
+                  style={styles.applyIcon}
+                />
+              )}
+            />
+          ) : null}
         </View>
       </View>
     </Container>

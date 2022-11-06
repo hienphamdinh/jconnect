@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO} from 'themes/Dimens';
+import {screenWidth, WIDTH_RATIO} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
   jobContainer: {
@@ -71,6 +71,22 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 16,
     paddingBottom: 100,
+  },
+  nothingComponent: {
+    flex: 1,
+    height: 200 * WIDTH_RATIO,
+    width: screenWidth - 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  nothingImg: {
+    height: 120 * WIDTH_RATIO,
+    width: 120 * WIDTH_RATIO,
+  },
+  nothingText: {
+    fontSize: 16 * WIDTH_RATIO,
+    fontWeight: 'bold',
+    marginTop: 10,
   },
 });
 

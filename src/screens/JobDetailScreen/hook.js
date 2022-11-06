@@ -10,6 +10,7 @@ const useDetailHook = props => {
   const navigation = useNavigation();
   const userId = useSelector(state => get(state, 'user.info._id'));
   const jobId = get(props, 'route.params.jobId');
+  const canApply = get(props, 'route.params.canApply');
   const [jobDetail, setJobDetail] = useState();
 
   const onPressApply = () => {
@@ -37,7 +38,7 @@ const useDetailHook = props => {
         console.log('ERROR', err.message);
       });
   }, [jobId]);
-  return {jobDetail, onPressApply};
+  return {jobDetail, canApply, onPressApply};
 };
 
 export default useDetailHook;
