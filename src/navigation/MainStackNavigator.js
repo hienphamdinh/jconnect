@@ -52,6 +52,10 @@ export default function MainStackNavigator() {
         name="MyProfileScreen"
         component={require('screens/MyProfileScreen').default}
       />
+      <MainStack.Screen
+        name="MessageDetailScreen"
+        component={require('screens/MessageDetailScreen').default}
+      />
     </MainStack.Navigator>
   );
 }

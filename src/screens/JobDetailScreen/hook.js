@@ -82,7 +82,7 @@ const useDetailHook = props => {
 
   const onPressPostBy = () => {
     navigation.navigate('MyProfileScreen', {
-      id: userId,
+      id: get(jobDetail, 'postedBy._id'),
     });
   };
 

@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     alignItems: 'center',
     paddingHorizontal: 16,
+    paddingBottom: 10,
   },
   avatar: {
     height: 96 * WIDTH_RATIO,
@@ -32,6 +33,25 @@ const styles = StyleSheet.create({
     fontSize: 16 * WIDTH_RATIO,
     color: Colors.black,
     marginTop: 8,
+  },
+  messageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.deepSkyBlue,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 4,
+    marginTop: 8,
+    marginLeft: 8,
+  },
+  messageText: {
+    color: Colors.white,
+    fontSize: 15 * WIDTH_RATIO,
+    marginLeft: 8,
+  },
+  messageView: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

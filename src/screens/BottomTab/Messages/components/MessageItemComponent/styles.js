@@ -36,7 +36,7 @@ export default StyleSheet.create({
   },
   time: {
     fontSize: 14,
-    color: Colors.black,
+    color: Colors.primary,
     fontWeight: '500',
   },
 });

@@ -24,3 +24,27 @@ export const userDetail = userId => {
   const path = `/user/${userId}/detail`;
   return GET(path, {});
 };
+
+export const userMessage = (userId, userOtherId) => {
+  const path = '/user/message';
+  return GET(path, {
+    userId,
+    userOtherId,
+  });
+};
+
+export const userSendMessage = (messageId, userId, content) => {
+  const path = '/user/send-message';
+  return POST(path, {
+    messageId,
+    userId,
+    content,
+  });
+};
+
+export const getAllMessage = userId => {
+  const path = '/user/message/all';
+  return GET(path, {
+    userId,
+  });
+};
