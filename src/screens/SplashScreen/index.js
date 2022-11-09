@@ -18,6 +18,7 @@ export default function SplashScreens() {
     SplashScreen.hide();
     const storeToken = await AsyncStorage.getItem(Storage.ACCESS_TOKEN);
     const token = storeToken || tokenLocal;
+
     if (token) {
       navigation.reset({
         index: 0,

@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import UserActions from 'store/user/action';
 import {FireBaseStorage} from 'utils/FirebaseHelper';
+import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 
 const storage = FireBaseStorage();
@@ -103,6 +104,21 @@ const useRegisterHook = props => {
     [avatar],
   );
 
+  const checkFullValue = () => {
+    const data = get(formRef, 'current.values');
+    if (activeToggle) {
+      return (
+        !isEmpty(get(data, 'schoolName')) &&
+        !isEmpty(get(data, 'endYear')) &&
+        !isEmpty(get(data, 'startYear'))
+      );
+    }
+    return (
+      !isEmpty(get(data, 'mostRecentlyCompany')) &&
+      !isEmpty(get(data, 'mostRecentlyJob'))
+    );
+  };
+
   return {
     insets,
     activeToggle,
@@ -112,6 +128,7 @@ const useRegisterHook = props => {
     openImagePicker,
     avatar,
     loading,
+    checkFullValue: checkFullValue(),
     onCloseImagePicker,
     onOpenImagePicker,
     setIsValid,

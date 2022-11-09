@@ -28,6 +28,7 @@ export default function RegisterInfoScreen(props) {
     openImagePicker,
     avatar,
     loading,
+    checkFullValue,
     onCloseImagePicker,
     onOpenImagePicker,
     setIsValid,
@@ -36,6 +37,7 @@ export default function RegisterInfoScreen(props) {
     onPressGender,
     onSelectedAvatar,
   } = useRegisterHook(props);
+
   const initForm = get(props, 'route.params.initForm');
   if (loading) {
     return <Loading />;
@@ -60,11 +62,21 @@ export default function RegisterInfoScreen(props) {
         city: yup.string().required('* Vui lòng điền thông tin'),
         address: yup.string(),
         gender: yup.string().required('* Vui lòng chọn giới tính'),
-        mostRecentlyJob: yup.string(),
-        mostRecentlyCompany: yup.string(),
-        schoolName: yup.string(),
-        startYear: yup.string(),
-        endYear: yup.string(),
+        mostRecentlyJob: activeToggle
+          ? yup.string()
+          : yup.string().required('* Vui lòng chọn công việc gần đây nhất'),
+        mostRecentlyCompany: activeToggle
+          ? yup.string()
+          : yup.string().required('* Vui lòng chọn công ty gần đây nhất'),
+        schoolName: !activeToggle
+          ? yup.string()
+          : yup.string().required('* Vui lòng chọn trường gần đây nhất'),
+        startYear: !activeToggle
+          ? yup.string()
+          : yup.string().required('* Vui lòng chọn năm bắt đầy'),
+        endYear: !activeToggle
+          ? yup.string()
+          : yup.string().required('* Vui lòng chọn năm tốt nghiệp'),
       })}>
       {({
         isValid,
@@ -192,6 +204,7 @@ export default function RegisterInfoScreen(props) {
                     onChangeText={handleChange('schoolName')}
                     error={!!values.schoolName && errors.schoolName}
                     onFocus={() => setFieldTouched('schoolName')}
+                    requireValue
                   />
                   <View style={styles.educationYear}>
                     <DateInputBox
@@ -204,6 +217,7 @@ export default function RegisterInfoScreen(props) {
                       onChangeDate={handleChange('startYear')}
                       error={!!values.startYear && errors.startYear}
                       onFocus={() => setFieldTouched('startYear')}
+                      requireValue
                     />
                     <View style={styles.divider} />
                     <DateInputBox
@@ -216,6 +230,7 @@ export default function RegisterInfoScreen(props) {
                       onChangeDate={handleChange('endYear')}
                       error={!!values.endYear && errors.endYear}
                       onFocus={() => setFieldTouched('endYear')}
+                      requireValue
                     />
                   </View>
                 </>
@@ -229,6 +244,7 @@ export default function RegisterInfoScreen(props) {
                     onChangeText={handleChange('mostRecentlyJob')}
                     error={!!values.mostRecentlyJob && errors.mostRecentlyJob}
                     onFocus={() => setFieldTouched('mostRecentlyJob')}
+                    requireValue
                   />
                   <InputBox
                     title="Most recently company"
@@ -240,6 +256,7 @@ export default function RegisterInfoScreen(props) {
                       !!values.mostRecentlyCompany && errors.mostRecentlyCompany
                     }
                     onFocus={() => setFieldTouched('mostRecentlyCompany')}
+                    requireValue
                   />
                 </>
               )}

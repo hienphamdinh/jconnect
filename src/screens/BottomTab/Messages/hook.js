@@ -33,6 +33,7 @@ const useMessage = props => {
         });
     }
   }, [userId, isFocused]);
+  //  chỗ này k truyền deps vì để nó call api liên tục và nhận thông tin realtime
 
   return {
     listMessage,

@@ -20,7 +20,7 @@ export default StyleSheet.create({
     backgroundColor: '#49AC5A',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: 8,
+    paddingVertical: 20,
   },
   plusIcon: {
     position: 'absolute',
@@ -28,6 +28,17 @@ export default StyleSheet.create({
     right: 0,
   },
   iconWrapper: {
+    borderWidth: 1,
+    borderColor: '#49AC5A',
+    backgroundColor: 'white',
+    height: 80 * WIDTH_RATIO,
+    width: 80 * WIDTH_RATIO,
+    borderRadius: 80 * WIDTH_RATIO,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  imageStyle: {
     borderWidth: 1,
     borderColor: '#49AC5A',
     backgroundColor: 'white',
@@ -129,7 +140,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   textName: {
-    fontSize: 18,
+    fontSize: 18 * WIDTH_RATIO,
     fontWeight: '600',
     color: Colors.white,
   },
@@ -139,6 +150,6 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    paddingTop: 50,
+    paddingTop: 20,
   },
 });

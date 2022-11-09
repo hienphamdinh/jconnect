@@ -7,9 +7,13 @@ import SettingItemComponent from './components/SettingItemComponent';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import UserActions from 'store/user/action';
+import get from 'lodash/get';
+import {useSelector} from 'react-redux';
+import Avatar from 'components/AvatarComponent';
 import styles from './styles';
 
 export default function Settings() {
+  const user = useSelector(state => get(state, 'user.info'));
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -31,6 +35,11 @@ export default function Settings() {
       title: 'My profile',
       icon: 'user',
       navigateScreen: '',
+      onPress: () => {
+        navigation.navigate('MyProfileScreen', {
+          id: get(user, '_id'),
+        });
+      },
     },
     {
       title: 'Change password',
@@ -71,15 +80,13 @@ export default function Settings() {
 
   return (
     <Container notSafeArea style={styles.container}>
-      <View
-        style={[
-          styles.header,
-          {
-            height: (insets.top + 130) * WIDTH_RATIO,
-          },
-        ]}>
-        <Image source={{uri: photo}} style={styles.iconWrapper} />
-        <Text style={styles.textName}>Phạm Đình Hiển</Text>
+      <View style={[styles.header]}>
+        <Avatar
+          style={styles.iconWrapper}
+          imageStyle={styles.imageStyle}
+          source={{uri: get(user, 'avatar')}}
+        />
+        <Text style={styles.textName}>{get(user, 'fullName')}</Text>
       </View>
       <View style={styles.content}>
         <FlatList data={data} renderItem={renderItem} />

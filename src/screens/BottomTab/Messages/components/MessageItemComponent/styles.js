@@ -12,7 +12,9 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
   },
   profilePicWrapper: {
-    borderColor: '#CECECE',
+    height: 50 * WIDTH_RATIO,
+    width: 50 * WIDTH_RATIO,
+    borderRadius: (25 * WIDTH_RATIO) / 2,
     marginRight: 8 * WIDTH_RATIO,
   },
   profilePic: {
@@ -38,5 +40,9 @@ export default StyleSheet.create({
     fontSize: 14,
     color: Colors.primary,
     fontWeight: '500',
+  },
+  borderAvatar: {
+    borderColor: Colors.gray,
+    borderWidth: 1,
   },
 });

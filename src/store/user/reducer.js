@@ -33,7 +33,10 @@ const loginSuccess = (state, action) => {
 };
 
 const logoutSuccess = (state, action) => {
-  return state.merge({});
+  return state.merge({
+    token: '',
+    info: {},
+  });
 };
 
 const restore = (state, action) => {

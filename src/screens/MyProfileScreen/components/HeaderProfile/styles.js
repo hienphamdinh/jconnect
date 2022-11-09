@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.gray1,
   },
   topHeaderBg: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.gray1,
     height: 100 * WIDTH_RATIO,
   },
   avtWrapper: {
@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingBottom: 10,
+    marginHorizontal: 16,
+    borderRadius: 8,
   },
   avatar: {
     height: 96 * WIDTH_RATIO,
@@ -30,14 +32,14 @@ const styles = StyleSheet.create({
   },
   profileText: {
     fontWeight: 'bold',
-    fontSize: 16 * WIDTH_RATIO,
+    fontSize: 18 * WIDTH_RATIO,
     color: Colors.black,
     marginTop: 8,
   },
   messageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.deepSkyBlue,
+    backgroundColor: Colors.primary,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 4,
@@ -50,8 +52,19 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   messageView: {
+    alignItems: 'center',
+  },
+  jobProfile: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 4,
+  },
+  icon: {
+    marginRight: 4,
+  },
+  jobText: {
+    fontSize: 14 * WIDTH_RATIO,
+    textAlign: 'center',
   },
 });
 
