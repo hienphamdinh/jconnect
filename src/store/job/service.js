@@ -89,3 +89,11 @@ export const removePosted = userId => {
     userId,
   });
 };
+
+export const findJob = (searchString, skip) => {
+  const path = 'job/find-job';
+  return GET(path, {
+    searchString,
+    skip,
+  });
+};

@@ -82,4 +82,11 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.deepSkyBlue,
   },
+  prefix: {
+    position: 'absolute',
+    right: 10,
+    color: Colors.black,
+    fontWeight: 'bold',
+    fontSize: 15 * WIDTH_RATIO,
+  },
 });

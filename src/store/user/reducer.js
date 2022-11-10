@@ -3,10 +3,12 @@ import Immutable from 'seamless-immutable';
 import {UserTypes} from './action';
 import {REHYDRATE} from 'redux-persist/es/constants';
 import get from 'lodash/get';
+import concat from 'lodash/concat';
 
 export const INITIAL_STATE = Immutable({
   token: '',
   info: {},
+  recentlySearch: [],
 });
 
 const createUserSuccess = (state, action) => {
@@ -36,6 +38,14 @@ const logoutSuccess = (state, action) => {
   return state.merge({
     token: '',
     info: {},
+    recentlySearch: [],
+  });
+};
+
+const recentlySearch = (state, action) => {
+  const {search} = action;
+  return state.merge({
+    recentlySearch: search ? search : [],
   });
 };
 
@@ -55,5 +65,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [UserTypes.UPDATE_USER_SUCCESS]: updateUserSuccess,
   [UserTypes.LOGOUT_SUCCESS]: logoutSuccess,
   [UserTypes.LOGIN_SUCCESS]: loginSuccess,
+  [UserTypes.RECENTLY_SEARCH]: recentlySearch,
   [REHYDRATE]: restore,
 });

@@ -9,6 +9,7 @@ import InputBox, {
   LocationInputBox,
   EditorInputBox,
   BaseInputBox,
+  SalaryBox,
 } from 'components/InputBox';
 import usePostJob from './hook';
 import PrimaryButton from 'components/PrimaryButton';
@@ -20,6 +21,7 @@ import HeaderTitle from 'components/HeaderTitle';
 import get from 'lodash/get';
 import {jobTypeList} from 'constants/Job';
 import {useSelector} from 'react-redux';
+import {formatCurrencyWithDot} from 'utils/CurrencyHelper';
 
 export default function PostJobScreen(props) {
   const {
@@ -51,7 +53,10 @@ export default function PostJobScreen(props) {
         categories: yup.string().required('* Vui lòng chọn danh mục'),
         jobType: yup.string().required('* Vui lòng chọn loại'),
         city: yup.string().required('* Vui lòng chọn thành phố'),
-        salary: yup.string().required('* Vui lòng nhập lương'),
+        salary: yup
+          .string()
+          .max(9, '* Số tiền quá lớn')
+          .required('* Vui lòng nhập lương'),
         expiredApply: yup.string().required('* Vui lòng chọn hạn ứng tuyển'),
         street: yup.string(),
         description: yup.string().required('* Vui lòng nhập mô tả công việc'),
@@ -136,13 +141,13 @@ export default function PostJobScreen(props) {
                 onFocus={() => setFieldTouched('jobType')}
                 listData={jobTypeList}
               />
-              <InputBox
+              <SalaryBox
                 title="Salary"
                 placeholder="Enter salary"
-                keyboardType="default"
+                keyboardType="number-pad"
                 requireValue
                 autoCapitalize="none"
-                value={values.salary}
+                value={formatCurrencyWithDot(values.salary)}
                 onChangeText={handleChange('salary')}
                 error={!!values.salary && errors.salary}
                 onFocus={() => setFieldTouched('salary')}

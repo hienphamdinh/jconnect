@@ -8,10 +8,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import Colors from 'themes/Colors';
 export default function HeaderJobSearch({
+  searchText,
   containerStyle,
   searchStyle,
   placeholder = 'Search...',
   onPress,
+  onSearch,
 }) {
   const navigation = useNavigation();
   return (
@@ -38,15 +40,16 @@ export default function HeaderJobSearch({
       <View style={styles.avatarWrapper}>
         <OpacityButton style={[styles.search, searchStyle]} onPress={onPress}>
           <TextInput
+            value={searchText}
             style={styles.title}
             placeholder={placeholder}
             placeholderTextColor="black"
+            onChangeText={text => {
+              onSearch(text);
+            }}
           />
           <AntDesign name={'search1'} size={25 * WIDTH_RATIO} />
         </OpacityButton>
-        <TouchableOpacity style={styles.filterWrapper}>
-          <Ionicons name="shuffle" size={25} color={Colors.primary} />
-        </TouchableOpacity>
       </View>
     </View>
   );

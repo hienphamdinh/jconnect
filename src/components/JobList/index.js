@@ -76,6 +76,7 @@ const JobItem = ({item, index, typeAction}) => {
 
 const JobList = ({
   data,
+  style,
   typeAction = {
     actionType: TYPE_JOB_ACTION.DEFAULT,
     action: () => {},
@@ -99,7 +100,7 @@ const JobList = ({
     [],
   );
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <FlatList
         data={data}
         renderItem={renderItem}

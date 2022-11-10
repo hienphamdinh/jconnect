@@ -8,6 +8,7 @@ const {Types, Creators} = createActions({
   loginSuccess: ['response'],
   logout: ['onSuccess'],
   logoutSuccess: [],
+  recentlySearch: ['search'],
 });
 
 export const UserTypes = Types;

@@ -14,7 +14,7 @@ export default StyleSheet.create({
   search: {
     flexDirection: 'row',
     flex: 1,
-    height: 40 * WIDTH_RATIO,
+    height: 50 * WIDTH_RATIO,
     backgroundColor: Colors.white,
     borderRadius: 8,
     alignItems: 'center',
@@ -23,6 +23,7 @@ export default StyleSheet.create({
     elevation: 5,
   },
   title: {
+    flex: 1,
     fontSize: 16,
   },
   profilePicWrapper: {
@@ -47,7 +48,7 @@ export default StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
-    bottom: -20,
+    bottom: -30,
   },
   filterWrapper: {
     justifyContent: 'center',
