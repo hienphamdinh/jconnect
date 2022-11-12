@@ -5,6 +5,8 @@ import PrimaryButton from 'components/PrimaryButton';
 import {USER_TYPE} from 'constants/Profile';
 import styles from './styles';
 import get from 'lodash/get';
+import FastImage from 'react-native-fast-image';
+import Images from 'themes/Images';
 
 const Item = ({item, index, onPressViewResume, onPressViewProfile}) => {
   const isStudent = get(item, 'applicant.account.type') === USER_TYPE.STUDENT;
@@ -64,6 +66,15 @@ export default function ApplicationList({
     ),
     [onPressViewProfile, onPressViewResume],
   );
+  const listEmptyComponent = useCallback(
+    () => (
+      <View style={styles.nothingComponent}>
+        <FastImage source={Images.Nothing} style={styles.nothingImg} />
+        <Text style={styles.nothingText}>Applicants is empty</Text>
+      </View>
+    ),
+    [],
+  );
   return (
     <View>
       <FlatList
@@ -71,6 +82,7 @@ export default function ApplicationList({
         contentContainerStyle={styles.contentContainerStyle}
         data={data}
         renderItem={renderItem}
+        ListEmptyComponent={listEmptyComponent}
       />
     </View>
   );

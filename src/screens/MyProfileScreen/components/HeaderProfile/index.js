@@ -7,9 +7,11 @@ import {useNavigation} from '@react-navigation/native';
 import {USER_TYPE} from 'constants/Profile';
 import styles from './styles';
 import {WIDTH_RATIO} from 'themes/Dimens';
+import useIsMeHook from 'screens/globalHook/useIsMeHook';
 
 export default function HeaderProfile(props) {
   const navigation = useNavigation();
+  const {isMe} = useIsMeHook();
   const {profile} = props;
   return (
     <View style={styles.container}>
@@ -50,16 +52,18 @@ export default function HeaderProfile(props) {
                 : ''}
             </Text>
           </View>
-          <TouchableOpacity
-            style={styles.messageContainer}
-            onPress={() => {
-              navigation.navigate('MessageDetailScreen', {
-                userOther: profile,
-              });
-            }}>
-            <AntDesignIcons name="message1" color={'white'} size={20} />
-            <Text style={styles.messageText}>Message</Text>
-          </TouchableOpacity>
+          {!isMe(get(profile, '_id')) ? (
+            <TouchableOpacity
+              style={styles.messageContainer}
+              onPress={() => {
+                navigation.navigate('MessageDetailScreen', {
+                  userOther: profile,
+                });
+              }}>
+              <AntDesignIcons name="message1" color={'white'} size={20} />
+              <Text style={styles.messageText}>Message</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </View>

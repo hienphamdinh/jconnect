@@ -41,6 +41,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  aboutMeEdit: {},
+  input: {
+    minHeight: 120 * WIDTH_RATIO,
+    paddingHorizontal: 8,
+    color: Colors.black,
+    borderRadius: 8,
+    backgroundColor: Colors.gray1,
+  },
 });
 
 export default styles;

@@ -27,7 +27,7 @@ export function* updateUser(action) {
     const response = yield call(API.updateUser, userId, data);
     if (response.status) {
       yield put(UserActions.updateUserSuccess(get(response, 'user')));
-      onSuccess() && onSuccess(response);
+      onSuccess && onSuccess(response);
     } else {
       onFailed && onFailed(response);
     }

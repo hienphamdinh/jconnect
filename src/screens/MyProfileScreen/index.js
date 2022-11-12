@@ -8,13 +8,15 @@ import useProfileHook from './hook';
 import styles from './styles';
 
 export default function MyProfileScreen(props) {
-  const {profile} = useProfileHook(props);
+  const {profile, updateUser} = useProfileHook(props);
   return (
     <Container showBack>
       <ScrollView style={styles.container}>
         <HeaderProfile profile={profile} />
-        <AboutMe profile={profile} />
-        <SkillBlock profile={profile} />
+        {profile ? <AboutMe profile={profile} updateUser={updateUser} /> : null}
+        {profile ? (
+          <SkillBlock profile={profile} updateUser={updateUser} />
+        ) : null}
       </ScrollView>
     </Container>
   );

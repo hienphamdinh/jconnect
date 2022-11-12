@@ -20,6 +20,7 @@ export default function Messages() {
       <NormalHeaderBar showSearch={false} />
       <View style={styles.contentView}>
         <FlatList
+          keyExtractor={(item, index) => index.toString()}
           styles={styles.list}
           data={listMessage}
           renderItem={renderItem}

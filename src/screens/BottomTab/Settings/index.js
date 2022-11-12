@@ -1,8 +1,6 @@
 import React from 'react';
-import {View, Image, Text, FlatList} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import Container from 'components/Container';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {WIDTH_RATIO} from 'themes/Dimens';
 import SettingItemComponent from './components/SettingItemComponent';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -14,9 +12,9 @@ import styles from './styles';
 
 export default function Settings() {
   const user = useSelector(state => get(state, 'user.info'));
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const onSuccess = () => {
     navigation.reset({
       index: 0,
@@ -27,8 +25,6 @@ export default function Settings() {
       ],
     });
   };
-  const photo =
-    'https://images.pexels.com/photos/1987301/pexels-photo-1987301.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
 
   const data = [
     {
@@ -42,29 +38,14 @@ export default function Settings() {
       },
     },
     {
-      title: 'Change password',
-      icon: 'lock1',
+      title: 'Update my profile',
+      icon: 'edit',
       navigateScreen: '',
-    },
-    {
-      title: 'Language',
-      icon: 'minussquareo',
-      navigateScreen: '',
-    },
-    {
-      title: 'Term of use',
-      icon: 'creditcard',
-      navigateScreen: '',
-    },
-    {
-      title: 'Language',
-      icon: 'minussquareo',
-      navigateScreen: '',
-    },
-    {
-      title: 'Service',
-      icon: 'customerservice',
-      navigateScreen: '',
+      onPress: () => {
+        navigation.navigate('MyProfileScreen', {
+          id: get(user, '_id'),
+        });
+      },
     },
     {
       title: 'Log out',
@@ -89,7 +70,7 @@ export default function Settings() {
         <Text style={styles.textName}>{get(user, 'fullName')}</Text>
       </View>
       <View style={styles.content}>
-        <FlatList data={data} renderItem={renderItem} />
+        <FlatList style={styles.list} data={data} renderItem={renderItem} />
       </View>
     </Container>
   );

@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   skillWrapper: {
+    flexDirection: 'row',
     backgroundColor: Colors.white,
     borderWidth: 1,
     borderColor: Colors.primary,
@@ -55,10 +56,34 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginRight: 20,
     marginBottom: 8,
+    alignItems: 'center',
   },
   skillText: {
     fontWeight: '500',
     fontSize: 13 * WIDTH_RATIO,
+  },
+  addSkills: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingHorizontal: 8,
+  },
+  txtInput: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: Colors.gray,
+    marginRight: 8,
+  },
+  addBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addText: {
+    fontWeight: 'bold',
+  },
+  removeItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
   },
 });
 

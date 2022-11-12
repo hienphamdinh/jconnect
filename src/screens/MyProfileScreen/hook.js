@@ -2,10 +2,31 @@ import {useState, useEffect} from 'react';
 import {userDetail} from 'store/user/service';
 import Toast from 'react-native-toast-message';
 import get from 'lodash/get';
+import UserActions from 'store/user/action';
+import {useDispatch} from 'react-redux';
 
 const useProfileHook = props => {
+  const dispatch = useDispatch();
   const userId = get(props, 'route.params.id');
   const [profile, setProfile] = useState();
+
+  const updateUser = ({
+    data = {},
+    onSuccess = () => {},
+    onFailed = () => {},
+  }) => {
+    dispatch(
+      UserActions.updateUser(
+        userId,
+        data,
+        response => {
+          setProfile(get(response, 'user'));
+          onSuccess(response);
+        },
+        onFailed,
+      ),
+    );
+  };
 
   useEffect(() => {
     userDetail(userId).then(res => {
@@ -22,6 +43,7 @@ const useProfileHook = props => {
   }, [userId]);
   return {
     profile,
+    updateUser,
   };
 };
 

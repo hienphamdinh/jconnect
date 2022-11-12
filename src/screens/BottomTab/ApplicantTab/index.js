@@ -49,6 +49,7 @@ export default function Messages() {
       />
       <View style={styles.contentView}>
         <FlatList
+          keyExtractor={(item, index) => index.toString()}
           styles={styles.list}
           numColumns={2}
           data={listUser}

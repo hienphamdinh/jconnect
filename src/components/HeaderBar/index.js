@@ -28,10 +28,10 @@ export default function HeaderBar({
           </Text>
         </View>
         <View style={styles.divider} />
-        <View style={styles.notificationWrapper}>
+        {/* <View style={styles.notificationWrapper}>
           <IconsIcons name="notifications" color="white" size={28} />
           <View style={styles.dotStyle} />
-        </View>
+        </View> */}
       </View>
       {/* <OpacityButton style={[styles.search, searchStyle]} onPress={onPress}>
         <Text style={styles.title}>{placeholder || 'Search...'}</Text>

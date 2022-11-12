@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {WIDTH_RATIO} from 'themes/Dimens';
+import {screenHeight, WIDTH_RATIO} from 'themes/Dimens';
 import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
@@ -18,36 +18,26 @@ export default StyleSheet.create({
   },
   header: {
     backgroundColor: '#49AC5A',
-    justifyContent: 'flex-end',
     alignItems: 'center',
     paddingVertical: 20,
-  },
-  plusIcon: {
-    position: 'absolute',
-    top: -9 * WIDTH_RATIO,
-    right: 0,
+    height: screenHeight / 3,
   },
   iconWrapper: {
     borderWidth: 1,
     borderColor: '#49AC5A',
     backgroundColor: 'white',
-    height: 80 * WIDTH_RATIO,
-    width: 80 * WIDTH_RATIO,
-    borderRadius: 80 * WIDTH_RATIO,
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 140 * WIDTH_RATIO,
+    width: 140 * WIDTH_RATIO,
+    borderRadius: 70 * WIDTH_RATIO,
     marginBottom: 15,
   },
   imageStyle: {
     borderWidth: 1,
     borderColor: '#49AC5A',
     backgroundColor: 'white',
-    height: 80 * WIDTH_RATIO,
-    width: 80 * WIDTH_RATIO,
-    borderRadius: 80 * WIDTH_RATIO,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 15,
+    height: 140 * WIDTH_RATIO,
+    width: 140 * WIDTH_RATIO,
+    borderRadius: 70 * WIDTH_RATIO,
   },
   logoBox: {
     width: 100,
@@ -145,11 +135,15 @@ export default StyleSheet.create({
     color: Colors.white,
   },
   content: {
-    marginTop: 10,
     flex: 1,
     backgroundColor: Colors.white,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     paddingTop: 20,
+    overflow: 'hidden',
+    marginTop: -45,
+  },
+  list: {
+    flex: 1,
   },
 });

@@ -21,7 +21,7 @@ export default function HomeScreen() {
         style={styles.scrollView}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
-        <Categories />
+        {/* <Categories /> */}
         <HomeBanner />
         <HomeHotJob />
       </ScrollView>

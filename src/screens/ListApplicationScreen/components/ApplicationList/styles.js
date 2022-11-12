@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO} from 'themes/Dimens';
+import {screenWidth, WIDTH_RATIO} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -47,6 +47,17 @@ const styles = StyleSheet.create({
   },
   position: {
     color: Colors.black,
+  },
+  nothingImg: {
+    height: 120 * WIDTH_RATIO,
+    width: 120 * WIDTH_RATIO,
+  },
+  nothingComponent: {
+    flex: 1,
+    height: 200 * WIDTH_RATIO,
+    width: screenWidth - 32,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
