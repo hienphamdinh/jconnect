@@ -20,6 +20,8 @@ const useMessage = props => {
     [navigation],
   );
 
+  const onSearch = () => {};
+
   useEffect(() => {
     if (isFocused) {
       getAllMessage(userId)
@@ -37,6 +39,7 @@ const useMessage = props => {
 
   return {
     listMessage,
+    onSearch,
     onPressItem,
   };
 };

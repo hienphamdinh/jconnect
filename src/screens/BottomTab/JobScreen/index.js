@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import Container from 'components/Container';
 import HeaderJobSearch from './components/HeaderJobSearch';
 import ListSearchRecently from './components/ListSearchRecently';
@@ -12,10 +12,12 @@ const Home = () => {
   return (
     <Container>
       <HeaderJobSearch onSearch={onSearch} searchText={searchText} />
+      <View style={styles.marginTop} />
       {!searchText ? <ListSearchRecently onPressItem={onPressItem} /> : null}
       {!searchText ? (
         <Text style={styles.recommendForYou}>Recommend for you</Text>
       ) : null}
+
       {!searchText ? <JobList data={hotJobs} /> : null}
       {searchText ? (
         <JobList

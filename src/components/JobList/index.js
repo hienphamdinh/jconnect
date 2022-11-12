@@ -9,6 +9,8 @@ import Images from 'themes/Images.js';
 import FastImage from 'react-native-fast-image';
 import styles from './styles.js';
 import get from 'lodash/get';
+import Colors from 'themes/Colors.js';
+import {WIDTH_RATIO} from 'themes/Dimens.js';
 
 const JobItem = ({item, index, typeAction}) => {
   const navigation = useNavigation();
@@ -47,30 +49,64 @@ const JobItem = ({item, index, typeAction}) => {
     );
   }, [index, item, typeAction]);
 
-  return (
-    <TouchableOpacity style={styles.jobContainer} onPress={onItemPress}>
-      <ImageFast
-        source={{uri: get(item, 'thumbnail')}}
-        style={styles.jobImage}
-        imageStyle={styles.imageStyle}
-      />
-      <View style={styles.jobInfo}>
-        <Text style={styles.jobCompany} numberOfLines={1} ellipsizeMode="tail">
-          {get(item, 'jobType')}
-        </Text>
-        <Text style={styles.jobRole} numberOfLines={1} ellipsizeMode="tail">
-          {get(item, 'jobName')}
-        </Text>
+  const renderApplyEntry = useCallback(() => {
+    return (
+      <TouchableOpacity
+        style={styles.listApply}
+        onPress={() => {
+          navigation.navigate('ListApplicationScreen', {
+            jobId: get(item, '_id'),
+          });
+        }}>
+        <Text style={styles.listApplyText}>List application</Text>
+        <FontAwesome
+          name="eye"
+          size={17 * WIDTH_RATIO}
+          color={Colors.primary}
+        />
+      </TouchableOpacity>
+    );
+  }, [item, navigation]);
 
-        <Text style={styles.jobSalary} numberOfLines={1} ellipsizeMode="tail">
-          {get(item, 'city')}
-        </Text>
-        <Text style={styles.jobLocation} numberOfLines={1}>
-          {timeFromNow(get(item, 'createAt'))}
-        </Text>
-      </View>
-      {renderLeft()}
-    </TouchableOpacity>
+  return (
+    <>
+      <TouchableOpacity
+        style={[
+          styles.jobContainer,
+          typeAction.actionType === TYPE_JOB_ACTION.POST && {
+            marginBottom: 0,
+          },
+        ]}
+        onPress={onItemPress}>
+        <ImageFast
+          source={{uri: get(item, 'thumbnail')}}
+          style={styles.jobImage}
+          imageStyle={styles.imageStyle}
+        />
+        <View style={styles.jobInfo}>
+          <Text
+            style={styles.jobCompany}
+            numberOfLines={1}
+            ellipsizeMode="tail">
+            {get(item, 'jobType')}
+          </Text>
+          <Text style={styles.jobRole} numberOfLines={1} ellipsizeMode="tail">
+            {get(item, 'jobName')}
+          </Text>
+
+          <Text style={styles.jobSalary} numberOfLines={1} ellipsizeMode="tail">
+            {get(item, 'city')}
+          </Text>
+          <Text style={styles.jobLocation} numberOfLines={1}>
+            {timeFromNow(get(item, 'createAt'))}
+          </Text>
+        </View>
+        {renderLeft()}
+      </TouchableOpacity>
+      {typeAction.actionType === TYPE_JOB_ACTION.POST
+        ? renderApplyEntry()
+        : null}
+    </>
   );
 };
 

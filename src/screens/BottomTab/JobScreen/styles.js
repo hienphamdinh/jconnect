@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   listJob: {
     marginTop: 30,
   },
+  marginTop: {
+    marginTop: 40,
+  },
 });
 
 export default styles;

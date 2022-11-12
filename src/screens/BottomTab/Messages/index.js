@@ -7,7 +7,7 @@ import useMessage from './hook';
 import styles from './styles';
 
 export default function Messages() {
-  const {listMessage, onPressItem} = useMessage();
+  const {listMessage, onSearch, onPressItem} = useMessage();
   const renderItem = ({item, index}) => (
     <MessageItemComponent
       item={item}
@@ -17,7 +17,7 @@ export default function Messages() {
   );
   return (
     <Container notSafeArea>
-      <NormalHeaderBar />
+      <NormalHeaderBar showSearch={false} />
       <View style={styles.contentView}>
         <FlatList
           styles={styles.list}

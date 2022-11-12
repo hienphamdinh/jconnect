@@ -88,6 +88,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
   },
+  listApply: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    marginHorizontal: 32,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    paddingVertical: 12,
+    marginBottom: 20,
+    elevation: 5,
+  },
+  listApplyText: {
+    fontWeight: 'bold',
+    color: Colors.black,
+    marginRight: 8,
+  },
 });
 
 export default styles;

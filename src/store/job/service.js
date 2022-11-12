@@ -97,3 +97,11 @@ export const findJob = (searchString, skip) => {
     skip,
   });
 };
+
+export const listApplication = (jobId, skip) => {
+  const path = 'job/list-application';
+  return GET(path, {
+    jobId,
+    skip,
+  });
+};

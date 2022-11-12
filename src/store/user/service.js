@@ -48,3 +48,11 @@ export const getAllMessage = userId => {
     userId,
   });
 };
+
+export const getAllUser = (searchString, skip) => {
+  const path = '/user/all';
+  return GET(path, {
+    searchString,
+    skip,
+  });
+};

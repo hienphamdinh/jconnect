@@ -30,13 +30,23 @@ export default function HeaderProfile(props) {
             />
             <Text style={styles.jobText}>
               {get(profile, 'account.type') === USER_TYPE.NORMAL
-                ? `${get(profile, 'mostRecentlyJob', '')} at ${get(
-                    profile,
-                    'mostRecentlyCompany',
-                    '',
-                  )}`
+                ? `${get(profile, 'mostRecentlyJob', '')}`
                 : get(profile, 'account.type') === USER_TYPE.STUDENT
-                ? get(profile, 'fullName', '')
+                ? 'Student'
+                : ''}
+            </Text>
+          </View>
+          <View style={styles.jobProfile}>
+            <AntDesignIcons
+              name="enviroment"
+              size={16 * WIDTH_RATIO}
+              style={styles.icon}
+            />
+            <Text style={styles.jobText}>
+              {get(profile, 'account.type') === USER_TYPE.NORMAL
+                ? `${get(profile, 'mostRecentlyCompany', '')}`
+                : get(profile, 'account.type') === USER_TYPE.STUDENT
+                ? get(profile, 'education.name')
                 : ''}
             </Text>
           </View>

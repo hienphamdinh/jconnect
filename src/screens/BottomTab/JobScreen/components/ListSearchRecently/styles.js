@@ -3,9 +3,7 @@ import Colors from 'themes/Colors';
 import {WIDTH_RATIO} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-  },
+  container: {},
   itemContainer: {
     paddingVertical: 12,
     paddingHorizontal: 16,

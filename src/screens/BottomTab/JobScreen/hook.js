@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import UserActions from 'store/user/action';
 import {findJob} from 'store/job/service';
@@ -42,7 +42,11 @@ const useJobScreenHook = () => {
     }
   };
 
-  const debounceSearch = debounce(text => fetchSearchData(text, 0), 1000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceSearch = useCallback(
+    debounce(text => fetchSearchData(text, 0), 1000),
+    [],
+  );
   const debounceRecentlySearch = debounce(
     text => fetchRecentlySearch(text),
     1000,

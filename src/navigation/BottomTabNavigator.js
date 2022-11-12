@@ -27,14 +27,14 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Messages"
-        component={require('screens/BottomTab/Messages').default}
+        name="ApplicantTab"
+        component={require('screens/BottomTab/ApplicantTab').default}
         options={{
           tabBarIcon: ({focused, tintColor}) => (
             <MaterialCommunityIcons
-              name="message-text"
+              name="account-check"
               color={focused ? '#49AC5A' : '#ccc'}
-              size={24}
+              size={26}
             />
           ),
           tabBarLabel: () => {
@@ -42,22 +42,6 @@ export default function BottomTabNavigator() {
           },
         }}
       />
-      {/* <BottomTab.Screen
-        name="Notifications"
-        component={require('screens/BottomTab/Notifications').default}
-        options={{
-          tabBarIcon: ({focused, tintColor}) => (
-            <Ionicons
-              name="ios-notifications"
-              color={focused ? '#49AC5A' : '#ccc'}
-              size={24}
-            />
-          ),
-          tabBarLabel: () => {
-            return null;
-          },
-        }}
-      /> */}
       <BottomTab.Screen
         name="JobScreen"
         component={require('screens/BottomTab/JobScreen').default}
@@ -74,6 +58,22 @@ export default function BottomTabNavigator() {
           },
         }}
         Ï
+      />
+      <BottomTab.Screen
+        name="Messages"
+        component={require('screens/BottomTab/Messages').default}
+        options={{
+          tabBarIcon: ({focused, tintColor}) => (
+            <MaterialCommunityIcons
+              name="message-text"
+              color={focused ? '#49AC5A' : '#ccc'}
+              size={24}
+            />
+          ),
+          tabBarLabel: () => {
+            return null;
+          },
+        }}
       />
       <BottomTab.Screen
         name="Settings"
