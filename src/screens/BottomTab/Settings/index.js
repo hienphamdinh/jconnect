@@ -42,9 +42,7 @@ export default function Settings() {
       icon: 'edit',
       navigateScreen: '',
       onPress: () => {
-        navigation.navigate('MyProfileScreen', {
-          id: get(user, '_id'),
-        });
+        navigation.navigate('UpdateInfoScreen');
       },
     },
     {

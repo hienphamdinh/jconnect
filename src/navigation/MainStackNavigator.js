@@ -60,6 +60,10 @@ export default function MainStackNavigator() {
         name="ListApplicationScreen"
         component={require('screens/ListApplicationScreen').default}
       />
+      <MainStack.Screen
+        name="UpdateInfoScreen"
+        component={require('screens/UpdateInfoScreen').default}
+      />
     </MainStack.Navigator>
   );
 }
