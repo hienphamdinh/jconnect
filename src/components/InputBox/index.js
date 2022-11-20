@@ -131,7 +131,7 @@ export const DateInputBox = ({
             mode="date"
             date={valueToDate()}
             onDateChange={date => {
-              onChangeDate(dayjs(date).format('DD/MM/YYYY'));
+              onChangeDate(dayjs(date).format('YYYY/MM/DD'));
             }}
             onCancel={() => {}}
             androidVariant={'iosClone'}
