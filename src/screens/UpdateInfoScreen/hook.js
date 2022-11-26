@@ -1,10 +1,9 @@
 import {useState, useCallback, useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useDispatch} from 'react-redux';
 import UserActions from 'store/user/action';
 import {FireBaseStorage} from 'utils/FirebaseHelper';
 import isEmpty from 'lodash/isEmpty';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {USER_TYPE} from 'constants/Profile';
 import Toast from 'react-native-toast-message';
 import get from 'lodash/get';

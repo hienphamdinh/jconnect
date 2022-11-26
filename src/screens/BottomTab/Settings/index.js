@@ -46,6 +46,14 @@ export default function Settings() {
       },
     },
     {
+      title: 'Change password',
+      icon: 'scan1',
+      navigateScreen: '',
+      onPress: () => {
+        navigation.navigate('ChangePasswordScreen');
+      },
+    },
+    {
       title: 'Log out',
       icon: 'customerservice',
       navigateScreen: '',
