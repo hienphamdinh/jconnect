@@ -13,13 +13,15 @@ import Colors from 'themes/Colors.js';
 import {WIDTH_RATIO} from 'themes/Dimens.js';
 
 const JobItem = ({item, index, typeAction}) => {
+  const itemStatus = get(item, 'status');
   const navigation = useNavigation();
   const onItemPress = () => {
     navigation.navigate('JobDetailScreen', {
       jobId: get(item, '_id'),
-      canApply: ![TYPE_JOB_ACTION.APPLY, TYPE_JOB_ACTION.POST].includes(
-        get(typeAction, 'actionType'),
-      ),
+      canApply:
+        ![TYPE_JOB_ACTION.APPLY, TYPE_JOB_ACTION.POST].includes(
+          get(typeAction, 'actionType'),
+        ) && !['off', 'rejected'].includes(get(item, 'status')),
     });
   };
 
@@ -50,7 +52,6 @@ const JobItem = ({item, index, typeAction}) => {
   }, [index, item, typeAction]);
 
   const renderApplyEntry = useCallback(() => {
-    const itemStatus = get(item, 'status');
     return (
       <TouchableOpacity
         style={styles.listApply}
@@ -79,7 +80,7 @@ const JobItem = ({item, index, typeAction}) => {
         )}
       </TouchableOpacity>
     );
-  }, [item, navigation]);
+  }, [item, itemStatus, navigation]);
 
   return (
     <>

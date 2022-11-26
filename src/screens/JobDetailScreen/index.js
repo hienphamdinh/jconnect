@@ -12,6 +12,7 @@ import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import IconIcons from 'react-native-vector-icons/Ionicons';
 import useDetailHook from './hook.js';
 import PrimaryButton from 'components/PrimaryButton/index.js';
+import dayjs from 'dayjs';
 
 const JobDetail = props => {
   const {
@@ -23,6 +24,8 @@ const JobDetail = props => {
     onPressApply,
     onPressPostBy,
   } = useDetailHook(props);
+
+  const isExpired = dayjs(get(jobDetail, 'expiredApply')).diff(dayjs()) < 0;
 
   return (
     <Container style={styles.jobDetailContainer} showBack>
@@ -91,8 +94,10 @@ const JobDetail = props => {
           <View style={styles.timeWrapper}>
             <View style={styles.timeItem}>
               <Text style={styles.timeTitle}>Expired apply</Text>
-              <Text style={styles.timeNow}>
-                {get(jobDetail, 'expiredApply')}
+              <Text style={[styles.timeNow, isExpired && styles.expired]}>
+                {isExpired
+                  ? `Expired: ${get(jobDetail, 'expiredApply')}`
+                  : get(jobDetail, 'expiredApply')}
               </Text>
             </View>
             <View style={styles.timeDivider} />
@@ -121,7 +126,7 @@ const JobDetail = props => {
           </View>
         </ScrollView>
         <View style={styles.bottomWrapper}>
-          {canApply && !isMyJob ? (
+          {canApply && !isMyJob && !isExpired ? (
             <PrimaryButton
               title={'Apply here'}
               customStyle={styles.applyHereBtn}

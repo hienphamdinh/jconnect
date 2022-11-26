@@ -123,6 +123,10 @@ const styles = StyleSheet.create({
     color: Colors.primary,
     fontWeight: 'bold',
   },
+  expired: {
+    color: Colors.red,
+    textDecorationLine: 'line-through',
+  },
   timeItem: {
     width: (screenWidth - 40 * WIDTH_RATIO) / 2,
     justifyContent: 'center',
