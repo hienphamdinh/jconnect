@@ -13,7 +13,7 @@ export default function Popup({
   visible = false,
   style,
   animationType = 'slide',
-  title = 'Chọn thành phố',
+  title = 'Select city',
   showHeader = false,
   onClose,
   renderLeft,

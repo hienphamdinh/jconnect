@@ -303,6 +303,7 @@ export const BaseInputBox = ({
   showKey,
   selectKey,
   listData = [],
+  popupTitle,
   ...otherProps
 }) => {
   const [show, setShow] = useState(false);
@@ -349,7 +350,7 @@ export const BaseInputBox = ({
             <Text>{placeholder}</Text>
           )}
         </View>
-        <Popup visible={show} onClose={onClose} showHeader>
+        <Popup visible={show} onClose={onClose} showHeader title={popupTitle}>
           <FlatList
             keyExtractor={KeyExtractor.extractor}
             data={listData}

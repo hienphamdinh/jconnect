@@ -49,18 +49,18 @@ export default function PostJobScreen(props) {
       validateOnMount
       validationSchema={yup.object().shape({
         thumbnail: yup.string(),
-        jobName: yup.string().required('* Vui lòng điền thông tin'),
-        categories: yup.string().required('* Vui lòng chọn danh mục'),
-        jobType: yup.string().required('* Vui lòng chọn loại'),
-        city: yup.string().required('* Vui lòng chọn thành phố'),
+        jobName: yup.string().required('* Please enter job name'),
+        categories: yup.string().required('* Please select category'),
+        jobType: yup.string().required('* Please select job type'),
+        city: yup.string().required('* Please select city'),
         salary: yup
           .string()
-          .max(9, '* Số tiền quá lớn')
-          .required('* Vui lòng nhập lương'),
-        expiredApply: yup.string().required('* Vui lòng chọn hạn ứng tuyển'),
+          .max(9, '* Money is very small')
+          .required('* Please enter salary'),
+        expiredApply: yup.string().required('* Select expired time'),
         street: yup.string(),
-        description: yup.string().required('* Vui lòng nhập mô tả công việc'),
-        requirement: yup.string().required('* Vui lòng nhập yêu cầu công việc'),
+        description: yup.string().required('* Please enter description'),
+        requirement: yup.string().required('* Please enter requirement'),
       })}>
       {({
         isValid,
@@ -129,10 +129,12 @@ export default function PostJobScreen(props) {
                 listData={categories}
                 showKey="title"
                 selectKey="_id"
+                popupTitle="Select category"
               />
               <BaseInputBox
                 title="Job type"
-                placeholder="Select job category"
+                popupTitle="Select job type"
+                placeholder="Select job type"
                 keyboardType="default"
                 textContentType="none"
                 requireValue

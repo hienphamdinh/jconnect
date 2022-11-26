@@ -1,13 +1,15 @@
-import {useState, useCallback, useRef} from 'react';
+import {useState, useCallback, useRef, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {createJob} from 'store/user/service';
 import {FireBaseStorage} from 'utils/FirebaseHelper';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import CategoriesActions from 'store/categories/action';
 import get from 'lodash/get';
 
 const storage = FireBaseStorage();
 
 const usePostJob = props => {
+  const dispatch = useDispatch();
   const userInfo = useSelector(state => get(state, 'user.info'));
   const formRef = useRef();
   const navigation = useNavigation();
@@ -93,6 +95,10 @@ const usePostJob = props => {
     },
     [thumbnail],
   );
+
+  useEffect(() => {
+    dispatch(CategoriesActions.getCategories());
+  }, [dispatch]);
 
   return {
     activeToggle,
