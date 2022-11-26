@@ -54,6 +54,7 @@ export default function ApplicationList({
   data,
   onPressViewResume,
   onPressViewProfile,
+  ...otherProps
 }) {
   const renderItem = useCallback(
     ({item, index}) => (
@@ -83,6 +84,7 @@ export default function ApplicationList({
         data={data}
         renderItem={renderItem}
         ListEmptyComponent={listEmptyComponent}
+        {...otherProps}
       />
     </View>
   );

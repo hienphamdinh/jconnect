@@ -24,6 +24,7 @@ export default function ListApplicationScreen(props) {
         data={applications}
         onPressViewProfile={onPressViewProfile}
         onPressViewResume={onPressViewResume}
+        onEndReached={onEndReached}
       />
       {pdfUri ? (
         <PdfViewComponent
