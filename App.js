@@ -25,6 +25,7 @@ LogBox.ignoreLogs([
   'Cannot update',
   "Can't update",
   'react-native-extra-dimensions-android is only available on Android',
+  "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
 ]);
 
 let originalTextRender = Text.render;
