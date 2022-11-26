@@ -11,8 +11,9 @@ export default function ListSearchRecently({onPressItem}) {
   return size(historySearch) ? (
     <View style={styles.container}>
       <Text style={styles.titleSearch}>Recently search</Text>
-      {map(historySearch, item => (
+      {map(historySearch, (item, index) => (
         <TouchableOpacity
+          key={index.toString()}
           style={styles.itemContainer}
           onPress={() => onPressItem(item)}>
           <Text style={styles.textSearch}>{`# ${item}`}</Text>
