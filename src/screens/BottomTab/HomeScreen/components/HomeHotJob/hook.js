@@ -13,9 +13,11 @@ const useHomeHook = () => {
 
   const fetchListHotJob = useCallback(() => {
     dispatch(JobActions.getHotJob());
+    setRefreshing(false);
   }, [dispatch]);
 
   const onRefresh = () => {
+    setRefreshing(true);
     fetchListHotJob();
   };
 

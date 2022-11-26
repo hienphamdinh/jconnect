@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {View, FlatList, Text} from 'react-native';
+import {View, FlatList, Text, RefreshControl} from 'react-native';
 import Container from 'components/Container';
 import NormalHeaderBar from 'components/NormalHeaderBar';
 import useMessage from './hook';
@@ -10,7 +10,7 @@ import get from 'lodash/get';
 import PrimaryButton from 'components/PrimaryButton';
 
 export default function Messages() {
-  const {listUser, onSearch, onPressItem} = useMessage();
+  const {listUser, refreshing, onRefresh, onSearch, onPressItem} = useMessage();
 
   const renderItem = useCallback(
     ({item, index}) => {
@@ -49,6 +49,9 @@ export default function Messages() {
       />
       <View style={styles.contentView}>
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           keyExtractor={(item, index) => index.toString()}
           styles={styles.list}
           numColumns={2}

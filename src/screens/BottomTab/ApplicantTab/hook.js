@@ -12,6 +12,7 @@ const useMessage = props => {
   const [loading, setLoading] = useState(false);
   const [viewMore, setViewMore] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchAllUser = useCallback((searchString = '', skip = 0) => {
     setLoading(skip === 0);
@@ -22,6 +23,9 @@ const useMessage = props => {
           setListUser(get(res, 'data', []));
           total.current = get(res, 'total');
         }
+        setRefreshing(false);
+        setLoading(false);
+        setViewMore(false);
       })
       .catch(error => {
         console.log(error);
@@ -53,6 +57,11 @@ const useMessage = props => {
     debounceFetchUser(text);
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchAllUser();
+  };
+
   useEffect(() => {
     fetchAllUser();
   }, [fetchAllUser]);
@@ -61,6 +70,8 @@ const useMessage = props => {
     loading,
     viewMore,
     listUser,
+    refreshing,
+    onRefresh,
     onSearch,
     onPressItem,
     onEndReached,
