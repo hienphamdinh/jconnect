@@ -55,10 +55,10 @@ export default function LoginScreen() {
               title={'Create account'}
               onPress={onPressCreateAccount}
             />
-            <PrimaryTinyButton
+            {/* <PrimaryTinyButton
               title={'Forgot password'}
               customStyle={styles.forgotStyle}
-            />
+            /> */}
           </View>
         </View>
       </View>

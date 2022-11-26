@@ -7,9 +7,9 @@ import size from 'lodash/size';
 import styles from './styles';
 
 const banner = [
-  'https://www.nhm.ac.uk/content/dam/nhmwww/discover/ring-necked-parakeet-uk/ring-necked-parakeet-in-flight-full-width.jpg.thumb.1160.1160.jpg',
-  'https://www.nhm.ac.uk/content/dam/nhmwww/discover/ring-necked-parakeet-uk/ring-necked-parakeet-in-flight-full-width.jpg.thumb.1160.1160.jpg',
-  'https://www.nhm.ac.uk/content/dam/nhmwww/discover/ring-necked-parakeet-uk/ring-necked-parakeet-in-flight-full-width.jpg.thumb.1160.1160.jpg',
+  'https://www.cogentholdingsltd.com/wp-content/uploads/2017/02/job-portal-banner.jpg',
+  'http://www.uvklink.com/job_portal/images/banner.jpg',
+  'https://stellenticket.fu-berlin.de/p/header_fub.jpg',
 ];
 export default function HomeBanner() {
   const ref = useRef();
@@ -30,7 +30,7 @@ export default function HomeBanner() {
     <View style={styles.container}>
       <Carousel
         ref={ref}
-        itemWidth={screenWidth - 32}
+        itemWidth={screenWidth}
         sliderWidth={screenWidth}
         data={banner}
         renderItem={renderItem}

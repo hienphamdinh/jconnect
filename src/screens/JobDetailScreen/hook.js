@@ -81,9 +81,12 @@ const useDetailHook = props => {
   };
 
   const onPressPostBy = () => {
-    navigation.navigate('MyProfileScreen', {
-      id: get(jobDetail, 'postedBy._id'),
-    });
+    const isAdmin = get(jobDetail, 'postedBy.account.type') === 'admin';
+    if (!isAdmin) {
+      navigation.navigate('MyProfileScreen', {
+        id: get(jobDetail, 'postedBy._id'),
+      });
+    }
   };
 
   useEffect(() => {

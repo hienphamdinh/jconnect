@@ -79,7 +79,11 @@ const JobItem = ({item, index, typeAction}) => {
         ]}
         onPress={onItemPress}>
         <ImageFast
-          source={{uri: get(item, 'thumbnail')}}
+          source={{
+            uri:
+              get(item, 'thumbnail') ||
+              'https://firebasestorage.googleapis.com/v0/b/jconnect-b2c5d.appspot.com/o/jconnect%2Fimages%2Fjconnect_logo.png?alt=media&token=d8bcd0e9-9887-49d4-8e71-9c90e8fd0929',
+          }}
           style={styles.jobImage}
           imageStyle={styles.imageStyle}
         />

@@ -1,15 +1,26 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, RefreshControl} from 'react-native';
 import JobList from 'components/JobList';
 import useHomeHook from './hook';
+import HomeBanner from '../HomeBanner';
 import styles from './styles';
 
 export default function HomeHotJob() {
-  const {hotJobs} = useHomeHook();
+  const {hotJobs, refreshing, onRefresh} = useHomeHook();
   return (
     <View style={styles.container}>
-      <Text style={styles.hotJobTitle}>Hot jobs</Text>
-      <JobList scrollEnabled={false} data={hotJobs} />
+      <JobList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        data={hotJobs}
+        ListHeaderComponent={() => (
+          <>
+            <HomeBanner />
+            <Text style={styles.hotJobTitle}>Hot jobs</Text>
+          </>
+        )}
+      />
     </View>
   );
 }
