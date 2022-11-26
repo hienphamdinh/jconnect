@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import FontistoIcons from 'react-native-vector-icons/Fontisto';
 import {WIDTH_RATIO} from 'themes/Dimens';
 import PrimaryButton from 'components/PrimaryButton';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, CommonActions} from '@react-navigation/native';
 import styles from './styles';
 import Colors from 'themes/Colors';
 export default function ApplyJobSuccess() {
@@ -37,14 +37,25 @@ export default function ApplyJobSuccess() {
           title={'My job'}
           customStyle={styles.btnFooter}
           onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [
-                {
-                  name: 'BottomTabNavigator',
-                },
-              ],
-            });
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [
+                  {
+                    name: 'BottomTabNavigator',
+                    params: {
+                      screen: 'JobScreen',
+                    },
+                  },
+                  {
+                    name: 'MyJobsScreen',
+                    params: {
+                      initTab: 1,
+                    },
+                  },
+                ],
+              }),
+            );
           }}
         />
       </View>

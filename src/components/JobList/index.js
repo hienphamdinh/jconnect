@@ -50,20 +50,33 @@ const JobItem = ({item, index, typeAction}) => {
   }, [index, item, typeAction]);
 
   const renderApplyEntry = useCallback(() => {
+    const itemStatus = get(item, 'status');
     return (
       <TouchableOpacity
         style={styles.listApply}
         onPress={() => {
-          navigation.navigate('ListApplicationScreen', {
-            jobId: get(item, '_id'),
-          });
+          if (itemStatus === 'on') {
+            navigation.navigate('ListApplicationScreen', {
+              jobId: get(item, '_id'),
+            });
+          }
         }}>
-        <Text style={styles.listApplyText}>List application</Text>
-        <FontAwesome
-          name="eye"
-          size={17 * WIDTH_RATIO}
-          color={Colors.primary}
-        />
+        {itemStatus === 'on' ? (
+          <>
+            <Text style={styles.listApplyText}>List application</Text>
+            <FontAwesome
+              name="eye"
+              size={17 * WIDTH_RATIO}
+              color={Colors.primary}
+            />
+          </>
+        ) : itemStatus === 'off' ? (
+          <Text style={styles.pending}>Pending</Text>
+        ) : itemStatus === 'rejected' ? (
+          <Text style={styles.rejected}>Rejected</Text>
+        ) : (
+          <Text style={styles.listApplyText}>Not found application</Text>
+        )}
       </TouchableOpacity>
     );
   }, [item, navigation]);

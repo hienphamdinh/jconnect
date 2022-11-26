@@ -105,6 +105,14 @@ const styles = StyleSheet.create({
     color: Colors.black,
     marginRight: 8,
   },
+  pending: {
+    fontWeight: 'bold',
+    color: Colors.lightYellow,
+  },
+  rejected: {
+    fontWeight: 'bold',
+    color: Colors.red,
+  },
 });
 
 export default styles;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, TextInput} from 'react-native';
 import Container from 'components/Container';
 import usePasswordHook from './hook';
 import I18n from 'locales';
