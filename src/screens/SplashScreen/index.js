@@ -5,14 +5,17 @@ import SplashScreen from 'react-native-splash-screen';
 import LottieView from 'lottie-react-native';
 import Animations from 'themes/Animations';
 import {WIDTH_RATIO} from 'themes/Dimens';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Storage from 'constants/Storage';
 import get from 'lodash/get';
+import UserActions from 'store/user/action';
 
 export default function SplashScreens() {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const tokenLocal = useSelector(state => get(state, 'user.token'));
+  const userInfo = useSelector(state => get(state, 'user.info'));
 
   const onAppStart = useCallback(async () => {
     SplashScreen.hide();
@@ -20,14 +23,32 @@ export default function SplashScreens() {
     const token = storeToken || tokenLocal;
 
     if (token) {
-      navigation.reset({
-        index: 0,
-        routes: [
-          {
-            name: 'BottomTabNavigator',
+      dispatch(
+        UserActions.login(
+          get(userInfo, 'account.email'),
+          get(userInfo, 'account.password'),
+          () => {
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'BottomTabNavigator',
+                },
+              ],
+            });
           },
-        ],
-      });
+          () => {
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: 'AuthenticationStack',
+                },
+              ],
+            });
+          },
+        ),
+      );
     } else {
       navigation.reset({
         index: 0,
@@ -38,7 +59,7 @@ export default function SplashScreens() {
         ],
       });
     }
-  }, [navigation, tokenLocal]);
+  }, [dispatch, navigation, tokenLocal, userInfo]);
 
   useEffect(() => {
     onAppStart();
