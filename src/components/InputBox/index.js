@@ -87,17 +87,8 @@ export const DateInputBox = ({
   ...otherProps
 }) => {
   const [show, setShow] = useState(false);
-  const valueToDate = () => {
-    const date = new Date();
-    if (!value) {
-      return date;
-    }
-    const values = value.split('/');
-    date.setDate(Number(values[0]));
-    date.setMonth(Number(values[1]) - 1);
-    date.setFullYear(Number(values[2]));
-    return date;
-  };
+  const [date, setDate] = useState(new Date());
+
   return (
     <View style={[styles.boxWrapper, style]}>
       <TouchableOpacity
@@ -129,9 +120,10 @@ export const DateInputBox = ({
             style={styles.datePicker}
             open={show}
             mode="date"
-            date={valueToDate()}
-            onDateChange={date => {
-              onChangeDate(dayjs(date).format('YYYY/MM/DD'));
+            date={date}
+            onDateChange={resDate => {
+              setDate(resDate);
+              onChangeDate(dayjs(resDate).format('YYYY/MM/DD'));
             }}
             onCancel={() => {}}
             androidVariant={'iosClone'}
