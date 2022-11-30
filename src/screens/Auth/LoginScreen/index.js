@@ -32,6 +32,7 @@ export default function LoginScreen() {
             <View style={styles.hr} />
             <PrimaryInputLabel
               label={'Email'}
+              placeholder="Email"
               value={email}
               onChangeText={onChangeEmail}
               onClearInput={onClearEmail}
@@ -39,6 +40,7 @@ export default function LoginScreen() {
             />
             <PrimaryInputLabel
               label={'Password'}
+              placeholder="Password"
               value={password}
               keyboardType="default"
               onChangeText={onChangePassword}
