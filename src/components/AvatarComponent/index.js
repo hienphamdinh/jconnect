@@ -8,7 +8,7 @@ import styles from './styles';
 export default function Avatar({source, imageStyle, style}) {
   return (isEmpty(source?.uri) && isEmpty(source)) || isEmpty(source?.uri) ? (
     <View style={[styles.imageWrapper, style]}>
-      <FontAwesome5Icons name="user" size={25} />
+      <FontAwesome5Icons name="user" size={60} />
     </View>
   ) : (
     <View style={[styles.imageWrapper, style]}>
