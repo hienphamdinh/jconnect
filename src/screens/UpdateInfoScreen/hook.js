@@ -70,6 +70,8 @@ const useRegisterHook = props => {
       avatarUrl = await storage.getImageURL({
         fileName: get(avatar, 'node.image.filename'),
       });
+    } else {
+      avatarUrl = avatar;
     }
 
     const user = {

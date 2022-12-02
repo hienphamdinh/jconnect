@@ -15,7 +15,6 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import {MALE, FEMALE} from 'constants/Gender';
 import FastImage from 'react-native-fast-image';
-import Loading from 'components/Loading';
 import get from 'lodash/get';
 
 export default function UpdateInfoScreen(props) {

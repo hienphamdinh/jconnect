@@ -35,10 +35,6 @@ export const applyJob = (applicantId, jobId) => {
 };
 
 export const savedJob = (applicantId, jobId) => {
-  console.log({
-    applicantId,
-    jobId,
-  });
   const path = 'job/saved';
   return POST(path, {
     applicantId,
@@ -87,6 +83,13 @@ export const removePosted = userId => {
   const path = 'job/remove-posted';
   return POST(path, {
     userId,
+  });
+};
+export const updateJob = (jobId, job = {}) => {
+  const path = 'job/update';
+  return POST(path, {
+    jobId,
+    job,
   });
 };
 

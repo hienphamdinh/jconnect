@@ -68,6 +68,10 @@ export default function MainStackNavigator() {
         name="ChangePasswordScreen"
         component={require('screens/ChangePasswordScreen').default}
       />
+      <MainStack.Screen
+        name="UpdateJobScreen"
+        component={require('screens/UpdateJobScreen').default}
+      />
     </MainStack.Navigator>
   );
 }

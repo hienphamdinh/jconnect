@@ -296,10 +296,11 @@ export const BaseInputBox = ({
   selectKey,
   listData = [],
   popupTitle,
+  value,
   ...otherProps
 }) => {
   const [show, setShow] = useState(false);
-  const [valueShow, setValueShow] = useState();
+  const [valueShow, setValueShow] = useState(value);
   const onClose = useCallback(() => {
     setShow(false);
   }, []);
@@ -319,6 +320,81 @@ export const BaseInputBox = ({
       );
     },
     [onClose, onSelect, selectKey, showKey],
+  );
+
+  return (
+    <View style={[styles.boxWrapper, style]}>
+      <TouchableOpacity
+        onPress={() => {
+          setShow(true);
+          onFocus && onFocus();
+        }}
+        style={[styles.inputBox, error && styles.error]}>
+        {title && (
+          <Text style={[styles.inputLabel, labelStyle]}>
+            {title}
+            {requireValue && <Text style={styles.star}>*</Text>}
+          </Text>
+        )}
+        <View style={[styles.input, inputStyle]} {...otherProps}>
+          {valueShow ? (
+            <Text style={styles.dateInput}>{valueShow}</Text>
+          ) : (
+            <Text>{placeholder}</Text>
+          )}
+        </View>
+        <Popup visible={show} onClose={onClose} showHeader title={popupTitle}>
+          <FlatList
+            keyExtractor={KeyExtractor.extractor}
+            data={listData}
+            contentContainerStyle={styles.contentContainerStyle}
+            style={styles.list}
+            renderItem={renderItem}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          />
+        </Popup>
+      </TouchableOpacity>
+      {error && <Text style={styles.errorText}>{error}</Text>}
+    </View>
+  );
+};
+export const CategoryBox = ({
+  title,
+  requireValue = false,
+  style,
+  labelStyle,
+  inputStyle,
+  error = false,
+  onFocus,
+  onSelect,
+  placeholder,
+  listData = [],
+  popupTitle,
+  value = {},
+  ...otherProps
+}) => {
+  const [show, setShow] = useState(false);
+  const [valueShow, setValueShow] = useState(get(value, 'title', ''));
+  const onClose = useCallback(() => {
+    setShow(false);
+  }, []);
+
+  const renderItem = useCallback(
+    ({item, index}) => {
+      return (
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => {
+            onSelect(item);
+            setValueShow(get(item, 'title'));
+            onClose && onClose();
+          }}>
+          <Text>{get(item, 'title')}</Text>
+        </TouchableOpacity>
+      );
+    },
+    [onClose, onSelect],
   );
 
   return (

@@ -1,10 +1,10 @@
 import {useState, useCallback, useRef, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {createJob} from 'store/user/service';
 import {FireBaseStorage} from 'utils/FirebaseHelper';
 import {useSelector, useDispatch} from 'react-redux';
 import CategoriesActions from 'store/categories/action';
 import get from 'lodash/get';
+import {getJobDetail, updateJob} from 'store/job/service';
 
 const storage = FireBaseStorage();
 
@@ -13,12 +13,15 @@ const usePostJob = props => {
   const userInfo = useSelector(state => get(state, 'user.info'));
   const formRef = useRef();
   const navigation = useNavigation();
+  const jobId = get(props, 'route.params.jobId');
+  const [jobDetail, setJobDetail] = useState();
   const [activeToggle, setActiveToggle] = useState(false);
   const [gender, setGender] = useState();
   const [valid, setIsValid] = useState(false);
   const [openImagePicker, setOpenImagePicker] = useState(false);
   const [thumbnail, setThumbnail] = useState();
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
 
   const onPressToggle = useCallback(() => {
     setActiveToggle(!activeToggle);
@@ -36,7 +39,7 @@ const usePostJob = props => {
     const data = get(formRef, 'current.values');
 
     let uploadImage;
-    if (thumbnail) {
+    if (get(thumbnail, 'node.image.uri')) {
       uploadImage = await storage.upLoadImage({
         fileName: get(thumbnail, 'node.image.filename'),
         uri: get(thumbnail, 'node.image.uri'),
@@ -48,6 +51,8 @@ const usePostJob = props => {
       thumbnailUrl = await storage.getImageURL({
         fileName: get(thumbnail, 'node.image.filename'),
       });
+    } else {
+      thumbnailUrl = thumbnail;
     }
 
     const job = {
@@ -64,7 +69,7 @@ const usePostJob = props => {
       postedBy: get(userInfo, '_id'),
     };
 
-    createJob(job)
+    updateJob(get(jobDetail, '_id'), job)
       .then(response => {
         if (response.status) {
           navigation.navigate('ApplyJobSuccess');
@@ -78,7 +83,7 @@ const usePostJob = props => {
       .finally(() => {
         setLoading(false);
       });
-  }, [navigation, thumbnail, userInfo]);
+  }, [jobDetail, navigation, thumbnail, userInfo]);
 
   const onPressGender = value => {
     formRef.current.setFieldValue('gender', value);
@@ -97,6 +102,22 @@ const usePostJob = props => {
   );
 
   useEffect(() => {
+    getJobDetail(jobId)
+      .then(response => {
+        if (response.status) {
+          setJobDetail(get(response, 'data'));
+          setThumbnail(get(response, 'data.thumbnail'));
+        }
+      })
+      .catch(err => {
+        console.log('ERROR', err.message);
+      })
+      .finally(() => {
+        setFetching(false);
+      });
+  }, [jobId]);
+
+  useEffect(() => {
     dispatch(CategoriesActions.getCategories());
   }, [dispatch]);
 
@@ -108,6 +129,8 @@ const usePostJob = props => {
     openImagePicker,
     thumbnail,
     loading,
+    jobDetail,
+    fetching,
     onCloseImagePicker,
     onOpenImagePicker,
     setIsValid,

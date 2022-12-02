@@ -23,30 +23,36 @@ import get from 'lodash/get';
 import {jobTypeList} from 'constants/Job';
 import {useSelector} from 'react-redux';
 import {formatCurrencyWithDot} from 'utils/CurrencyHelper';
+import omit from 'lodash/omit';
 
-export default function PostJobScreen(props) {
+export default function UpdateJobScreen(props) {
   const {
     formRef,
-    valid,
     openImagePicker,
     thumbnail,
     loading,
+    jobDetail,
+    fetching,
     onCloseImagePicker,
     onOpenImagePicker,
     setIsValid,
     onPressJoin,
     onSelectedAvatar,
   } = usePostJob(props);
-  const initForm = get(props, 'route.params.initForm');
+
   const categories = useSelector(state =>
     get(state, 'categories.listCategories'),
   );
+
+  if (fetching) {
+    return null;
+  }
 
   return (
     <Formik
       innerRef={formRef}
       onSubmit={values => {}}
-      initialValues={initForm || {}}
+      initialValues={jobDetail || {}}
       validateOnMount
       validationSchema={yup.object().shape({
         thumbnail: yup.string(),
@@ -76,7 +82,7 @@ export default function PostJobScreen(props) {
         setIsValid(isValid);
         return (
           <Container style={styles.container} notSafeArea showBack>
-            <HeaderTitle title={'Create new job'} />
+            <HeaderTitle title={'Detail my job'} />
             <ScrollView
               style={styles.scrollView}
               contentContainerStyle={styles.contentContainerStyle}
@@ -89,7 +95,7 @@ export default function PostJobScreen(props) {
                     style={styles.iconWrapper}>
                     <FastImage
                       source={{
-                        uri: get(thumbnail, 'node.image.uri'),
+                        uri: get(thumbnail, 'node.image.uri') || thumbnail,
                       }}
                       style={styles.avatar}
                     />
@@ -127,6 +133,7 @@ export default function PostJobScreen(props) {
                 onSelect={item =>
                   formRef.current.setFieldValue('categories', item)
                 }
+                value={values?.categories}
                 error={!!values.categories && errors.categories}
                 onFocus={() => setFieldTouched('categories')}
                 listData={categories}
@@ -139,6 +146,7 @@ export default function PostJobScreen(props) {
                 keyboardType="default"
                 textContentType="none"
                 requireValue
+                value={values?.jobType}
                 onSelect={handleChange('jobType')}
                 error={!!values.jobType && errors.jobType}
                 onFocus={() => setFieldTouched('jobType')}
@@ -216,7 +224,7 @@ export default function PostJobScreen(props) {
                 onFocus={() => setFieldTouched('contact')}
               />
               <PrimaryButton
-                title={'Create'}
+                title={'Update'}
                 onPress={onPressJoin}
                 // disable={!valid}
                 loading={loading}

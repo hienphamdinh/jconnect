@@ -16,13 +16,19 @@ const JobItem = ({item, index, typeAction}) => {
   const itemStatus = get(item, 'status');
   const navigation = useNavigation();
   const onItemPress = () => {
-    navigation.navigate('JobDetailScreen', {
-      jobId: get(item, '_id'),
-      canApply:
-        ![TYPE_JOB_ACTION.APPLY, TYPE_JOB_ACTION.POST].includes(
-          get(typeAction, 'actionType'),
-        ) && !['off', 'rejected'].includes(get(item, 'status')),
-    });
+    if ([TYPE_JOB_ACTION.POST].includes(get(typeAction, 'actionType'))) {
+      navigation.navigate('UpdateJobScreen', {
+        jobId: get(item, '_id'),
+      });
+    } else {
+      navigation.navigate('JobDetailScreen', {
+        jobId: get(item, '_id'),
+        canApply:
+          ![TYPE_JOB_ACTION.APPLY, TYPE_JOB_ACTION.POST].includes(
+            get(typeAction, 'actionType'),
+          ) && !['off', 'rejected'].includes(get(item, 'status')),
+      });
+    }
   };
 
   const renderLeft = useCallback(() => {
