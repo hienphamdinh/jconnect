@@ -27,6 +27,7 @@ import omit from 'lodash/omit';
 
 export default function UpdateJobScreen(props) {
   const {
+    valid,
     formRef,
     openImagePicker,
     thumbnail,
@@ -226,7 +227,7 @@ export default function UpdateJobScreen(props) {
               <PrimaryButton
                 title={'Update'}
                 onPress={onPressJoin}
-                // disable={!valid}
+                disable={!valid}
                 loading={loading}
               />
             </ScrollView>
