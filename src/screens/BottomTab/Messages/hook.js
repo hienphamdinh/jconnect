@@ -1,15 +1,33 @@
 import {useState, useEffect, useCallback} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {getAllMessage} from 'store/user/service';
+import {
+  getAllMessage,
+  userDeleteMessage,
+  userClearMessage,
+} from 'store/user/service';
 import {useSelector} from 'react-redux';
-import {useIsFocused} from '@react-navigation/native';
 import get from 'lodash/get';
 
 const useMessage = props => {
-  const isFocused = useIsFocused();
   const navigation = useNavigation();
   const userId = useSelector(state => get(state, 'user.info._id'));
   const [listMessage, setListMessage] = useState([]);
+  const [isShowDelete, setIsShowDelete] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const getListMessage = useCallback(() => {
+    getAllMessage(userId)
+      .then(res => {
+        if (res.status) {
+          setListMessage(get(res, 'data', []));
+        }
+        setRefreshing(false);
+      })
+      .catch(error => {
+        setRefreshing(false);
+        console.log(error);
+      });
+  }, [userId]);
 
   const onPressItem = useCallback(
     item => {
@@ -22,25 +40,61 @@ const useMessage = props => {
 
   const onSearch = () => {};
 
+  const onLongPressItem = () => {
+    setIsShowDelete(true);
+  };
+
+  const onCloseModalDelete = () => {
+    setIsShowDelete(false);
+  };
+
+  const onDeleteMessage = item => {
+    userDeleteMessage(get(item, '_id'))
+      .then(res => {
+        if (res.status) {
+          getListMessage();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    setIsShowDelete(false);
+  };
+
+  const onClearMessage = item => {
+    userClearMessage(get(item, '_id'))
+      .then(res => {
+        if (res.status) {
+          getListMessage();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    setIsShowDelete(false);
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    getListMessage();
+  };
+
   useEffect(() => {
-    if (isFocused) {
-      getAllMessage(userId)
-        .then(res => {
-          if (res.status) {
-            setListMessage(get(res, 'data', []));
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-  }, [userId, isFocused]);
+    getListMessage();
+  }, [getListMessage]);
   //  chỗ này k truyền deps vì để nó call api liên tục và nhận thông tin realtime
 
   return {
     listMessage,
+    isShowDelete,
+    refreshing,
+    onRefresh,
+    onDeleteMessage,
+    onCloseModalDelete,
+    onLongPressItem,
     onSearch,
     onPressItem,
+    onClearMessage,
   };
 };
 

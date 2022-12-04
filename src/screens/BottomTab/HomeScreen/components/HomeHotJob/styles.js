@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontSize: 15 * WIDTH_RATIO,
     marginLeft: 16,
+    marginBottom: 20,
   },
 });
 

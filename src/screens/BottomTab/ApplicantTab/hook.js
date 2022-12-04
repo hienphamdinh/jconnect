@@ -1,13 +1,16 @@
 import {useState, useEffect, useCallback, useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 import {getAllUser} from 'store/user/service';
 import debounce from 'lodash/debounce';
 import get from 'lodash/get';
-import {size} from 'lodash';
+import size from 'lodash/size';
+import filter from 'lodash/filter';
 
 const useMessage = props => {
   const total = useRef(0);
   const navigation = useNavigation();
+  const userId = useSelector(state => get(state, 'user.info._id'));
   const [listUser, setListUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [viewMore, setViewMore] = useState(false);
@@ -69,7 +72,7 @@ const useMessage = props => {
   return {
     loading,
     viewMore,
-    listUser,
+    listUser: filter(listUser, (item, index) => get(item, '_id') !== userId),
     refreshing,
     onRefresh,
     onSearch,

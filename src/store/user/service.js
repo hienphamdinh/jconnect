@@ -42,6 +42,20 @@ export const userSendMessage = (messageId, userId, content) => {
   });
 };
 
+export const userDeleteMessage = messageId => {
+  const path = '/user/message/delete';
+  return POST(path, {
+    messageId,
+  });
+};
+
+export const userClearMessage = messageId => {
+  const path = '/user/message/clear';
+  return POST(path, {
+    messageId,
+  });
+};
+
 export const getAllMessage = userId => {
   const path = '/user/message/all';
   return GET(path, {

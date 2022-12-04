@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO} from 'themes/Dimens';
+import {screenHeight, WIDTH_RATIO} from 'themes/Dimens';
 
 export default StyleSheet.create({
   container: {
@@ -44,5 +44,28 @@ export default StyleSheet.create({
   borderAvatar: {
     borderColor: Colors.gray,
     borderWidth: 1,
+  },
+  modal: {
+    backgroundColor: Colors.white,
+    marginTop: screenHeight - screenHeight * 0.3,
+  },
+  delete: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 16,
+    marginHorizontal: 16,
+  },
+  deleteText: {
+    color: Colors.red,
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  clearConversation: {
+    borderBottomWidth: 1,
+  },
+  conversationText: {
+    color: Colors.primary,
+    fontWeight: 'bold',
+    fontSize: 15,
   },
 });
