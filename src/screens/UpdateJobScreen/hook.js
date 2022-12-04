@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import CategoriesActions from 'store/categories/action';
 import get from 'lodash/get';
 import {getJobDetail, updateJob} from 'store/job/service';
+import dayjs from 'dayjs';
 
 const storage = FireBaseStorage();
 
@@ -62,7 +63,7 @@ const usePostJob = props => {
       jobType: get(data, 'jobType'),
       city: get(data, 'city'),
       salary: get(data, 'salary'),
-      expiredApply: get(data, 'expiredApply'),
+      expiredApply: dayjs(get(data, 'expiredApply')).toISOString(),
       street: get(data, 'street'),
       description: get(data, 'description'),
       requirement: get(data, 'requirement'),

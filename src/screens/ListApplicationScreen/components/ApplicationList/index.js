@@ -14,7 +14,7 @@ const Item = ({item, index, onPressViewResume, onPressViewProfile}) => {
   return (
     <View style={styles.itemContainer}>
       <View style={styles.item}>
-        <Avatar source={get(item, 'applicant.avatar')} />
+        <Avatar source={{uri: get(item, 'applicant.avatar')}} />
         <View style={styles.nameInfo}>
           <Text style={styles.applicationName}>
             {get(item, 'applicant.fullName')}

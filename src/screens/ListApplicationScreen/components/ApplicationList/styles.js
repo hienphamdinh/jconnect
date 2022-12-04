@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Colors.gray1,
     paddingVertical: 12,
+    paddingLeft: 12,
   },
   list: {},
   contentContainerStyle: {

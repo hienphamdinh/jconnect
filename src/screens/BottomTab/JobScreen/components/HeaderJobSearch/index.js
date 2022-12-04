@@ -14,6 +14,7 @@ export default function HeaderJobSearch({
   placeholder = 'Search...',
   onPress,
   onSearch,
+  onClearSearch,
 }) {
   const navigation = useNavigation();
   return (
@@ -48,7 +49,9 @@ export default function HeaderJobSearch({
               onSearch(text);
             }}
           />
-          <AntDesign name={'search1'} size={25 * WIDTH_RATIO} />
+          <TouchableOpacity style={styles.closeBtn} onPress={onClearSearch}>
+            <AntDesign name={'close'} size={8 * WIDTH_RATIO} color="white" />
+          </TouchableOpacity>
         </OpacityButton>
       </View>
     </View>

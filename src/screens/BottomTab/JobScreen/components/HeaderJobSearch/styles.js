@@ -82,4 +82,11 @@ export default StyleSheet.create({
     fontSize: 14 * WIDTH_RATIO,
     marginLeft: 8,
   },
+  closeBtn: {
+    backgroundColor: Colors.gray,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
+    padding: 4,
+  },
 });

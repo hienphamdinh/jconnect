@@ -56,34 +56,31 @@ export default function UpdateInfoScreen(props) {
       }}
       validateOnMount
       validationSchema={yup.object().shape({
-        fullName: yup.string().required('* Vui lòng điền thông tin'),
-        birthDay: yup.string().required('* Vui lòng chọn ngày sinh nhật'),
+        fullName: yup.string().required('* Please fill information'),
+        birthDay: yup.string().required('* Please select birthday'),
         phone: yup
           .string()
-          .max(11, '* Tối đa 11 ký tự')
-          .matches(
-            /(84|0[0-9])+([0-9]{8,9})\b/g,
-            '* Số điện thoại không đúng định dạng',
-          )
-          .required('* Vui lòng điền thông tin'),
-        city: yup.string().required('* Vui lòng điền thông tin'),
+          .max(11, '* Max length is 11')
+          .matches(/(84|0[0-9])+([0-9]{8,9})\b/g, '* Phone is invalid')
+          .required('* Please fill information'),
+        city: yup.string().required('* Please fill information'),
         address: yup.string(),
-        gender: yup.string().required('* Vui lòng chọn giới tính'),
+        gender: yup.string().required('* Please select gender'),
         mostRecentlyJob: activeToggle
           ? yup.string()
-          : yup.string().required('* Vui lòng chọn công việc gần đây nhất'),
+          : yup.string().required('* Please fill most recently job'),
         mostRecentlyCompany: activeToggle
           ? yup.string()
-          : yup.string().required('* Vui lòng chọn công ty gần đây nhất'),
+          : yup.string().required('* Please fill most recently company'),
         schoolName: !activeToggle
           ? yup.string()
-          : yup.string().required('* Vui lòng chọn trường gần đây nhất'),
+          : yup.string().required('* Please fill school'),
         startYear: !activeToggle
           ? yup.string()
-          : yup.string().required('* Vui lòng chọn năm bắt đầy'),
+          : yup.string().required('* Please select start year'),
         endYear: !activeToggle
           ? yup.string()
-          : yup.string().required('* Vui lòng chọn năm tốt nghiệp'),
+          : yup.string().required('* Please select end year'),
       })}>
       {({
         isValid,

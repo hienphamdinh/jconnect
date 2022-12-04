@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
   marginTop: {
     marginTop: 40,
   },
+  marginTopWhenSearch: {
+    marginTop: 2,
+  },
+  listHotJobs: {
+    marginTop: 8,
+  },
 });
 
 export default styles;

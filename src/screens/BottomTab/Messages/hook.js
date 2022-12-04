@@ -7,8 +7,10 @@ import {
 } from 'store/user/service';
 import {useSelector} from 'react-redux';
 import get from 'lodash/get';
+import {useIsFocused} from '@react-navigation/native';
 
 const useMessage = props => {
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
   const userId = useSelector(state => get(state, 'user.info._id'));
   const [listMessage, setListMessage] = useState([]);
@@ -80,8 +82,10 @@ const useMessage = props => {
   };
 
   useEffect(() => {
-    getListMessage();
-  }, [getListMessage]);
+    if (isFocused) {
+      getListMessage();
+    }
+  }, [getListMessage, isFocused]);
   //  chỗ này k truyền deps vì để nó call api liên tục và nhận thông tin realtime
 
   return {

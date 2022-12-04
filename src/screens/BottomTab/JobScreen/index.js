@@ -7,22 +7,37 @@ import JobList from 'components/JobList';
 import useJobScreenHook from './hook';
 import styles from './styles';
 const Home = () => {
-  const {listJob, hotJobs, searchText, onEndReached, onPressItem, onSearch} =
-    useJobScreenHook();
+  const {
+    listJob,
+    hotJobs,
+    searchText,
+    onClearSearch,
+    onEndReached,
+    onPressItem,
+    onSearch,
+  } = useJobScreenHook();
   return (
     <Container>
-      <HeaderJobSearch onSearch={onSearch} searchText={searchText} />
+      <HeaderJobSearch
+        onSearch={onSearch}
+        searchText={searchText}
+        onClearSearch={onClearSearch}
+      />
       <View style={styles.marginTop} />
       {!searchText ? <ListSearchRecently onPressItem={onPressItem} /> : null}
       {!searchText ? (
         <Text style={styles.recommendForYou}>Recommend for you</Text>
-      ) : null}
+      ) : (
+        <Text style={styles.recommendForYou}>Result search</Text>
+      )}
 
-      {!searchText ? <JobList data={hotJobs} /> : null}
+      {!searchText ? (
+        <JobList data={hotJobs} style={styles.listHotJobs} />
+      ) : null}
       {searchText ? (
         <JobList
           data={listJob}
-          style={styles.listJob}
+          style={[styles.listJob, searchText && styles.marginTopWhenSearch]}
           onReachEnd={onEndReached}
         />
       ) : null}

@@ -29,7 +29,7 @@ export default function AboutMe(props) {
         {!openEdit ? (
           <Text>
             {!isEmpty(get(profile, 'bio'))
-              ? get(profile, 'bio', 'No infomation')
+              ? get(profile, 'bio', 'No information')
               : 'No information'}
           </Text>
         ) : null}

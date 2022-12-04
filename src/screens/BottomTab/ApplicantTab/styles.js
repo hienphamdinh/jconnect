@@ -55,5 +55,6 @@ export default StyleSheet.create({
     color: Colors.black,
     fontWeight: '500',
     fontSize: 15 * WIDTH_RATIO,
+    height: 38 * WIDTH_RATIO,
   },
 });

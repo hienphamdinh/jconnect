@@ -23,7 +23,7 @@ export default function Messages() {
           />
           <View style={styles.info}>
             <Text style={styles.nameText}>{get(item, 'fullName', '')}</Text>
-            <Text>
+            <Text numberOfLines={2}>
               {get(item, 'account.type') === USER_TYPE.STUDENT
                 ? 'Student'
                 : get(item, 'mostRecentlyJob')}

@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce';
 import concat from 'lodash/concat';
 import get from 'lodash/get';
 import size from 'lodash/size';
+import slice from 'lodash/slice';
 
 const useJobScreenHook = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ const useJobScreenHook = () => {
   };
 
   const onPressItem = item => {
+    if (item) {
+      fetchSearchData(item, 0);
+    }
     setSearchText(item);
   };
 
@@ -70,13 +74,18 @@ const useJobScreenHook = () => {
     }
   };
 
+  const onClearSearch = () => {
+    setSearchText('');
+  };
+
   return {
     listJob,
-    hotJobs,
+    hotJobs: slice(hotJobs, 0, 6),
     searchText,
     onEndReached,
     onPressItem,
     onSearch,
+    onClearSearch,
   };
 };
 

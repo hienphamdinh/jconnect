@@ -30,18 +30,21 @@ export default function ApplicationScreen(props) {
         }}
         validateOnMount
         validationSchema={yup.object().shape({
-          fullName: yup.string().required('* Vui lòng điền thông tin'),
-          email: yup.string().required('* Vui lòng chọn ngày sinh nhật'),
+          fullName: yup.string().required('* Please fill information'),
+          email: yup
+            .string()
+            .required('* Please select birthday')
+            .matches(
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g,
+              '* Email is invalid',
+            ),
           phone: yup
             .string()
-            .max(11, '* Tối đa 11 ký tự')
-            .matches(
-              /(84|0[0-9])+([0-9]{8,9})\b/g,
-              '* Số điện thoại không đúng định dạng',
-            )
-            .required('* Vui lòng điền thông tin'),
+            .max(11, '* Max length is 11')
+            .matches(/(84|0[0-9])+([0-9]{8,9})\b/g, '* Phone is invalid')
+            .required('* Please fill information'),
           cv: yup.object({
-            url: yup.string().required('* Vui lòng điền thông tin'),
+            url: yup.string().required('* Please fill information'),
             name: yup.string(),
           }),
         })}>

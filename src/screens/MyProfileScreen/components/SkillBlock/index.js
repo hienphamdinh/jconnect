@@ -14,7 +14,8 @@ import get from 'lodash/get';
 import map from 'lodash/map';
 import Colors from 'themes/Colors';
 import useIsMeHook from 'screens/globalHook/useIsMeHook';
-import {size, concat, filter} from 'lodash';
+import {size, concat, filter, isEmpty} from 'lodash';
+import Toast from 'react-native-toast-message';
 
 export default function SkillBlock(props) {
   const {isMe} = useIsMeHook();
@@ -65,8 +66,19 @@ export default function SkillBlock(props) {
           <TouchableOpacity
             style={styles.addBtn}
             onPress={() => {
-              setSkills(concat(textInput, skills));
-              setTextInput('');
+              const check = filter(skills, (item, index) => item === textInput);
+              if (isEmpty(check)) {
+                if (!isEmpty(textInput)) {
+                  setSkills(concat(textInput, skills));
+                }
+                setTextInput('');
+              } else {
+                Toast.show({
+                  type: 'failed',
+                  text1: 'ERROR',
+                  text2: 'This skill is added to list',
+                });
+              }
             }}>
             <Text style={styles.addText}>Add</Text>
           </TouchableOpacity>
