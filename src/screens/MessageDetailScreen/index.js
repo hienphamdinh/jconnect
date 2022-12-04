@@ -5,6 +5,7 @@ import IconsIcons from 'react-native-vector-icons/Ionicons';
 import Avatar from 'components/AvatarComponent';
 import Colors from 'themes/Colors';
 import useMessageDetail from './hook';
+import {timeFromNow} from 'utils/JobHelper/index.js';
 import get from 'lodash/get';
 import styles from './styles';
 
@@ -47,7 +48,11 @@ export default function MessageDetailScreen(props) {
         />
         <View style={styles.info}>
           <Text style={styles.messageName}>{get(userOther, 'fullName')}</Text>
-          <Text style={styles.activeStatus}>Active now</Text>
+          <Text style={styles.activeStatus}>
+            {get(userOther, 'justNow', '') === 'on'
+              ? 'Active now'
+              : timeFromNow(get(userOther, 'timeOff'))}
+          </Text>
         </View>
       </View>
       <FlatList

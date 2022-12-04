@@ -3,7 +3,6 @@ import Immutable from 'seamless-immutable';
 import {UserTypes} from './action';
 import {REHYDRATE} from 'redux-persist/es/constants';
 import get from 'lodash/get';
-import concat from 'lodash/concat';
 
 export const INITIAL_STATE = Immutable({
   token: '',

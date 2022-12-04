@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import Container from 'components/Container';
 import SettingItemComponent from './components/SettingItemComponent';
@@ -9,11 +9,23 @@ import get from 'lodash/get';
 import {useSelector} from 'react-redux';
 import Avatar from 'components/AvatarComponent';
 import styles from './styles';
+import {updateUser} from 'store/user/service';
+import dayjs from 'dayjs';
 
 export default function Settings() {
   const user = useSelector(state => get(state, 'user.info'));
+  const userId = useSelector(state => get(state, 'user.info._id'));
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  const updateUserActive = useCallback(
+    (data = {}) => {
+      if (userId) {
+        updateUser(userId, data);
+      }
+    },
+    [userId],
+  );
 
   const onSuccess = () => {
     navigation.reset({
@@ -58,6 +70,10 @@ export default function Settings() {
       icon: 'customerservice',
       navigateScreen: '',
       onPress: () => {
+        updateUserActive({
+          justNow: 'off',
+          timeOff: dayjs().toISOString(),
+        });
         dispatch(UserActions.logout(onSuccess));
       },
     },
