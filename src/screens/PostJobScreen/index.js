@@ -218,7 +218,7 @@ export default function PostJobScreen(props) {
               <PrimaryButton
                 title={'Create'}
                 onPress={onPressJoin}
-                // disable={!valid}
+                disable={!valid}
                 loading={loading}
               />
             </ScrollView>
