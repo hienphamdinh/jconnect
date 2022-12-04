@@ -20,6 +20,11 @@ export default function MessageDetailScreen(props) {
     onSend,
   } = useMessageDetail(props);
 
+  const conversationStatus =
+    get(userOther, 'justNow', '') === 'on'
+      ? 'Active now'
+      : timeFromNow(get(userOther, 'timeOff')) || '';
+
   const renderItem = useCallback(
     ({item, index}) => {
       const active = userId === item.sender;
@@ -48,11 +53,7 @@ export default function MessageDetailScreen(props) {
         />
         <View style={styles.info}>
           <Text style={styles.messageName}>{get(userOther, 'fullName')}</Text>
-          <Text style={styles.activeStatus}>
-            {get(userOther, 'justNow', '') === 'on'
-              ? 'Active now'
-              : timeFromNow(get(userOther, 'timeOff'))}
-          </Text>
+          <Text style={styles.activeStatus}>{conversationStatus}</Text>
         </View>
       </View>
       <FlatList
