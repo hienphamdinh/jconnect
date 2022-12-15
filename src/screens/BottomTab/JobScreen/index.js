@@ -5,7 +5,9 @@ import HeaderJobSearch from './components/HeaderJobSearch';
 import ListSearchRecently from './components/ListSearchRecently';
 import JobList from 'components/JobList';
 import useJobScreenHook from './hook';
+import PostJobBubble from 'components/PostJobBubble';
 import styles from './styles';
+
 const Home = () => {
   const {
     listJob,
@@ -41,6 +43,7 @@ const Home = () => {
           onReachEnd={onEndReached}
         />
       ) : null}
+      <PostJobBubble />
     </Container>
   );
 };

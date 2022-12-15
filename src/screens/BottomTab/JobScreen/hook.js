@@ -7,9 +7,11 @@ import concat from 'lodash/concat';
 import get from 'lodash/get';
 import size from 'lodash/size';
 import slice from 'lodash/slice';
+import {useNavigation} from '@react-navigation/native';
 
 const useJobScreenHook = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const hotJobs = useSelector(state => get(state, 'job.hotJobs'));
   const historySearch = useSelector(state => get(state, 'user.recentlySearch'));
   const [listJob, setListJob] = useState([]);

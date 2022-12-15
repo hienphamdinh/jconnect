@@ -65,14 +65,16 @@ export default StyleSheet.create({
     marginBottom: 8,
   },
   topHeaderItem: {
-    flexDirection: 'row',
-    flex: 1,
-    backgroundColor: Colors.white,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.white,
+    height: 50 * WIDTH_RATIO,
+    width: 50 * WIDTH_RATIO,
+    marginLeft: 10,
     borderRadius: 8,
-    minHeight: 40 * WIDTH_RATIO,
+    elevation: 5,
   },
+
   divider: {
     width: 10 * WIDTH_RATIO,
   },

@@ -26,6 +26,7 @@ LogBox.ignoreLogs([
   "Can't update",
   'react-native-extra-dimensions-android is only available on Android',
   "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+  "Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.",
 ]);
 
 let originalTextRender = Text.render;

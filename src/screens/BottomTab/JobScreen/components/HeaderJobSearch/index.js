@@ -19,25 +19,6 @@ export default function HeaderJobSearch({
   const navigation = useNavigation();
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={styles.topHeader}>
-        <TouchableOpacity
-          style={styles.topHeaderItem}
-          onPress={() => {
-            navigation.navigate('MyJobsScreen');
-          }}>
-          <Ionicons name="browsers" size={25} color={Colors.primary} />
-          <Text style={styles.textHeaderItem}>My jobs</Text>
-        </TouchableOpacity>
-        <View style={styles.divider} />
-        <TouchableOpacity
-          style={styles.topHeaderItem}
-          onPress={() => {
-            navigation.navigate('PostJobScreen');
-          }}>
-          <Ionicons name="create-sharp" size={25} color={Colors.primary} />
-          <Text style={styles.textHeaderItem}>Post job</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.avatarWrapper}>
         <OpacityButton style={[styles.search, searchStyle]} onPress={onPress}>
           <TextInput
@@ -53,6 +34,13 @@ export default function HeaderJobSearch({
             <AntDesign name={'close'} size={8 * WIDTH_RATIO} color="white" />
           </TouchableOpacity>
         </OpacityButton>
+        <TouchableOpacity
+          style={styles.topHeaderItem}
+          onPress={() => {
+            navigation.navigate('MyJobsScreen');
+          }}>
+          <Ionicons name="browsers" size={25} color={Colors.primary} />
+        </TouchableOpacity>
       </View>
     </View>
   );
