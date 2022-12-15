@@ -48,7 +48,15 @@ const useLoginHook = props => {
   };
 
   const onPressCreateAccount = () => {
-    navigation.navigate('EnterEmailScreen');
+    navigation.navigate('EnterEmailScreen', {
+      type: 'normal',
+    });
+  };
+
+  const onPressCreateAccountRecruiter = () => {
+    navigation.navigate('EnterEmailScreen', {
+      type: 'company',
+    });
   };
 
   const onPressLogin = () => {
@@ -76,6 +84,7 @@ const useLoginHook = props => {
     onClearPassword,
     onPressLogin,
     onPressCreateAccount,
+    onPressCreateAccountRecruiter,
   };
 };
 export default useLoginHook;

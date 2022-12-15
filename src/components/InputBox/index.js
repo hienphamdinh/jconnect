@@ -9,10 +9,7 @@ import HTMLView from 'react-native-htmlview';
 import dayjs from 'dayjs';
 import styles from './styles';
 import get from 'lodash/get';
-import {
-  formatCurrencyWithDot,
-  convertDotCurrencyToNumber,
-} from 'utils/CurrencyHelper';
+import {convertDotCurrencyToNumber} from 'utils/CurrencyHelper';
 
 const InputBox = ({
   title,
@@ -47,6 +44,7 @@ export const SalaryBox = ({
   inputStyle,
   onChangeText,
   error,
+  showUnit = true,
   ...otherProps
 }) => {
   return (
@@ -66,7 +64,7 @@ export const SalaryBox = ({
           }}
           {...otherProps}
         />
-        <Text style={styles.prefix}>VND</Text>
+        {showUnit && <Text style={styles.prefix}>VND</Text>}
       </View>
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>

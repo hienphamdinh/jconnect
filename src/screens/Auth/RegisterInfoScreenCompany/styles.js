@@ -1,49 +1,36 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import Colors from 'themes/Colors';
+import {StyleSheet} from 'react-native';
 import {WIDTH_RATIO} from 'themes/Dimens';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
+    backgroundColor: 'white',
   },
-  bigCircle: {
-    width: Dimensions.get('window').height * 0.7,
-    height: Dimensions.get('window').height * 0.7,
+  scrollView: {
+    flex: 1,
+    paddingTop: 24,
+    backgroundColor: 'white',
+  },
+  contentContainerStyle: {
+    backgroundColor: 'white',
+    paddingHorizontal: 16,
+    paddingBottom: 80,
+  },
+  header: {
     backgroundColor: '#49AC5A',
-    borderRadius: 1000,
-    position: 'absolute',
-    right: Dimensions.get('window').width * 0.25,
-    top: -50,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
-  smallCircle: {
-    width: Dimensions.get('window').height * 0.4,
-    height: Dimensions.get('window').height * 0.4,
-    backgroundColor: '#49AC5A',
-    borderRadius: 1000,
-    position: 'absolute',
-    bottom: Dimensions.get('window').width * -0.2,
-    right: Dimensions.get('window').width * -0.3,
-  },
-  centerizedView: {
-    width: '100%',
-    top: '15%',
-  },
-  authBox: {
-    width: '80%',
-    backgroundColor: '#fafafa',
-    borderRadius: 20,
-    alignSelf: 'center',
-    paddingHorizontal: 14,
-    paddingBottom: 30,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+  iconWrapper: {
+    borderWidth: 1,
+    borderColor: '#49AC5A',
+    backgroundColor: 'white',
+    height: 70 * WIDTH_RATIO,
+    width: 70 * WIDTH_RATIO,
+    borderRadius: 35 * WIDTH_RATIO,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
   },
   logoBox: {
     width: 100,
@@ -70,7 +57,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     alignSelf: 'center',
-    color: Colors.black,
+    marginVertical: 18,
   },
   hr: {
     width: '100%',
@@ -80,15 +67,17 @@ export default StyleSheet.create({
   },
   inputBox: {
     marginTop: 10,
+    borderBottomWidth: 1,
+    borderColor: '#49AC5A',
   },
+
   inputLabel: {
     fontSize: 18,
-    marginBottom: 6,
   },
   input: {
     width: '100%',
     height: 40,
-    backgroundColor: '#dfe4ea',
+    backgroundColor: 'white',
     borderRadius: 4,
     paddingHorizontal: 10,
   },
@@ -114,15 +103,29 @@ export default StyleSheet.create({
     marginTop: 12,
     fontSize: 16,
   },
-  forgotStyle: {
-    marginTop: 8,
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
   },
-  tinyButton: {
-    fontWeight: 'bold',
-    color: Colors.orange,
+  textSwitch: {
+    fontSize: 16,
   },
-  tinyButtonUnder: {
-    fontWeight: 'bold',
-    color: Colors.charcoal,
+  educationYear: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  divider: {
+    width: 20 * WIDTH_RATIO,
+  },
+  inputItem: {
+    flex: 1,
+  },
+  avatar: {
+    height: 70 * WIDTH_RATIO,
+    width: 70 * WIDTH_RATIO,
+    borderRadius: 35 * WIDTH_RATIO,
+    marginBottom: 15,
   },
 });

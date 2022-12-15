@@ -7,6 +7,7 @@ import get from 'lodash/get';
 const usePasswordHook = props => {
   const navigation = useNavigation();
   const email = get(props, 'route.params.email');
+  const type = get(props, 'route.params.type');
   const [password, setPassWord] = useState('');
   const [rePassword, setRePassWord] = useState('');
   const [error, setError] = useState();
@@ -28,12 +29,23 @@ const usePasswordHook = props => {
       return;
     }
     if (password === rePassword) {
-      navigation.navigate('RegisterInfoScreen', {
-        account: {
-          password,
-          email,
-        },
-      });
+      if (type === 'company') {
+        navigation.navigate('RegisterInfoScreenCompany', {
+          account: {
+            password,
+            email,
+            type,
+          },
+        });
+      } else {
+        navigation.navigate('RegisterInfoScreen', {
+          account: {
+            password,
+            email,
+            type,
+          },
+        });
+      }
     } else {
       setError(I18n.t('CreatePasswordScreen.NotMatch'));
     }

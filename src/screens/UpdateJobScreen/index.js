@@ -23,7 +23,6 @@ import get from 'lodash/get';
 import {jobTypeList} from 'constants/Job';
 import {useSelector} from 'react-redux';
 import {formatCurrencyWithDot} from 'utils/CurrencyHelper';
-import omit from 'lodash/omit';
 
 export default function UpdateJobScreen(props) {
   const {

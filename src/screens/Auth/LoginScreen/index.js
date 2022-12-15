@@ -19,6 +19,7 @@ export default function LoginScreen() {
     onClearPassword,
     onPressLogin,
     onPressCreateAccount,
+    onPressCreateAccountRecruiter,
   } = useLoginHook();
 
   return (
@@ -54,7 +55,13 @@ export default function LoginScreen() {
               loading={loading}
             />
             <PrimaryTinyButton
-              title={'Create account'}
+              textStyle={styles.tinyButton}
+              title={'Sign up as recruiter'}
+              onPress={onPressCreateAccountRecruiter}
+            />
+            <PrimaryTinyButton
+              textStyle={styles.tinyButtonUnder}
+              title={'Sign up as applicant'}
               onPress={onPressCreateAccount}
             />
             {/* <PrimaryTinyButton

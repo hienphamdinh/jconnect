@@ -119,6 +119,14 @@ export default function MainStackNavigator() {
         name="UpdateJobScreen"
         component={require('screens/UpdateJobScreen').default}
       />
+      <MainStack.Screen
+        name="RegisterInfoScreenCompany"
+        component={require('screens/Auth/RegisterInfoScreenCompany').default}
+      />
+      <MainStack.Screen
+        name="NewsScreen"
+        component={require('screens/NewsScreen').default}
+      />
     </MainStack.Navigator>
   );
 }

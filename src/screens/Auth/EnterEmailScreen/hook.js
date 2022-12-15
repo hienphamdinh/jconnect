@@ -5,7 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 import {useDispatch} from 'react-redux';
 import AuthActions from 'store/auth/action';
 import I18n from 'locales';
-const useEnterEmailHook = () => {
+const useEnterEmailHook = props => {
+  const type = get(props, 'route.params.type');
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ const useEnterEmailHook = () => {
         AuthActions.checkEmail(email, res => {
           setLoading(false);
           if (get(res, 'status')) {
-            navigation.navigate('VerifyEmailScreen', {email});
+            navigation.navigate('VerifyEmailScreen', {email, type});
             setError();
           } else {
             setError(get(res, 'message'));

@@ -10,9 +10,9 @@ import BigBackgroundCircle from 'components/BigBackgroundCircle';
 import SmallBackgroundCircle from 'components/SmallBackgroundCircle';
 import I18n from 'locales';
 
-export default function EnterEmailScreen() {
+export default function EnterEmailScreen(props) {
   const {onCheckEmail, onChangeText, onClearInput, loading, email, error} =
-    useEnterEmailHook();
+    useEnterEmailHook(props);
 
   return (
     <Container notSafeArea showBack>

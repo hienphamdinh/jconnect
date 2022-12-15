@@ -88,6 +88,7 @@ export default function Settings() {
           style={styles.iconWrapper}
           imageStyle={styles.imageStyle}
           source={{uri: get(user, 'avatar')}}
+          sizeIcon={60}
         />
         <Text style={styles.textName}>{get(user, 'fullName')}</Text>
       </View>
