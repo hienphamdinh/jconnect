@@ -10,7 +10,8 @@ import styles from './styles';
 
 export default function HomeHotJob() {
   const navigation = useNavigation();
-  const {hotJobs, refreshing, onRefresh} = useHomeHook();
+  const {hotJobs, refreshing, listNews, onRefresh} = useHomeHook();
+
   return (
     <JobList
       refreshControl={
@@ -44,7 +45,7 @@ export default function HomeHotJob() {
           </View>
           {/*
 lấy tin tức ngoài hook của tk jobs luôn xong truyền vào*/}
-          <HomeNews data={[1, 2]} />
+          <HomeNews data={listNews} />
         </>
       )}
     />

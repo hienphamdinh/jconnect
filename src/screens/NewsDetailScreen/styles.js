@@ -3,7 +3,11 @@ import Colors from 'themes/Colors';
 import {screenWidth, WIDTH_RATIO} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
-  container: {},
+  header: {height: 60 * WIDTH_RATIO},
+  container: {
+    flex: 1,
+    backgroundColor: Colors.white,
+  },
   row: {
     backgroundColor: Colors.white,
     width: screenWidth - 32,
@@ -16,17 +20,19 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   jobImage: {
-    height: 150 * WIDTH_RATIO,
-    width: screenWidth - 56,
+    height: 170 * WIDTH_RATIO,
+    width: screenWidth - 32,
   },
   imageStyle: {
-    height: 150 * WIDTH_RATIO,
-    width: screenWidth - 56,
+    height: 170 * WIDTH_RATIO,
+    width: screenWidth - 32,
     borderRadius: 8,
   },
   text: {
     fontWeight: 'bold',
+    fontSize: 18 * WIDTH_RATIO,
     color: Colors.black,
+    marginBottom: 12,
   },
   wrapper: {
     flex: 1,
@@ -34,12 +40,21 @@ const styles = StyleSheet.create({
   },
   time: {
     color: Colors.primary,
-
-    marginBottom: 4,
+    alignSelf: 'flex-end',
+    marginBottom: 12,
   },
   contentContainerStyle: {
     paddingHorizontal: 16,
     paddingVertical: 16,
+  },
+  backBtn: {
+    backgroundColor: 'transparent',
+    top: 10,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 24,
   },
 });
 

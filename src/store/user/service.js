@@ -70,3 +70,17 @@ export const getAllUser = (searchString, skip) => {
     skip,
   });
 };
+
+export const getAllNews = (searchString, skip) => {
+  const path = '/user/news/all';
+  return GET(path, {
+    skip,
+  });
+};
+
+export const getNewsDetail = newsId => {
+  const path = `/user/news-detail/${newsId}`;
+  return GET(path, {
+    newsId,
+  });
+};
