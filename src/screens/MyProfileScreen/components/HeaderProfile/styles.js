@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO} from 'themes/Dimens';
+import {screenWidth, WIDTH_RATIO} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
   },
   topHeaderBg: {
     backgroundColor: Colors.gray1,
-    height: 100 * WIDTH_RATIO,
+    height: 150 * WIDTH_RATIO,
+    width: screenWidth,
   },
   avtWrapper: {
     backgroundColor: Colors.white,
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingBottom: 10,
-    marginHorizontal: 16,
     borderRadius: 8,
   },
   avatar: {
@@ -65,6 +65,11 @@ const styles = StyleSheet.create({
   jobText: {
     fontSize: 14 * WIDTH_RATIO,
     textAlign: 'center',
+  },
+  banner: {
+    backgroundColor: Colors.gray1,
+    height: 150 * WIDTH_RATIO,
+    width: screenWidth,
   },
 });
 

@@ -4,11 +4,14 @@ import {ScrollView} from 'react-native';
 import HeaderProfile from './components/HeaderProfile';
 import AboutMe from './components/AboutMe';
 import SkillBlock from './components/SkillBlock';
+import CompanyInfoBlock from './components/CompanyInfoBlock';
 import useProfileHook from './hook';
 import Fetching from 'components/Fetching';
+import useCompanyHooks from 'hooks/useCompanyHook';
 import styles from './styles';
 
 export default function MyProfileScreen(props) {
+  const {isCompany} = useCompanyHooks();
   const {profile, loading, updateUser} = useProfileHook(props);
 
   if (loading) {
@@ -18,11 +21,12 @@ export default function MyProfileScreen(props) {
   return (
     <Container showBack>
       <ScrollView style={styles.container}>
-        <HeaderProfile profile={profile} />
+        <HeaderProfile profile={profile} isCompany={isCompany} />
         {profile ? <AboutMe profile={profile} updateUser={updateUser} /> : null}
-        {profile ? (
+        {profile && !isCompany ? (
           <SkillBlock profile={profile} updateUser={updateUser} />
         ) : null}
+        {isCompany && <CompanyInfoBlock />}
       </ScrollView>
     </Container>
   );
