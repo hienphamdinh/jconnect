@@ -2,7 +2,7 @@ import {useEffect, useState, useRef, useCallback} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {listApplication} from 'store/job/service';
 import get from 'lodash/get';
-import {isEmpty, size} from 'lodash';
+import {size} from 'lodash';
 import Toast from 'react-native-toast-message';
 
 const useListApplicationHook = props => {

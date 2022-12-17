@@ -4,6 +4,7 @@ import Container from 'components/Container';
 import HeaderTitle from 'components/HeaderTitle';
 import ApplicationList from './components/ApplicationList';
 import PdfViewComponent from 'components/PdfViewComponent';
+import Fetching from 'components/Fetching';
 
 export default function ListApplicationScreen(props) {
   const {
@@ -17,6 +18,10 @@ export default function ListApplicationScreen(props) {
     onPressViewProfile,
     onPressViewResume,
   } = useListApplicationHook(props);
+  if (loading) {
+    return <Fetching />;
+  }
+
   return (
     <Container showBack>
       <HeaderTitle title={'List application'} />

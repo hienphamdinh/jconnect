@@ -5,10 +5,16 @@ import HeaderProfile from './components/HeaderProfile';
 import AboutMe from './components/AboutMe';
 import SkillBlock from './components/SkillBlock';
 import useProfileHook from './hook';
+import Fetching from 'components/Fetching';
 import styles from './styles';
 
 export default function MyProfileScreen(props) {
-  const {profile, updateUser} = useProfileHook(props);
+  const {profile, loading, updateUser} = useProfileHook(props);
+
+  if (loading) {
+    return <Fetching />;
+  }
+
   return (
     <Container showBack>
       <ScrollView style={styles.container}>

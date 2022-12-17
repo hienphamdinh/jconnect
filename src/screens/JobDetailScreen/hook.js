@@ -12,6 +12,7 @@ const useDetailHook = props => {
   const userId = useSelector(state => get(state, 'user.info._id'));
   const jobId = get(props, 'route.params.jobId');
   const canApply = get(props, 'route.params.canApply');
+  const [loading, setLoading] = useState(false);
   const [jobDetail, setJobDetail] = useState();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const isMyJob = userId === get(jobDetail, 'postedBy._id');
@@ -90,6 +91,7 @@ const useDetailHook = props => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getJobDetail(jobId)
       .then(response => {
         if (response.status) {
@@ -98,6 +100,9 @@ const useDetailHook = props => {
       })
       .catch(err => {
         console.log('ERROR', err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [jobId]);
 
@@ -110,6 +115,7 @@ const useDetailHook = props => {
     canApply,
     isBookmarked,
     isMyJob,
+    loading,
     onPressApply,
     onPressSavedJobs,
     onPressPostBy,

@@ -10,6 +10,7 @@ export default function useApplyHook(props) {
   const [listJob, setListJob] = useState([]);
   const userId = useSelector(state => get(state, 'user.info._id'));
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [viewMore, setViewMore] = useState(false);
   const total = useRef(0);
 
@@ -26,6 +27,10 @@ export default function useApplyHook(props) {
         })
         .catch(err => {
           console.log('ERROR', err);
+        })
+        .finally(() => {
+          setLoading(false);
+          setRefreshing(false);
         });
     },
     [loading, userId],
@@ -45,6 +50,11 @@ export default function useApplyHook(props) {
     });
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchData(0);
+  };
+
   useEffect(() => {
     if (activeTab === 0) {
       fetchData(0);
@@ -53,6 +63,9 @@ export default function useApplyHook(props) {
 
   return {
     listJob,
+    loading,
+    refreshing,
+    onRefresh,
     onEndReached,
     onRemoveApply,
   };

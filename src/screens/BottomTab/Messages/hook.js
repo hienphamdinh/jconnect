@@ -13,17 +13,20 @@ const useMessage = props => {
   const isFocused = useIsFocused();
   const navigation = useNavigation();
   const userId = useSelector(state => get(state, 'user.info._id'));
+  const [loading, setLoading] = useState(false);
   const [listMessage, setListMessage] = useState([]);
   const [isShowDelete, setIsShowDelete] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const getListMessage = useCallback(() => {
+    setLoading(true);
     getAllMessage(userId)
       .then(res => {
         if (res.status) {
           setListMessage(get(res, 'data', []));
         }
         setRefreshing(false);
+        setLoading(false);
       })
       .catch(error => {
         setRefreshing(false);
@@ -92,6 +95,7 @@ const useMessage = props => {
     listMessage,
     isShowDelete,
     refreshing,
+    loading,
     onRefresh,
     onDeleteMessage,
     onCloseModalDelete,

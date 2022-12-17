@@ -12,6 +12,7 @@ import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import IconIcons from 'react-native-vector-icons/Ionicons';
 import useDetailHook from './hook.js';
 import PrimaryButton from 'components/PrimaryButton/index.js';
+import Fetching from 'components/Fetching';
 import dayjs from 'dayjs';
 
 const JobDetail = props => {
@@ -20,10 +21,15 @@ const JobDetail = props => {
     canApply,
     isBookmarked,
     isMyJob,
+    loading,
     onPressSavedJobs,
     onPressApply,
     onPressPostBy,
   } = useDetailHook(props);
+
+  if (loading) {
+    return <Fetching />;
+  }
 
   const isExpired = dayjs(get(jobDetail, 'expiredApply')).diff(dayjs()) < 0;
 

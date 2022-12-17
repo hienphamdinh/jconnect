@@ -1,15 +1,25 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, RefreshControl} from 'react-native';
+import Fetching from 'components/Fetching';
 import useApplyHook from './hook';
 import JobList from 'components/JobList';
 import {TYPE_JOB_ACTION} from 'constants/TypeJobAction';
+
 import styles from './styles';
 export default function MyApplyJob(props) {
-  const {listJob, onRemoveSaved, onEndReached} = useApplyHook(props);
+  const {listJob, loading, refreshing, onRefresh, onEndReached, onRemoveSaved} =
+    useApplyHook(props);
+
+  if (loading) {
+    return <Fetching />;
+  }
 
   return (
     <View style={styles.container}>
       <JobList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         data={listJob}
         onReachEnd={onEndReached}
         typeAction={{

@@ -8,12 +8,17 @@ import {useDispatch} from 'react-redux';
 const useProfileHook = props => {
   const dispatch = useDispatch();
   const userId = get(props, 'route.params.id');
+  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState();
 
   const updateUser = ({
     data = {},
-    onSuccess = () => {},
-    onFailed = () => {},
+    onSuccess = () => {
+      setLoading(false);
+    },
+    onFailed = () => {
+      setLoading(false);
+    },
   }) => {
     dispatch(
       UserActions.updateUser(
@@ -29,20 +34,26 @@ const useProfileHook = props => {
   };
 
   useEffect(() => {
-    userDetail(userId).then(res => {
-      if (res.status) {
-        setProfile(get(res, 'user'));
-      } else {
-        Toast.show({
-          type: 'failed',
-          text1: 'Error',
-          text2: 'Not found information',
-        });
-      }
-    });
+    setLoading(true);
+    userDetail(userId)
+      .then(res => {
+        if (res.status) {
+          setProfile(get(res, 'user'));
+        } else {
+          Toast.show({
+            type: 'failed',
+            text1: 'Error',
+            text2: 'Not found information',
+          });
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [userId]);
   return {
     profile,
+    loading,
     updateUser,
   };
 };

@@ -6,16 +6,18 @@ import size from 'lodash/size';
 import {removePosted} from 'store/job/service';
 
 export default function useApplyHook(props) {
+  const forceCall = get(props, 'forceCall');
   const activeTab = get(props, 'activeTab');
   const [listJob, setListJob] = useState([]);
   const userId = useSelector(state => get(state, 'user.info._id'));
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [viewMore, setViewMore] = useState(false);
   const total = useRef(0);
 
   const fetchData = useCallback(
     (skip = 0) => {
-      setLoading(loading === 0);
+      setLoading(skip === 0);
       setViewMore(skip !== 0);
       myPostedJob(userId, skip)
         .then(res => {
@@ -26,9 +28,13 @@ export default function useApplyHook(props) {
         })
         .catch(err => {
           console.log('ERROR', err);
+        })
+        .finally(() => {
+          setRefreshing(false);
+          setLoading(false);
         });
     },
-    [loading, userId],
+    [userId],
   );
 
   const onEndReached = () => {
@@ -45,15 +51,29 @@ export default function useApplyHook(props) {
     });
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchData(0);
+  };
+
   useEffect(() => {
     if (activeTab === 1) {
       fetchData(0);
     }
   }, [fetchData, activeTab]);
 
+  useEffect(() => {
+    if (forceCall) {
+      fetchData(0);
+    }
+  }, [fetchData, forceCall]);
+
   return {
     listJob,
-    onEndReached,
+    refreshing,
+    loading,
+    onRefresh,
     onRemovePosted,
+    onEndReached,
   };
 }
