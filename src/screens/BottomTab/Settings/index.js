@@ -10,9 +10,11 @@ import {useSelector} from 'react-redux';
 import Avatar from 'components/AvatarComponent';
 import styles from './styles';
 import {updateUser} from 'store/user/service';
+import useCompanyHooks from 'hooks/useCompanyHook';
 import dayjs from 'dayjs';
 
 export default function Settings() {
+  const {isCompany} = useCompanyHooks();
   const user = useSelector(state => get(state, 'user.info'));
   const userId = useSelector(state => get(state, 'user.info._id'));
   const navigation = useNavigation();
@@ -54,7 +56,11 @@ export default function Settings() {
       icon: 'edit',
       navigateScreen: '',
       onPress: () => {
-        navigation.navigate('UpdateInfoScreen');
+        if (isCompany) {
+          navigation.navigate('UpdateCompanyInfoScreen');
+        } else {
+          navigation.navigate('UpdateInfoScreen');
+        }
       },
     },
     {

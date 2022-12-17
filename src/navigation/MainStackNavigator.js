@@ -131,6 +131,10 @@ export default function MainStackNavigator() {
         name="NewsDetailScreen"
         component={require('screens/NewsDetailScreen').default}
       />
+      <MainStack.Screen
+        name="UpdateCompanyInfoScreen"
+        component={require('screens/UpdateCompanyInfoScreen').default}
+      />
     </MainStack.Navigator>
   );
 }
