@@ -7,12 +7,10 @@ import SkillBlock from './components/SkillBlock';
 import CompanyInfoBlock from './components/CompanyInfoBlock';
 import useProfileHook from './hook';
 import Fetching from 'components/Fetching';
-import useCompanyHooks from 'hooks/useCompanyHook';
 import styles from './styles';
 
 export default function MyProfileScreen(props) {
-  const {isCompany} = useCompanyHooks();
-  const {profile, loading, updateUser} = useProfileHook(props);
+  const {isCompany, profile, loading, updateUser} = useProfileHook(props);
 
   if (loading) {
     return <Fetching />;
@@ -26,7 +24,7 @@ export default function MyProfileScreen(props) {
         {profile && !isCompany ? (
           <SkillBlock profile={profile} updateUser={updateUser} />
         ) : null}
-        {isCompany && <CompanyInfoBlock />}
+        {isCompany && profile && <CompanyInfoBlock profile={profile} />}
       </ScrollView>
     </Container>
   );

@@ -52,6 +52,7 @@ const useProfileHook = props => {
       });
   }, [userId]);
   return {
+    isCompany: get(profile, 'account.type') === 'company',
     profile,
     loading,
     updateUser,

@@ -6,8 +6,10 @@ import debounce from 'lodash/debounce';
 import get from 'lodash/get';
 import size from 'lodash/size';
 import filter from 'lodash/filter';
+import useCompanyHooks from 'hooks/useCompanyHook';
 
 const useMessage = props => {
+  const {isCompany} = useCompanyHooks();
   const total = useRef(0);
   const navigation = useNavigation();
   const userId = useSelector(state => get(state, 'user.info._id'));
@@ -17,23 +19,25 @@ const useMessage = props => {
   const [searchText, setSearchText] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchAllUser = useCallback((searchString = '', skip = 0) => {
-    setLoading(skip === 0);
-    setViewMore(skip !== 0);
-    getAllUser(searchString, skip)
-      .then(res => {
-        if (res.status) {
-          setListUser(get(res, 'data', []));
-          total.current = get(res, 'total');
-        }
-        setRefreshing(false);
-        setLoading(false);
-        setViewMore(false);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+  const fetchAllUser = useCallback(
+    (searchString = '', skip = 0) => {
+      setViewMore(skip !== 0);
+      getAllUser(searchString, skip, isCompany ? 'company' : 'none')
+        .then(res => {
+          if (res.status) {
+            setListUser(get(res, 'data', []));
+            total.current = get(res, 'total');
+          }
+          setRefreshing(false);
+          setLoading(false);
+          setViewMore(false);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    [isCompany],
+  );
 
   const onPressItem = useCallback(
     item => {
@@ -58,6 +62,7 @@ const useMessage = props => {
 
   const onSearch = text => {
     debounceFetchUser(text);
+    setSearchText(text);
   };
 
   const onRefresh = () => {
@@ -66,10 +71,12 @@ const useMessage = props => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchAllUser();
   }, [fetchAllUser]);
 
   return {
+    isCompany,
     loading,
     viewMore,
     listUser: filter(listUser, (item, index) => get(item, '_id') !== userId),

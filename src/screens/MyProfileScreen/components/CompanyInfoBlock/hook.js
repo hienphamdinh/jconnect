@@ -1,6 +1,5 @@
 import {useState, useEffect, useCallback, useRef} from 'react';
 import {myPostedJob} from 'store/job/service';
-import {useSelector} from 'react-redux';
 import get from 'lodash/get';
 import size from 'lodash/size';
 import {removePosted} from 'store/job/service';
@@ -8,7 +7,7 @@ import {filter} from 'lodash';
 
 export default function useApplyHook(props) {
   const [listJob, setListJob] = useState([]);
-  const userId = useSelector(state => get(state, 'user.info._id'));
+  const userId = get(props, 'profile._id');
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [viewMore, setViewMore] = useState(false);

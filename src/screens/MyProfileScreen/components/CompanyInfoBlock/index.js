@@ -5,7 +5,7 @@ import useMyPostedJobs from './hook';
 import styles from './styles';
 
 export default function AboutMe(props) {
-  const {listJob} = useMyPostedJobs();
+  const {listJob} = useMyPostedJobs(props);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Job posted</Text>

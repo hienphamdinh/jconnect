@@ -39,6 +39,14 @@ export default StyleSheet.create({
     height: 70 * WIDTH_RATIO,
     borderRadius: 35 * WIDTH_RATIO,
   },
+  avatarCompany: {
+    width: 70 * WIDTH_RATIO,
+    height: 70 * WIDTH_RATIO,
+  },
+  imageStyleCompany: {
+    width: 70 * WIDTH_RATIO,
+    height: 70 * WIDTH_RATIO,
+  },
   info: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -56,5 +64,24 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontSize: 15 * WIDTH_RATIO,
     height: 38 * WIDTH_RATIO,
+  },
+  nameTextCompany: {
+    color: Colors.black,
+    fontWeight: 'bold',
+    fontSize: 15 * WIDTH_RATIO,
+  },
+  itemCompany: {
+    flexDirection: 'row',
+    backgroundColor: Colors.white,
+    borderRadius: 12,
+    padding: 8,
+    width: screenWidth - 32,
+    marginRight: 16,
+    elevation: 5,
+    marginBottom: 16,
+  },
+  infoCompany: {
+    flex: 1,
+    paddingLeft: 16,
   },
 });
