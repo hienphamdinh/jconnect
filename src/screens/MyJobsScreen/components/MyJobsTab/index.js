@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import MyApplyJob from './MyApplyJob';
-import MyPostedJob from './MyPostedJob';
 import MySaveJob from './MySaveJob';
 import get from 'lodash/get';
 import styles from './styles';
@@ -19,7 +18,6 @@ export default function MyJobsTab({initTabIndex = 0}) {
 
   const renderScene = SceneMap({
     MyApplyJob: () => <MyApplyJob activeTab={activeTab} />,
-    MyPostedJob: () => <MyPostedJob activeTab={activeTab} />,
     MySaveJob: () => <MySaveJob activeTab={activeTab} />,
   });
 
@@ -56,7 +54,6 @@ export default function MyJobsTab({initTabIndex = 0}) {
 
   const routes = [
     {key: 'MyApplyJob', title: 'Applied'},
-    {key: 'MyPostedJob', title: 'Posted'},
     {key: 'MySaveJob', title: 'Saved'},
   ];
 

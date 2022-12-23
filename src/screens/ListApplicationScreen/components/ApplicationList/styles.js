@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  nothingText: {
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
 });
 
 export default styles;

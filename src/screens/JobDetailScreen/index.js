@@ -32,6 +32,9 @@ const JobDetail = props => {
   }
 
   const isExpired = dayjs(get(jobDetail, 'expiredApply')).diff(dayjs()) < 0;
+  const expired = get(jobDetail, 'expiredApply')
+    ? dayjs(get(jobDetail, 'expiredApply')).format('YYYY/MM/DD')
+    : '';
 
   return (
     <Container style={styles.jobDetailContainer} showBack>
@@ -101,9 +104,7 @@ const JobDetail = props => {
             <View style={styles.timeItem}>
               <Text style={styles.timeTitle}>Expired apply</Text>
               <Text style={[styles.timeNow, isExpired && styles.expired]}>
-                {isExpired
-                  ? `Expired: ${get(jobDetail, 'expiredApply')}`
-                  : get(jobDetail, 'expiredApply')}
+                {isExpired ? `Expired: ${expired}` : expired}
               </Text>
             </View>
             <View style={styles.timeDivider} />

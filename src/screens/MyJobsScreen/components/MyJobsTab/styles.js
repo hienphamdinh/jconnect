@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   itemTabBar: {
     flex: 1,
     backgroundColor: Colors.primary,
-    minWidth: screenWidth / 3,
+    minWidth: screenWidth / 2,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,

@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
   addJobs: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.white,
+    borderWidth: 12,
+    borderColor: Colors.primary,
     height: 60 * WIDTH_RATIO,
     width: 60 * WIDTH_RATIO,
     borderRadius: 30 * WIDTH_RATIO,

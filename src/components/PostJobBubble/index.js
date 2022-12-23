@@ -23,7 +23,7 @@ export default function PostJobBubble() {
         onPress={() => {
           navigation.navigate('PostJobScreen');
         }}>
-        <Ionicons name="add-circle" size={25} color={Colors.white} />
+        <Ionicons name="add-circle" size={25} color={Colors.primary} />
       </Pressable>
     </Bubble>
   ) : null;

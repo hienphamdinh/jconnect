@@ -4,6 +4,7 @@ import {ScrollView} from 'react-native';
 import HeaderProfile from './components/HeaderProfile';
 import AboutMe from './components/AboutMe';
 import SkillBlock from './components/SkillBlock';
+import ExperienceBlock from './components/ExperienceBlock';
 import CompanyInfoBlock from './components/CompanyInfoBlock';
 import useProfileHook from './hook';
 import Fetching from 'components/Fetching';
@@ -23,6 +24,9 @@ export default function MyProfileScreen(props) {
         {profile ? <AboutMe profile={profile} updateUser={updateUser} /> : null}
         {profile && !isCompany ? (
           <SkillBlock profile={profile} updateUser={updateUser} />
+        ) : null}
+        {profile && !isCompany ? (
+          <ExperienceBlock profile={profile} updateUser={updateUser} />
         ) : null}
         {isCompany && profile && <CompanyInfoBlock profile={profile} />}
       </ScrollView>
