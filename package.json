@@ -15,7 +15,8 @@
     "clean:gradlew": "cd android && ./gradlew clean && cd ..",
     "adb:reverse": "adb reverse tcp:8081 tcp:8081",
     "repo:update": "cd ios && arch -x86_64 pod install --repo-update",
-    "build:android": "cd android && ./gradlew assembleRelease"
+    "build:android": "cd android && ./gradlew assembleRelease",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@notifee/react-native": "^5.5.0",
@@ -38,6 +39,8 @@
     "lottie-ios": "3.2.3",
     "lottie-react-native": "^5.1.3",
     "numeral": "^2.0.6",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "query-string": "^7.1.1",
     "react": "17.0.2",
     "react-native": "0.68.2",
