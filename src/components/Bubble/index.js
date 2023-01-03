@@ -1,6 +1,6 @@
 import React, {useRef, memo, useCallback} from 'react';
-import {Animated, StyleSheet, PanResponder} from 'react-native';
-import {deviceWidth, deviceHeight} from 'themes/Dimens';
+import {Animated, StyleSheet, PanResponder, Platform} from 'react-native';
+import {screenWidth, screenHeight} from 'themes/Dimens';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import isUndefined from 'lodash/isUndefined';
 
@@ -12,14 +12,14 @@ const Bubble = ({
 }) => {
   const inset = useSafeAreaInsets();
   const boundTop = inset.top + 30;
-  const boundBottom = deviceHeight - inset.bottom - buttonHeight - 80; // 80 is relative height of bottom tab
-  const boundRight = deviceWidth - buttonWidth - 10;
+  const boundBottom = screenHeight - inset.bottom - buttonHeight - 80; // 80 is relative height of bottom tab
+  const boundRight = screenWidth - buttonWidth - 10;
   const boundLeft = 10;
 
   const pan = useRef(
     new Animated.ValueXY({
       x: boundRight,
-      y: (deviceHeight - buttonHeight) * initialPositionHeight,
+      y: (screenHeight - buttonHeight) * initialPositionHeight,
     }),
   ).current;
 
@@ -28,7 +28,7 @@ const Bubble = ({
       if (isUndefined(currentX) || isUndefined(currentY)) {
         return;
       }
-      const offsetX = currentX > deviceWidth / 2 ? boundRight : boundLeft;
+      const offsetX = currentX > screenWidth / 2 ? boundRight : boundLeft;
       const offsetY =
         currentY < boundTop
           ? boundTop
@@ -50,15 +50,21 @@ const Bubble = ({
 
   const panResponder = useRef(
     PanResponder.create({
+      // onMoveShouldSetPanResponder: Platform.select({
+      //   ios: (e, state) => !(state.dx === 0 && state.dy === 0),
+      //   android: (e, state) =>
+      //     Math.abs(state.dx) > 10 || Math.abs(state.dy) > 10
+      // }),
+
       onMoveShouldSetPanResponder: (evt, gestureState) => {
         //return true if user is swiping, return false if it's a single click
-        return true;
+        return Math.abs(gestureState.dx) > 10 || Math.abs(gestureState.dy) > 10;
       },
 
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
-        //return true if user is swiping, return false if it's a single click
-        return true;
-      },
+      // onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
+      //   //return true if user is swiping, return false if it's a single click
+      //   return !(gestureState.dx === 0 && gestureState.dy === 0);
+      // },
 
       onPanResponderGrant: () => {
         pan.setOffset({
@@ -86,7 +92,9 @@ const Bubble = ({
     <Animated.View
       style={[
         styles.container,
-        {transform: [{translateX: pan.x}, {translateY: pan.y}]},
+        {
+          transform: [{translateX: pan.x}, {translateY: pan.y}],
+        },
       ]}
       {...panResponder.panHandlers}>
       {children}
@@ -96,10 +104,10 @@ const Bubble = ({
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 10,
-    elevation: 10,
     position: 'absolute',
     backgroundColor: 'transparent',
+    zIndex: 10,
+    elevation: 10,
   },
 });
 
