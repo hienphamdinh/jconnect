@@ -27,8 +27,8 @@ const useImagesPicker = props => {
       CameraRoll.getPhotos({
         first: 20,
         assetType: 'Photos',
-        include: ['filename'],
-        after,
+        include: ['filename', 'fileSize'],
+        // after,
       })
         .then(res => {
           setListImages(prev => concat(prev, get(res, 'edges')));

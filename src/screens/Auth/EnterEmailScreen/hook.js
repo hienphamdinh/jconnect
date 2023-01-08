@@ -42,10 +42,16 @@ const useEnterEmailHook = props => {
   const onClearInput = () => {
     setEmail('');
   };
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return {
     onCheckEmail,
     onChangeText,
     onClearInput,
+    goBack,
     loading,
     error,
     email,

@@ -22,6 +22,14 @@ export default StyleSheet.create({
     padding: 8,
     width: (screenWidth - 48) / 2,
     marginRight: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
     marginBottom: 16,
   },
@@ -77,6 +85,14 @@ export default StyleSheet.create({
     padding: 8,
     width: screenWidth - 32,
     marginRight: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
     marginBottom: 16,
   },

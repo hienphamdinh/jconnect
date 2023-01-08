@@ -46,7 +46,8 @@ const useMessageDetail = props => {
       .catch(error => {
         console.log(error);
       });
-  }, [userId, userOther]);
+  });
+  // }, [userId, userOther]);
 
   return {
     userOther,

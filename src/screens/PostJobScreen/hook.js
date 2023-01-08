@@ -85,6 +85,7 @@ const usePostJob = props => {
     setGender(value);
   };
 
+  console.log(thumbnail);
   const onSelectedAvatar = useCallback(
     async item => {
       if (get(item, 'node.image.uri') === get(thumbnail, 'node.image.uri')) {

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     top: 15 * WIDTH_RATIO,
   },
   header: {
-    height: NORMAL_STATUS_BAR_HEIGHT + 50,
+    height: NORMAL_STATUS_BAR_HEIGHT + 80,
   },
 });
 

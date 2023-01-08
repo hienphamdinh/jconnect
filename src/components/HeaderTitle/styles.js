@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#49AC5A',
     justifyContent: 'center',
     alignItems: 'center',
-    height: (NORMAL_STATUS_BAR_HEIGHT + 70) * WIDTH_RATIO,
+    paddingTop: NORMAL_STATUS_BAR_HEIGHT + 10,
+    height: (NORMAL_STATUS_BAR_HEIGHT + 80) * WIDTH_RATIO,
   },
   txtHeader: {
     color: Colors.white,

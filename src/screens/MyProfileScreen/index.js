@@ -18,8 +18,10 @@ export default function MyProfileScreen(props) {
   }
 
   return (
-    <Container showBack>
-      <ScrollView style={styles.container}>
+    <Container notSafeArea showBack>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainerStyle}>
         <HeaderProfile profile={profile} isCompany={isCompany} />
         {profile ? <AboutMe profile={profile} updateUser={updateUser} /> : null}
         {profile && !isCompany ? (

@@ -13,6 +13,7 @@ export default function MyApplyJob(props) {
     onRefresh,
     onRemovePosted,
     onEndReached,
+    offJobAction,
   } = useApplyHook(props);
 
   if (loading) {
@@ -30,6 +31,7 @@ export default function MyApplyJob(props) {
         typeAction={{
           actionType: TYPE_JOB_ACTION.POST,
           action: onRemovePosted,
+          offJobAction: offJobAction,
         }}
       />
     </View>

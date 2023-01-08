@@ -1,6 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO} from 'themes/Dimens';
 
 export default StyleSheet.create({
   container: {
@@ -59,11 +58,12 @@ export default StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   loginTitleText: {
     fontSize: 26,

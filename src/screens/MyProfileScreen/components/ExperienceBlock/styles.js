@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Colors.gray,
     marginRight: 8,
+    marginTop: 15,
   },
   addBtn: {
     marginTop: 8,

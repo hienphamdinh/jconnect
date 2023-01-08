@@ -9,7 +9,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    shadowColor: Colors.black,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     elevation: 5,
     paddingRight: 16,
     paddingLeft: 12,
@@ -90,14 +96,19 @@ const styles = StyleSheet.create({
   },
   listApply: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'white',
-    marginHorizontal: 32,
+    marginHorizontal: 16,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     paddingVertical: 12,
     marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     elevation: 5,
   },
   listApplyText: {
@@ -112,6 +123,19 @@ const styles = StyleSheet.create({
   rejected: {
     fontWeight: 'bold',
     color: Colors.red,
+  },
+  visibleWrapper: {
+    paddingLeft: 16,
+  },
+  viewContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  visibleText: {
+    fontWeight: 'bold',
+    color: Colors.primary,
   },
 });
 

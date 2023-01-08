@@ -8,7 +8,7 @@ import styles from './styles';
 
 const banner = [
   'https://www.cogentholdingsltd.com/wp-content/uploads/2017/02/job-portal-banner.jpg',
-  'http://www.uvklink.com/job_portal/images/banner.jpg',
+  'https://www.tuvsud.com/-/media/global/images/careers/ss-1059775274-careers-banner.jpg?h=365&w=1280&la=en-GB&hash=3037B6F58C2D9438717EF4FBAECAC083',
   'https://stellenticket.fu-berlin.de/p/header_fub.jpg',
 ];
 export default function HomeBanner() {

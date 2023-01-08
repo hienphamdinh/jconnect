@@ -1,9 +1,16 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {screenWidth, WIDTH_RATIO} from 'themes/Dimens';
+import {
+  NORMAL_STATUS_BAR_HEIGHT,
+  screenWidth,
+  WIDTH_RATIO,
+} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
-  header: {height: 60 * WIDTH_RATIO},
+  header: {
+    paddingTop: NORMAL_STATUS_BAR_HEIGHT + 20,
+    height: NORMAL_STATUS_BAR_HEIGHT + 60 * WIDTH_RATIO,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.white,
@@ -12,7 +19,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     width: screenWidth - 32,
     borderRadius: 12,
-    shadowColor: Colors.black,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
     paddingRight: 16,
     paddingLeft: 12,
@@ -49,7 +63,7 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     backgroundColor: 'transparent',
-    top: 10,
+    top: NORMAL_STATUS_BAR_HEIGHT + 15,
   },
   content: {
     flex: 1,

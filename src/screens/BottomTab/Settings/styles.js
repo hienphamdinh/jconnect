@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
-import {screenHeight, WIDTH_RATIO} from 'themes/Dimens';
+import {
+  screenHeight,
+  WIDTH_RATIO,
+  NORMAL_STATUS_BAR_HEIGHT,
+} from 'themes/Dimens';
 import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
@@ -17,6 +21,7 @@ export default StyleSheet.create({
     paddingBottom: 80,
   },
   header: {
+    paddingTop: 20 + NORMAL_STATUS_BAR_HEIGHT,
     backgroundColor: '#49AC5A',
     alignItems: 'center',
     paddingVertical: 20,
@@ -53,11 +58,12 @@ export default StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   loginTitleText: {
     fontSize: 26,

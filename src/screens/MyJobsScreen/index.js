@@ -11,7 +11,7 @@ export default function MyJobsScreen(props) {
 
   const initTab = get(props, 'route.params.initTab', 0);
   return (
-    <Container showBack backButtonStyle={styles.backButtonStyle}>
+    <Container notSafeArea showBack backButtonStyle={styles.backButtonStyle}>
       <HeaderTitle title={'My jobs'} style={styles.header} />
       {isCompany ? (
         <MyPostedJob forceCall={true} />

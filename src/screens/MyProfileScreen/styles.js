@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.gray1,
   },
+  contentContainerStyle: {
+    paddingBottom: 100,
+  },
 });
 
 export default styles;

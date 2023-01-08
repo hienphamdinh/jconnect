@@ -5,7 +5,6 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import {Provider} from 'react-redux';
 import store, {persistedStore} from 'store/reduxStore';
 import MainStackNavigator from 'navigation/MainStackNavigator';
-import messaging from '@react-native-firebase/messaging';
 import codePush from 'react-native-code-push';
 import auth from '@react-native-firebase/auth';
 import Toast from 'react-native-toast-message';
@@ -27,6 +26,7 @@ LogBox.ignoreLogs([
   'react-native-extra-dimensions-android is only available on Android',
   "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
   "Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.",
+  '"PermissionsAndroid" module works only for Android platform',
 ]);
 
 let originalTextRender = Text.render;
@@ -107,12 +107,7 @@ const toastConfig = {
 const RootComponent = () => {
   const navigationRef = useRef();
   const [token, setToken] = useState('');
-  const getFirebaseToken = async () => {
-    await messaging().registerDeviceForRemoteMessages();
 
-    const generatedToken = messaging().getToken();
-    return generatedToken;
-  };
   useEffect(() => {
     auth()
       .signInAnonymously()
@@ -128,19 +123,6 @@ const RootComponent = () => {
       });
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      const generatedToken = await getFirebaseToken();
-      setToken(generatedToken);
-    }
-    fetchData();
-  });
-  const onMessageReceived = async message => {
-    console.log('message', message);
-  };
-  useEffect(() => {
-    messaging().setBackgroundMessageHandler(onMessageReceived);
-  }, []);
   return (
     <NavigationContainer ref={navigationRef}>
       <MainStackNavigator />

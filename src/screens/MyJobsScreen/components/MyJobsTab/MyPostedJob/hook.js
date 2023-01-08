@@ -4,6 +4,8 @@ import {useSelector} from 'react-redux';
 import get from 'lodash/get';
 import size from 'lodash/size';
 import {removePosted} from 'store/job/service';
+import {updateJob} from 'store/job/service';
+import Toast from 'react-native-toast-message';
 
 export default function useApplyHook(props) {
   const forceCall = get(props, 'forceCall');
@@ -56,6 +58,33 @@ export default function useApplyHook(props) {
     fetchData(0);
   };
 
+  const offJobAction = useCallback(
+    item => {
+      if (!item) {
+        return;
+      }
+      const itemStatus = get(item, 'status');
+      updateJob(get(item, '_id'), {
+        status: itemStatus === 'on' ? 'invisible' : 'on',
+      })
+        .then(response => {
+          if (response.status) {
+            Toast.show({
+              text1: 'Success',
+              text2: 'Updated job status',
+              type: 'done',
+            });
+            fetchData();
+          }
+        })
+        .catch(error => {
+          console.log('ERROR', error?.message);
+        })
+        .finally(() => {});
+    },
+    [fetchData],
+  );
+
   useEffect(() => {
     if (activeTab === 1) {
       fetchData(0);
@@ -75,5 +104,6 @@ export default function useApplyHook(props) {
     onRefresh,
     onRemovePosted,
     onEndReached,
+    offJobAction,
   };
 }

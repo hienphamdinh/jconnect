@@ -1,5 +1,5 @@
 import React, {useRef, memo, useCallback} from 'react';
-import {Animated, StyleSheet, PanResponder, Platform} from 'react-native';
+import {Animated, StyleSheet, PanResponder} from 'react-native';
 import {screenWidth, screenHeight} from 'themes/Dimens';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import isUndefined from 'lodash/isUndefined';
@@ -13,7 +13,7 @@ const Bubble = ({
   const inset = useSafeAreaInsets();
   const boundTop = inset.top + 30;
   const boundBottom = screenHeight - inset.bottom - buttonHeight - 80; // 80 is relative height of bottom tab
-  const boundRight = screenWidth - buttonWidth - 10;
+  const boundRight = screenWidth - buttonWidth - 20;
   const boundLeft = 10;
 
   const pan = useRef(

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text} from 'react-native';
+import {View, ScrollView, Text, Image} from 'react-native';
 import Container from 'components/Container';
 import styles from './styles';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
@@ -93,7 +93,7 @@ export default function UpdateJobScreen(props) {
                   <OpacityButton
                     onPress={onOpenImagePicker}
                     style={styles.iconWrapper}>
-                    <FastImage
+                    <Image
                       source={{
                         uri: get(thumbnail, 'node.image.uri') || thumbnail,
                       }}

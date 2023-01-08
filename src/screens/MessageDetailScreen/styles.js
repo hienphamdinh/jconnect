@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from 'themes/Colors';
-import {WIDTH_RATIO} from 'themes/Dimens';
+import {NORMAL_STATUS_BAR_HEIGHT, WIDTH_RATIO} from 'themes/Dimens';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 16,
-    paddingVertical: 12,
+    paddingTop: NORMAL_STATUS_BAR_HEIGHT + 20,
+    paddingBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
   },
   info: {
@@ -33,7 +42,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     backgroundColor: Colors.white,
-    paddingVertical: 8,
+    paddingTop: 8,
+    paddingBottom: 25,
   },
   input: {
     flex: 1,
@@ -41,6 +51,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
+    minHeight: 50 * WIDTH_RATIO,
   },
   avatar: {
     height: 50 * WIDTH_RATIO,

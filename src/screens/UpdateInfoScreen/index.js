@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text} from 'react-native';
+import {View, ScrollView, Text, Image} from 'react-native';
 import Container from 'components/Container';
 import styles from './styles';
 import EntypoIcons from 'react-native-vector-icons/Entypo';
@@ -104,7 +104,7 @@ export default function UpdateInfoScreen(props) {
               ]}>
               {avatar ? (
                 <OpacityButton onPress={onOpenImagePicker}>
-                  <FastImage
+                  <Image
                     source={{
                       uri: get(avatar, 'node.image.uri') || avatar,
                     }}

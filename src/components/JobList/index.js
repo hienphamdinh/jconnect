@@ -59,34 +59,57 @@ const JobItem = ({item, index, typeAction}) => {
 
   const renderApplyEntry = useCallback(() => {
     return (
-      <TouchableOpacity
-        style={styles.listApply}
-        onPress={() => {
-          if (itemStatus === 'on') {
-            navigation.navigate('ListApplicationScreen', {
-              jobId: get(item, '_id'),
-            });
-          }
-        }}>
-        {itemStatus === 'on' ? (
-          <>
-            <Text style={styles.listApplyText}>List application</Text>
-            <FontAwesome
-              name="eye"
-              size={17 * WIDTH_RATIO}
-              color={Colors.primary}
-            />
-          </>
-        ) : itemStatus === 'off' ? (
-          <Text style={styles.pending}>Pending</Text>
-        ) : itemStatus === 'rejected' ? (
-          <Text style={styles.rejected}>Rejected</Text>
-        ) : (
-          <Text style={styles.listApplyText}>Not found application</Text>
-        )}
-      </TouchableOpacity>
+      <View style={styles.listApply}>
+        {['on', 'invisible'].includes(itemStatus) ? (
+          <TouchableOpacity
+            style={styles.visibleWrapper}
+            onPress={() => {
+              typeAction.offJobAction && typeAction.offJobAction(item);
+            }}>
+            <Text
+              style={[
+                styles.visibleText,
+                itemStatus === 'on' && {
+                  color: Colors.red,
+                },
+              ]}>
+              {itemStatus === 'invisible'
+                ? 'ON'
+                : itemStatus === 'on'
+                ? 'OFF'
+                : ''}
+            </Text>
+          </TouchableOpacity>
+        ) : null}
+        <TouchableOpacity
+          style={styles.viewContent}
+          onPress={() => {
+            if (itemStatus === 'on') {
+              navigation.navigate('ListApplicationScreen', {
+                jobId: get(item, '_id'),
+              });
+            }
+          }}>
+          {itemStatus === 'on' ? (
+            <>
+              <Text style={styles.listApplyText}>List application</Text>
+              <FontAwesome
+                name="eye"
+                size={17 * WIDTH_RATIO}
+                color={Colors.primary}
+              />
+            </>
+          ) : itemStatus === 'off' ? (
+            <Text style={styles.pending}>Pending</Text>
+          ) : itemStatus === 'rejected' ? (
+            <Text style={styles.rejected}>Rejected</Text>
+          ) : (
+            <Text style={styles.listApplyText}>Not found application</Text>
+          )}
+        </TouchableOpacity>
+      </View>
     );
-  }, [item, itemStatus, navigation]);
+  }, [item, itemStatus, navigation, typeAction]);
 
   return (
     <>
@@ -117,7 +140,6 @@ const JobItem = ({item, index, typeAction}) => {
           <Text style={styles.jobRole} numberOfLines={1} ellipsizeMode="tail">
             {get(item, 'jobName')}
           </Text>
-
           <Text style={styles.jobSalary} numberOfLines={1} ellipsizeMode="tail">
             {get(item, 'city')}
           </Text>
@@ -140,6 +162,7 @@ const JobList = ({
   typeAction = {
     actionType: TYPE_JOB_ACTION.DEFAULT,
     action: () => {},
+    offJobAction: item => {},
   },
   ...otherProps
 }) => {

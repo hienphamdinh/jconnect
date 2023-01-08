@@ -26,8 +26,8 @@ const instance = axios.create({
   // Nên phải dùng 1 trong 2 cách trên để chữa cháy
   // Sau này báo cáo phải nhớ đổi lại
 
-  // baseURL: Configs.API_BASE_URL,
-  baseURL: 'http://192.168.0.100:3000/job-connect/api',
+  baseURL: 'http://localhost:3000/job-connect/api',
+  // baseURL: 'http://192.168.0.100:3000/job-connect/api',
   // baseURL: 'https://jconnect-backend.onrender.com/job-connect/api',
   timeout: 60000,
 });

@@ -19,7 +19,7 @@ const Home = () => {
     onSearch,
   } = useJobScreenHook();
   return (
-    <Container>
+    <Container notSafeArea>
       <HeaderJobSearch
         onSearch={onSearch}
         searchText={searchText}

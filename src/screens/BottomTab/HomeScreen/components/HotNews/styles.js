@@ -8,7 +8,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     width: screenWidth - 80,
     borderRadius: 12,
-    shadowColor: Colors.black,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
     paddingRight: 16,
     paddingLeft: 12,

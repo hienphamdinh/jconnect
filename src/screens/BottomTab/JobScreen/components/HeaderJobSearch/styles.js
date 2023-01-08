@@ -1,11 +1,16 @@
 import {StyleSheet} from 'react-native';
-import {WIDTH_RATIO, HEIGHT_RATIO, screenWidth} from 'themes/Dimens';
+import {
+  WIDTH_RATIO,
+  HEIGHT_RATIO,
+  screenWidth,
+  NORMAL_STATUS_BAR_HEIGHT,
+} from 'themes/Dimens';
 
 import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 20 + NORMAL_STATUS_BAR_HEIGHT,
     backgroundColor: Colors.primary,
     paddingHorizontal: 16,
     paddingBottom: 25 * HEIGHT_RATIO,
@@ -20,6 +25,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
   },
   title: {
@@ -58,6 +71,14 @@ export default StyleSheet.create({
     width: 40 * WIDTH_RATIO,
     borderRadius: 8,
     marginLeft: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
   },
   topHeader: {
@@ -72,6 +93,14 @@ export default StyleSheet.create({
     width: 50 * WIDTH_RATIO,
     marginLeft: 10,
     borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
     elevation: 5,
   },
 

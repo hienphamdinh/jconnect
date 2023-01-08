@@ -23,7 +23,7 @@ export default function ListApplicationScreen(props) {
   }
 
   return (
-    <Container showBack>
+    <Container notSafeArea showBack>
       <HeaderTitle title={'List application'} />
       <ApplicationList
         data={applications}

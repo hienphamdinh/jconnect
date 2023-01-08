@@ -11,8 +11,15 @@ import SmallBackgroundCircle from 'components/SmallBackgroundCircle';
 import I18n from 'locales';
 
 export default function EnterEmailScreen(props) {
-  const {onCheckEmail, onChangeText, onClearInput, loading, email, error} =
-    useEnterEmailHook(props);
+  const {
+    onCheckEmail,
+    onChangeText,
+    onClearInput,
+    goBack,
+    loading,
+    email,
+    error,
+  } = useEnterEmailHook(props);
 
   return (
     <Container notSafeArea showBack>
@@ -37,7 +44,10 @@ export default function EnterEmailScreen(props) {
               onPress={onCheckEmail}
               loading={loading}
             />
-            <PrimaryTinyButton title={I18n.t('EnterEmailScreen.LoginNow')} />
+            <PrimaryTinyButton
+              title={I18n.t('EnterEmailScreen.LoginNow')}
+              onPress={goBack}
+            />
           </View>
         </View>
       </View>

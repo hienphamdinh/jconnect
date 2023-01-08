@@ -1,11 +1,16 @@
 import {StyleSheet} from 'react-native';
-import {WIDTH_RATIO, HEIGHT_RATIO, WIDTH_DEVICE} from 'themes/Dimens';
+import {
+  WIDTH_RATIO,
+  HEIGHT_RATIO,
+  WIDTH_DEVICE,
+  NORMAL_STATUS_BAR_HEIGHT,
+} from 'themes/Dimens';
 
 import Colors from 'themes/Colors';
 
 export default StyleSheet.create({
   container: {
-    paddingTop: 25 * WIDTH_RATIO,
+    paddingTop: 25 + NORMAL_STATUS_BAR_HEIGHT,
     backgroundColor: Colors.primary,
     paddingHorizontal: 16,
     paddingBottom: 16 * HEIGHT_RATIO,
