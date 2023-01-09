@@ -56,7 +56,7 @@ export default function useApplyHook(props) {
   };
 
   useEffect(() => {
-    if (activeTab === 2) {
+    if (activeTab === 1) {
       fetchData(0);
     }
   }, [fetchData, activeTab]);

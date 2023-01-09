@@ -1,5 +1,4 @@
 import {useCallback, useEffect, useState} from 'react';
-import {ToastAndroid} from 'react-native';
 import {getJobDetail} from 'store/job/service';
 import {checkApply, checkSaved, savedJob} from 'store/job/service.js';
 import Toast from 'react-native-toast-message';
@@ -10,6 +9,7 @@ import get from 'lodash/get';
 const useDetailHook = props => {
   const navigation = useNavigation();
   const userId = useSelector(state => get(state, 'user.info._id'));
+  const userType = useSelector(state => get(state, 'user.info.account.type'));
   const jobId = get(props, 'route.params.jobId');
   const canApply = get(props, 'route.params.canApply');
   const [loading, setLoading] = useState(false);
@@ -58,7 +58,11 @@ const useDetailHook = props => {
           .then(response => {
             if (response.status) {
               setIsBookmarked(true);
-              ToastAndroid.show('Saved job', ToastAndroid.LONG);
+              Toast.show({
+                type: 'done',
+                text1: 'Great',
+                text2: 'You just save this job',
+              });
             } else {
               setIsBookmarked(false);
               Toast.show({
@@ -116,6 +120,7 @@ const useDetailHook = props => {
     isBookmarked,
     isMyJob,
     loading,
+    isValidUser: !['company', 'admin'].includes(userType),
     onPressApply,
     onPressSavedJobs,
     onPressPostBy,

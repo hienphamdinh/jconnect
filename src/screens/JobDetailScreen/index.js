@@ -22,6 +22,7 @@ const JobDetail = props => {
     isBookmarked,
     isMyJob,
     loading,
+    isValidUser,
     onPressSavedJobs,
     onPressApply,
     onPressPostBy,
@@ -39,15 +40,17 @@ const JobDetail = props => {
   return (
     <Container style={styles.jobDetailContainer} showBack>
       <View style={styles.jobDetailContent}>
-        <TouchableOpacity
-          style={styles.jobDetailCircleContainer}
-          onPress={onPressSavedJobs}>
-          {isMyJob ? null : isBookmarked ? (
-            <FontAwesome name="bookmark" color="#49AC5A" size={20} />
-          ) : (
-            <FontAwesome name="bookmark-o" color="#ccc" size={20} />
-          )}
-        </TouchableOpacity>
+        {isMyJob || !isValidUser ? null : (
+          <TouchableOpacity
+            style={styles.jobDetailCircleContainer}
+            onPress={onPressSavedJobs}>
+            {isBookmarked ? (
+              <FontAwesome name="bookmark" color="#49AC5A" size={20} />
+            ) : (
+              <FontAwesome name="bookmark-o" color="#ccc" size={20} />
+            )}
+          </TouchableOpacity>
+        )}
 
         <View style={styles.jobDetaiRow1}>
           <ImageFast
@@ -133,7 +136,7 @@ const JobDetail = props => {
           </View>
         </ScrollView>
         <View style={styles.bottomWrapper}>
-          {canApply && !isMyJob && !isExpired ? (
+          {canApply && !isMyJob && !isExpired && isValidUser ? (
             <PrimaryButton
               title={'Apply here'}
               customStyle={styles.applyHereBtn}

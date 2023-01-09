@@ -1,1 +1,1 @@
-export const jobTypeList = ['Full-time', 'Path-time', 'Onsite', 'Remote'];
+export const jobTypeList = ['Full-time', 'Part-time', 'Onsite', 'Remote'];

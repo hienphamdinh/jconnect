@@ -92,7 +92,7 @@ const useMessage = props => {
   //  chỗ này k truyền deps vì để nó call api liên tục và nhận thông tin realtime
 
   return {
-    listMessage: listMessage ? listMessage?.reverse() : [],
+    listMessage: listMessage,
     isShowDelete,
     refreshing,
     loading,

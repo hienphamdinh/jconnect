@@ -16,7 +16,7 @@ export default function ApplicationScreen(props) {
   const userInfo = useSelector(state => get(state, 'user.info'));
   const {formRef, loading, onResumeChange, onPressSubmit} = useApplyHook(props);
   return (
-    <Container showBack>
+    <Container notSafeArea showBack>
       <HeaderTitle title={'Apply this job'} />
       <Formik
         innerRef={formRef}
